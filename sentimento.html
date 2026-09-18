@@ -1,0 +1,392 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quadro de sentimento dos influencers</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+:root{--bg:#f3f5f1;--surface:#ffffff;--ink:#19211e;--muted:#5a6963;--line:#c6cfca;
+  --alta:#dbefe1;--baixa:#f7dfdb;--misto:#eceeea;--accent:#0e6a5a}
+@media (prefers-color-scheme:dark){:root{--bg:#111513;--surface:#19201d;--ink:#e5ebe8;--muted:#97a6a0;
+  --line:#36413c;--alta:#1c3b2b;--baixa:#45221f;--misto:#1f2623;--accent:#5ccab3}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "IBM Plex Sans",system-ui,sans-serif}
+.pagina{max-width:1100px;margin-inline:auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:26px}
+h1,h2,h3{font-family:"Archivo","IBM Plex Sans",system-ui,sans-serif;margin:0;text-wrap:balance}
+h1{font-size:1.8rem;line-height:1.15;font-weight:700}
+h2{font-size:1.1rem;font-weight:600}
+h3{font-size:.95rem;font-weight:600;flex:1;min-width:0;overflow-wrap:anywhere}
+p{margin:0}
+a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
+.cabeca{display:flex;flex-direction:column;gap:6px}
+.cabeca p,.rodape{color:var(--muted);font-size:.9rem}
+.quadro{width:100%;max-width:680px;height:auto;display:block;margin-inline:auto;background:var(--surface);
+  border:1px solid var(--line);border-radius:6px;font-family:"IBM Plex Sans",system-ui,sans-serif}
+.q-alta{fill:var(--alta)}.q-baixa{fill:var(--baixa)}.q-misto{fill:var(--misto)}
+.moldura{fill:none;stroke:var(--line)}
+.meio{stroke:var(--muted);stroke-dasharray:4 4;fill:none}
+.tick{fill:var(--muted);font-size:10px;font-variant-numeric:tabular-nums}
+.eixo{fill:var(--ink);font-size:12px;font-weight:600}
+.canto{fill:var(--muted);font-size:10px}
+.anel{fill:var(--surface);stroke:var(--ink);stroke-width:1}
+.rotulo{fill:var(--ink);font-size:10px;font-weight:600;stroke:var(--surface);stroke-width:3;paint-order:stroke}
+.secao{display:flex;flex-direction:column;gap:10px}
+.tabela-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:8px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:none}
+.num{text-align:right}
+.mini{width:28px;height:28px;border-radius:50%;vertical-align:middle;margin-right:10px;border:1px solid var(--line);object-fit:cover}
+.cartoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
+.cartao{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.cartao header{display:flex;align-items:center;gap:8px}
+.cartao header .mini{margin-right:0;flex:none}
+.xy{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cartao ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.cartao li{display:grid;grid-template-columns:3.6em 1fr;column-gap:6px;font-size:.86rem;line-height:1.35}
+.cartao li a{overflow-wrap:anywhere;text-decoration-color:var(--line)}
+.peso{color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums;grid-row:span 2}
+.meta{color:var(--muted);font-size:.8rem;font-variant-numeric:tabular-nums}
+.mudo{color:var(--accent);font-weight:700}
+</style>
+</head>
+<body>
+<main class="pagina">
+  <header class="cabeca">
+    <h1>Quadro de sentimento dos influencers</h1>
+    <p>Atualizado em 18/09/2026 às 20:31 (horário de Brasília).</p>
+  </header>
+
+  <svg class="quadro" viewBox="0 0 520 520" role="img" aria-label="Quadro de sentimento dos influencers">
+    <defs><clipPath id="foto" clipPathUnits="objectBoundingBox"><circle cx=".5" cy=".5" r=".5"/></clipPath></defs>
+    <rect class="q-alta" x="260.0" y="33" width="227.0" height="227.0"/>
+    <rect class="q-baixa" x="33" y="260.0" width="227.0" height="227.0"/>
+    <rect class="q-misto" x="33" y="33" width="227.0" height="227.0"/>
+    <rect class="q-misto" x="260.0" y="260.0" width="227.0" height="227.0"/>
+    <rect class="moldura" x="33" y="33" width="454" height="454"/>
+    <line class="meio" x1="260.0" y1="33" x2="260.0" y2="487"/>
+    <line class="meio" x1="33" y1="260.0" x2="487" y2="260.0"/>
+    
+    <text class="tick" x="33.0" y="501" text-anchor="middle">0</text>
+    <text class="tick" x="27" y="490.0" text-anchor="end">0</text>
+    
+    <text class="tick" x="146.5" y="501" text-anchor="middle">25</text>
+    <text class="tick" x="27" y="376.5" text-anchor="end">25</text>
+    
+    <text class="tick" x="260.0" y="501" text-anchor="middle">50</text>
+    <text class="tick" x="27" y="263.0" text-anchor="end">50</text>
+    
+    <text class="tick" x="373.5" y="501" text-anchor="middle">75</text>
+    <text class="tick" x="27" y="149.5" text-anchor="end">75</text>
+    
+    <text class="tick" x="487.0" y="501" text-anchor="middle">100</text>
+    <text class="tick" x="27" y="36.0" text-anchor="end">100</text>
+    
+    <text class="eixo" x="260.0" y="516" text-anchor="middle">Cripto · 0 baixista → 100 altista</text>
+    <text class="eixo" x="12" y="260.0" text-anchor="middle" transform="rotate(-90 12 260.0)">Legado · 0 baixista → 100 altista</text>
+    <text class="canto" x="481" y="47" text-anchor="end">altista nos dois</text>
+    <text class="canto" x="39" y="481">baixista nos dois</text>
+    <text class="canto" x="39" y="47">baixista cripto · altista legado</text>
+    <text class="canto" x="481" y="481" text-anchor="end">altista cripto · baixista legado</text>
+    
+    <a href="https://www.youtube.com/channel/UCuWRNR4p8nLGVf_ZPuIBdDA" target="_blank" rel="noopener">
+      <title>Gui Telles / Investimento — cripto 92 · legado 70</title>
+      <circle class="anel" cx="450.7" cy="169.2" r="17"/>
+      <image href="https://yt3.googleusercontent.com/DEZB28-Qj1Pm_Lrcwhxv8hN_ZNigDKozylB1DTNq4kVhCuL_UrmGIczEGF5WQAOVvRwMYX7jdYg=s96" x="435.7" y="154.2" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    <a href="https://www.youtube.com/channel/UC3bwXp8SU6EqK3Bb6tYKbhQ" target="_blank" rel="noopener">
+      <title>INSCRITOS MILIONÁRIOS — cripto 91 · legado 56</title>
+      <circle class="anel" cx="446.1" cy="232.8" r="17"/>
+      <image href="https://yt3.googleusercontent.com/GI0ZZckJrJJxSSuHrSJMKzO-eVmq7Nig-rGEO6U1wsHz_Pl6kYrcSZSAQ_pJiq-3rN1i0WWV=s96" x="431.1" y="217.8" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    <a href="https://www.youtube.com/channel/UC16h2Qs8qQobqsU_D6rgeXA" target="_blank" rel="noopener">
+      <title>Cauê Oliveira — cripto 90 · legado 65</title>
+      <circle class="anel" cx="441.6" cy="191.9" r="17"/>
+      <image href="https://yt3.googleusercontent.com/ckcbpaT6m1z0zJeOzNxw4Fnce5B3IiGESVWbELr2Jz9hmj2Un5DSh12WSb_NkbAQusjkGGvzKIo=s96" x="426.6" y="176.9" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    <a href="https://www.youtube.com/channel/UCxgxWgN0T4hcXJvkzGegb4w" target="_blank" rel="noopener">
+      <title>Ghost | Bitcoin e Cripto — cripto 86 · legado 32</title>
+      <circle class="anel" cx="423.4" cy="341.7" r="17"/>
+      <image href="https://yt3.googleusercontent.com/u9Grlg1intVKN34XmVPeveetHld-es1fPVTnTfH4VMpk_COBsSxPahkAjKCQ6LEWJ0jQ8PdCUA=s96" x="408.4" y="326.7" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    <a href="https://www.youtube.com/channel/UCqJh7qQbiQ-5HPZkMu_hIqg" target="_blank" rel="noopener">
+      <title>Investidor Moderno — cripto 77 · legado 62</title>
+      <circle class="anel" cx="382.6" cy="205.5" r="17"/>
+      <image href="https://yt3.googleusercontent.com/bdEg7cmv2G-o-8w4eDQHs-xnsSLlN0kSBj4SKSE2CH_lSHRZWOkcEBNMmG3JQNBO4X3uM9RBEw=s96" x="367.6" y="190.5" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    <a href="https://www.youtube.com/channel/UCFzEG7N47dktszRxdfOHJdA" target="_blank" rel="noopener">
+      <title>Fausto Botelho — cripto 41 · legado 20</title>
+      <circle class="anel" cx="219.1" cy="396.2" r="17"/>
+      <image href="https://yt3.googleusercontent.com/EYbwokGAKktsun2WnX3tFuJpAaEQiK8i3L8Xs0Sx0L2qnr-Ulgwom_2wLYNRIrD3e1QHiMWzOVU=s96" x="204.1" y="381.2" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    <a href="https://www.youtube.com/channel/UCoNkJtAvRbc0t_KR8PSNs8w" target="_blank" rel="noopener">
+      <title>Bernardo Pascowitch — cripto 30 · legado 33</title>
+      <circle class="anel" cx="169.2" cy="337.2" r="17"/>
+      <image href="https://yt3.googleusercontent.com/4wnXIuYUgGa2Fdgyn6LtpmJj3QWSh25q1IEgX8KlKEDdH7CcJ7uKkCHfQAjJJlVVuYMOv9nxhw=s96" x="154.2" y="322.2" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    <a href="https://www.youtube.com/channel/UC7F2FFxvbHyuarrjRlCFK4g" target="_blank" rel="noopener">
+      <title>Mack Aqui — cripto 2 · legado 35</title>
+      <circle class="anel" cx="42.1" cy="328.1" r="17"/>
+      <image href="https://yt3.googleusercontent.com/K8UkwWbmW7uOEuVlV33UlphOHGP8yuqJvbaHOG5XN6LGnJJvALkz57GixEqgL5ExwBJ3i35t=s96" x="27.1" y="313.1" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    <a href="https://www.youtube.com/channel/UCpwO586BGlLdJMYuDU9-FoQ" target="_blank" rel="noopener">
+      <title>TMG Trades — cripto 2 · legado 10</title>
+      <circle class="anel" cx="42.1" cy="441.6" r="17"/>
+      <image href="https://yt3.googleusercontent.com/UBV7jZIWbqiC50UVB8U56vsPFMD0HhtqKX-9D2z5fo0PkBc2XcRhPudX7MAL04j1YJZ07t4dON4=s96" x="27.1" y="426.6" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    
+    
+    <text class="rotulo" x="450.7" y="196.2" text-anchor="middle">Gui</text>
+    
+    <text class="rotulo" x="446.1" y="259.8" text-anchor="middle">INSCRITOS</text>
+    
+    <text class="rotulo" x="441.6" y="218.9" text-anchor="middle">Cauê</text>
+    
+    <text class="rotulo" x="423.4" y="368.7" text-anchor="middle">Ghost</text>
+    
+    <text class="rotulo" x="382.6" y="232.5" text-anchor="middle">Investidor</text>
+    
+    <text class="rotulo" x="219.1" y="423.2" text-anchor="middle">Fausto</text>
+    
+    <text class="rotulo" x="169.2" y="364.2" text-anchor="middle">Bernardo</text>
+    
+    <text class="rotulo" x="42.1" y="355.1" text-anchor="middle">Mack</text>
+    
+    <text class="rotulo" x="42.1" y="468.6" text-anchor="middle">TMG</text>
+    
+  </svg>
+
+  <section class="secao">
+    <h2>Notas</h2>
+    <div class="tabela-wrap"><table>
+      <thead><tr><th>Influencer</th><th class="num">X cripto</th><th class="num">Y legado</th></tr></thead>
+      <tbody>
+        
+        <tr><td><img class="mini" src="https://yt3.googleusercontent.com/DEZB28-Qj1Pm_Lrcwhxv8hN_ZNigDKozylB1DTNq4kVhCuL_UrmGIczEGF5WQAOVvRwMYX7jdYg=s96" alt=""><a href="https://www.youtube.com/channel/UCuWRNR4p8nLGVf_ZPuIBdDA" target="_blank" rel="noopener">Gui Telles / Investimento</a></td>
+            <td class="num">92</td><td class="num">70</td></tr>
+        
+        <tr><td><img class="mini" src="https://yt3.googleusercontent.com/GI0ZZckJrJJxSSuHrSJMKzO-eVmq7Nig-rGEO6U1wsHz_Pl6kYrcSZSAQ_pJiq-3rN1i0WWV=s96" alt=""><a href="https://www.youtube.com/channel/UC3bwXp8SU6EqK3Bb6tYKbhQ" target="_blank" rel="noopener">INSCRITOS MILIONÁRIOS</a></td>
+            <td class="num">91</td><td class="num">56</td></tr>
+        
+        <tr><td><img class="mini" src="https://yt3.googleusercontent.com/ckcbpaT6m1z0zJeOzNxw4Fnce5B3IiGESVWbELr2Jz9hmj2Un5DSh12WSb_NkbAQusjkGGvzKIo=s96" alt=""><a href="https://www.youtube.com/channel/UC16h2Qs8qQobqsU_D6rgeXA" target="_blank" rel="noopener">Cauê Oliveira</a></td>
+            <td class="num">90</td><td class="num">65</td></tr>
+        
+        <tr><td><img class="mini" src="https://yt3.googleusercontent.com/u9Grlg1intVKN34XmVPeveetHld-es1fPVTnTfH4VMpk_COBsSxPahkAjKCQ6LEWJ0jQ8PdCUA=s96" alt=""><a href="https://www.youtube.com/channel/UCxgxWgN0T4hcXJvkzGegb4w" target="_blank" rel="noopener">Ghost | Bitcoin e Cripto</a></td>
+            <td class="num">86</td><td class="num">32</td></tr>
+        
+        <tr><td><img class="mini" src="https://yt3.googleusercontent.com/bdEg7cmv2G-o-8w4eDQHs-xnsSLlN0kSBj4SKSE2CH_lSHRZWOkcEBNMmG3JQNBO4X3uM9RBEw=s96" alt=""><a href="https://www.youtube.com/channel/UCqJh7qQbiQ-5HPZkMu_hIqg" target="_blank" rel="noopener">Investidor Moderno</a></td>
+            <td class="num">77</td><td class="num">62</td></tr>
+        
+        <tr><td><img class="mini" src="https://yt3.googleusercontent.com/EYbwokGAKktsun2WnX3tFuJpAaEQiK8i3L8Xs0Sx0L2qnr-Ulgwom_2wLYNRIrD3e1QHiMWzOVU=s96" alt=""><a href="https://www.youtube.com/channel/UCFzEG7N47dktszRxdfOHJdA" target="_blank" rel="noopener">Fausto Botelho</a></td>
+            <td class="num">41</td><td class="num">20</td></tr>
+        
+        <tr><td><img class="mini" src="https://yt3.googleusercontent.com/4wnXIuYUgGa2Fdgyn6LtpmJj3QWSh25q1IEgX8KlKEDdH7CcJ7uKkCHfQAjJJlVVuYMOv9nxhw=s96" alt=""><a href="https://www.youtube.com/channel/UCoNkJtAvRbc0t_KR8PSNs8w" target="_blank" rel="noopener">Bernardo Pascowitch</a></td>
+            <td class="num">30</td><td class="num">33</td></tr>
+        
+        <tr><td><img class="mini" src="https://yt3.googleusercontent.com/K8UkwWbmW7uOEuVlV33UlphOHGP8yuqJvbaHOG5XN6LGnJJvALkz57GixEqgL5ExwBJ3i35t=s96" alt=""><a href="https://www.youtube.com/channel/UC7F2FFxvbHyuarrjRlCFK4g" target="_blank" rel="noopener">Mack Aqui</a></td>
+            <td class="num">2</td><td class="num">35</td></tr>
+        
+        <tr><td><img class="mini" src="https://yt3.googleusercontent.com/UBV7jZIWbqiC50UVB8U56vsPFMD0HhtqKX-9D2z5fo0PkBc2XcRhPudX7MAL04j1YJZ07t4dON4=s96" alt=""><a href="https://www.youtube.com/channel/UCpwO586BGlLdJMYuDU9-FoQ" target="_blank" rel="noopener">TMG Trades</a></td>
+            <td class="num">2</td><td class="num">10</td></tr>
+        
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="secao">
+    <h2>De onde saiu cada nota</h2>
+    <div class="cartoes">
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/DEZB28-Qj1Pm_Lrcwhxv8hN_ZNigDKozylB1DTNq4kVhCuL_UrmGIczEGF5WQAOVvRwMYX7jdYg=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCuWRNR4p8nLGVf_ZPuIBdDA" target="_blank" rel="noopener">Gui Telles / Investimento</a></h3><span class="xy">92 · 70</span></header>
+        <ol>
+          
+          <li><span class="peso">50%</span>
+            <a href="https://www.youtube.com/watch?v=n9EK9HEoNco" target="_blank" rel="noopener">Não vacila, essa é a grande oportunidade de 2026 nas criptos</a>
+            <span class="meta">18/09 · cripto 93 · legado 50<span class="mudo">*</span></span></li>
+          
+          <li><span class="peso">30%</span>
+            <a href="https://www.youtube.com/watch?v=RHIdai1Tmrs" target="_blank" rel="noopener">Além do Bitcoin, vem altseason por ai</a>
+            <span class="meta">17/09 · cripto 90 · legado 90</span></li>
+          
+          <li><span class="peso">20%</span>
+            <a href="https://www.youtube.com/watch?v=dw-L-HbNjuU" target="_blank" rel="noopener">Se prepare no BTC antes do FED... Veja oq fazer agora</a>
+            <span class="meta">16/09 · cripto 90 · legado 90</span></li>
+          
+        </ol>
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/GI0ZZckJrJJxSSuHrSJMKzO-eVmq7Nig-rGEO6U1wsHz_Pl6kYrcSZSAQ_pJiq-3rN1i0WWV=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UC3bwXp8SU6EqK3Bb6tYKbhQ" target="_blank" rel="noopener">INSCRITOS MILIONÁRIOS</a></h3><span class="xy">91 · 56</span></header>
+        <ol>
+          
+          <li><span class="peso">50%</span>
+            <a href="https://www.youtube.com/watch?v=fkJETr0ev08" target="_blank" rel="noopener">Dias de luta, dias de lenda!</a>
+            <span class="meta">18/09 · cripto 87 · legado 50</span></li>
+          
+          <li><span class="peso">30%</span>
+            <a href="https://www.youtube.com/watch?v=YQS4BEiGQQI" target="_blank" rel="noopener">ALERTA: Ninguém Viu Isso na Reunião do Fed (E o Bitcoin Já Reagiu)</a>
+            <span class="meta">17/09 · cripto 90 · legado 70</span></li>
+          
+          <li><span class="peso">20%</span>
+            <a href="https://www.youtube.com/watch?v=Jn9XfEPtlQc" target="_blank" rel="noopener">URGENTE: A Hora da Compra do Bitcoin Está Chegando (Vou Comprar Tudo)</a>
+            <span class="meta">15/09 · cripto 100 · legado 50<span class="mudo">*</span></span></li>
+          
+        </ol>
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/ckcbpaT6m1z0zJeOzNxw4Fnce5B3IiGESVWbELr2Jz9hmj2Un5DSh12WSb_NkbAQusjkGGvzKIo=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UC16h2Qs8qQobqsU_D6rgeXA" target="_blank" rel="noopener">Cauê Oliveira</a></h3><span class="xy">90 · 65</span></header>
+        <ol>
+          
+          <li><span class="peso">50%</span>
+            <a href="https://www.youtube.com/watch?v=CjfvutqTmj4" target="_blank" rel="noopener">Fed SOBE JUROS, mas BITCOIN vai SUBIR por ESSE MOTIVO (Não é o que você acha)</a>
+            <span class="meta">17/09 · cripto 90 · legado 80</span></li>
+          
+          <li><span class="peso">30%</span>
+            <a href="https://www.youtube.com/watch?v=MLEfEYBrtfQ" target="_blank" rel="noopener">Essa reunião pode MUDAR TUDO para o BITCOIN (O dia do PRÓXIMO MOVIMENTO)</a>
+            <span class="meta">15/09 · cripto 90 · legado 50<span class="mudo">*</span></span></li>
+          
+          <li><span class="peso">20%</span>
+            <a href="https://www.youtube.com/watch?v=prP8S1iE11E" target="_blank" rel="noopener">BITCOIN está repetindo o CICLO PASSADO (esse é o PRÓXIMO movimento!)</a>
+            <span class="meta">08/09 · cripto 90 · legado 50<span class="mudo">*</span></span></li>
+          
+        </ol>
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/u9Grlg1intVKN34XmVPeveetHld-es1fPVTnTfH4VMpk_COBsSxPahkAjKCQ6LEWJ0jQ8PdCUA=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCxgxWgN0T4hcXJvkzGegb4w" target="_blank" rel="noopener">Ghost | Bitcoin e Cripto</a></h3><span class="xy">86 · 32</span></header>
+        <ol>
+          
+          <li><span class="peso">50%</span>
+            <a href="https://www.youtube.com/watch?v=nU1KNZwVR_I" target="_blank" rel="noopener">BITCOIN Grande IMPACTO NO PREÇO essa SEMANA (Clarity e FOMC, saiba disso)</a>
+            <span class="meta">15/09 · cripto 87 · legado 20</span></li>
+          
+          <li><span class="peso">30%</span>
+            <a href="https://www.youtube.com/watch?v=9s9GVD_ryHs" target="_blank" rel="noopener">BITCOIN A ARMADILHA PERFEITA COMEÇOU (não é o que vc espera)</a>
+            <span class="meta">11/09 · cripto 90 · legado 20</span></li>
+          
+          <li><span class="peso">20%</span>
+            <a href="https://www.youtube.com/watch?v=f1qp4Oj2WPI" target="_blank" rel="noopener">BITCOIN Vc Analisa Errado VEJA ISSO</a>
+            <span class="meta">05/09 · cripto 78 · legado 80</span></li>
+          
+        </ol>
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/bdEg7cmv2G-o-8w4eDQHs-xnsSLlN0kSBj4SKSE2CH_lSHRZWOkcEBNMmG3JQNBO4X3uM9RBEw=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCqJh7qQbiQ-5HPZkMu_hIqg" target="_blank" rel="noopener">Investidor Moderno</a></h3><span class="xy">77 · 62</span></header>
+        <ol>
+          
+          <li><span class="peso">50%</span>
+            <a href="https://www.youtube.com/watch?v=93k12-PgTNA" target="_blank" rel="noopener">BITCOIN PUMP 81K: AGORA VAI? ROMPIMENTO CONFIRMADO? + ESTRATÉGIA AGORA</a>
+            <span class="meta">18/09 · cripto 87 · legado 50<span class="mudo">*</span></span></li>
+          
+          <li><span class="peso">30%</span>
+            <a href="https://www.youtube.com/watch?v=kzbwKIN4VhQ" target="_blank" rel="noopener">BITCOIN 77K: SE SEGURANDO MESMO COM NOTÍCIAS TERRÍVEIS: LUA OU APOCALIPSE?</a>
+            <span class="meta">17/09 · cripto 78 · legado 90</span></li>
+          
+          <li><span class="peso">20%</span>
+            <a href="https://www.youtube.com/watch?v=rBkLHwybZFo" target="_blank" rel="noopener">BITCOIN CONTINUA A QUEDA: 74K + O FED VAI GERAR O APOCALIPSE?: ESTRATÉGIA AGORA</a>
+            <span class="meta">16/09 · cripto 50 · legado 50</span></li>
+          
+        </ol>
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/EYbwokGAKktsun2WnX3tFuJpAaEQiK8i3L8Xs0Sx0L2qnr-Ulgwom_2wLYNRIrD3e1QHiMWzOVU=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCFzEG7N47dktszRxdfOHJdA" target="_blank" rel="noopener">Fausto Botelho</a></h3><span class="xy">41 · 20</span></header>
+        <ol>
+          
+          <li><span class="peso">50%</span>
+            <a href="https://www.youtube.com/watch?v=_p-gNrboMUg" target="_blank" rel="noopener">🚨BITCOIN DESAFIANDO o MACRO: Força ou Armadilha?</a>
+            <span class="meta">18/09 · cripto 50 · legado 10</span></li>
+          
+          <li><span class="peso">30%</span>
+            <a href="https://www.youtube.com/watch?v=lutAqHkUh0A" target="_blank" rel="noopener">🚨Vai ser TUDO TOKENIZADO!  |  FAUSTO BOTELHO</a>
+            <span class="meta">18/09 · cripto 50<span class="mudo">*</span> · legado 50<span class="mudo">*</span></span></li>
+          
+          <li><span class="peso">20%</span>
+            <a href="https://www.youtube.com/watch?v=QZu_gbUADUU" target="_blank" rel="noopener">🚨BITCOIN: BUY the NEWS, SELL the FACT?</a>
+            <span class="meta">15/09 · cripto 3 · legado 0</span></li>
+          
+        </ol>
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/4wnXIuYUgGa2Fdgyn6LtpmJj3QWSh25q1IEgX8KlKEDdH7CcJ7uKkCHfQAjJJlVVuYMOv9nxhw=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCoNkJtAvRbc0t_KR8PSNs8w" target="_blank" rel="noopener">Bernardo Pascowitch</a></h3><span class="xy">30 · 33</span></header>
+        <ol>
+          
+          <li><span class="peso">50%</span>
+            <a href="https://www.youtube.com/watch?v=ISMGTvhBYvM" target="_blank" rel="noopener">BITCOIN (BTC) SOBE MESMO COM CLARITY ACT E JURO AMERICANO! O QUE ESTÁ ACONTECENDO?</a>
+            <span class="meta">18/09 · cripto 50 · legado 50<span class="mudo">*</span></span></li>
+          
+          <li><span class="peso">30%</span>
+            <a href="https://www.youtube.com/watch?v=8GiK8IXYQAo" target="_blank" rel="noopener">BITCOIN: POR QUE O RSI MOSTRA QUE O FUNDO NÃO CHEGOU (e o que precisa acontecer)</a>
+            <span class="meta">17/09 · cripto 10 · legado 20</span></li>
+          
+          <li><span class="peso">20%</span>
+            <a href="https://www.youtube.com/watch?v=xV_GExr3Ewk" target="_blank" rel="noopener">URGENTE: DECISÃO DE JURO AMERICANO COM IMPACTOS NO BITCOIN (BTC) E CRIPTOMOEDAS!</a>
+            <span class="meta">16/09 · cripto 10 · legado 10</span></li>
+          
+        </ol>
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/K8UkwWbmW7uOEuVlV33UlphOHGP8yuqJvbaHOG5XN6LGnJJvALkz57GixEqgL5ExwBJ3i35t=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UC7F2FFxvbHyuarrjRlCFK4g" target="_blank" rel="noopener">Mack Aqui</a></h3><span class="xy">2 · 35</span></header>
+        <ol>
+          
+          <li><span class="peso">50%</span>
+            <a href="https://www.youtube.com/watch?v=DDMvPzWdffA" target="_blank" rel="noopener">Bitcoin: Você Acha que o Bear Realmente &#34;Acabou&#34;?</a>
+            <span class="meta">17/09 · cripto 0 · legado 50<span class="mudo">*</span></span></li>
+          
+          <li><span class="peso">30%</span>
+            <a href="https://www.youtube.com/watch?v=a25tHQ91t8U" target="_blank" rel="noopener">Bitcoin: Não Seja Enganado (Cuidado em Setembro)</a>
+            <span class="meta">15/09 · cripto 0 · legado 20</span></li>
+          
+          <li><span class="peso">20%</span>
+            <a href="https://www.youtube.com/watch?v=djDahOqycLs" target="_blank" rel="noopener">Bitcoin: A Queda Começou (Não Erre Agora)</a>
+            <span class="meta">10/09 · cripto 10 · legado 20</span></li>
+          
+        </ol>
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/UBV7jZIWbqiC50UVB8U56vsPFMD0HhtqKX-9D2z5fo0PkBc2XcRhPudX7MAL04j1YJZ07t4dON4=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCpwO586BGlLdJMYuDU9-FoQ" target="_blank" rel="noopener">TMG Trades</a></h3><span class="xy">2 · 10</span></header>
+        <ol>
+          
+          <li><span class="peso">62,5%</span>
+            <a href="https://www.youtube.com/watch?v=we8GcSFF0aw" target="_blank" rel="noopener">BITCOIN HUGE LIQUIDITY GAP!! THURSDAY LIQUIDATION TRAP!! FOMC RATE HIKE!!!</a>
+            <span class="meta">16/09 · cripto 3 · legado 10</span></li>
+          
+          <li><span class="peso">37,5%</span>
+            <a href="https://www.youtube.com/watch?v=R6kgTb1cLYs" target="_blank" rel="noopener">BITCOIN RATE HIKE BLACK SWAN WEDNESDAY?!? BITCOIN FOMC LIQUIDATION TRAP!!!!</a>
+            <span class="meta">15/09 · cripto 0 · legado 10</span></li>
+          
+        </ol>
+      </article>
+      
+    </div>
+    <p class="rodape"><span class="mudo">*</span> o vídeo não falou desse mercado; conta como neutro (50).</p>
+  </section>
+</main>
+</body>
+</html>
