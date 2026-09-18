@@ -1,0 +1,307 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Régua do Bitcoin</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+:root{--bg:#f3f5f1;--surface:#ffffff;--ink:#19211e;--muted:#5a6963;--line:#c6cfca;--accent:#0e6a5a;
+  --compra:#187a4a;--venda:#b23a2a}
+@media (prefers-color-scheme:dark){:root{--bg:#111513;--surface:#19201d;--ink:#e5ebe8;--muted:#97a6a0;
+  --line:#36413c;--accent:#5ccab3;--compra:#62d095;--venda:#f28f7d}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "IBM Plex Sans",system-ui,sans-serif}
+.pagina{max-width:1100px;margin-inline:auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:26px}
+h1,h2,h3{font-family:"Archivo","IBM Plex Sans",system-ui,sans-serif;margin:0;text-wrap:balance}
+h1{font-size:1.8rem;line-height:1.15;font-weight:700}
+h2{font-size:1.1rem;font-weight:600}
+h3{font-size:.95rem;font-weight:600;flex:1;min-width:0;overflow-wrap:anywhere}
+p,blockquote{margin:0}
+a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
+.cabeca{display:flex;flex-direction:column;gap:6px}
+.cabeca p,.rodape{color:var(--muted);font-size:.9rem;max-width:68ch}
+.regua{width:100%;max-width:420px;height:auto;display:block;margin-inline:auto;background:var(--surface);
+  border:1px solid var(--line);border-radius:6px;font-family:"IBM Plex Sans",system-ui,sans-serif}
+.eixo{stroke:var(--ink);stroke-width:2}
+.risco{stroke:var(--muted);stroke-width:1}
+.tick{fill:var(--muted);font-size:10px;font-variant-numeric:tabular-nums}
+.fundo{stroke:var(--surface);stroke-width:4;paint-order:stroke}
+.guia{fill:none;stroke-width:1.2}
+.anel{fill:var(--surface);stroke-width:2}
+.guia.compra,.anel.compra{stroke:var(--compra)}.guia.venda,.anel.venda{stroke:var(--venda)}
+.marca.compra{fill:var(--compra)}.marca.venda{fill:var(--venda)}
+.rot{fill:var(--ink);font-size:10px;font-weight:600}
+.val{font-size:10px;font-weight:600;font-variant-numeric:tabular-nums}
+.lado{font-size:10px;font-weight:700;letter-spacing:.08em}
+.val.compra,.lado.compra{fill:var(--compra)}.val.venda,.lado.venda{fill:var(--venda)}
+.cot{stroke:var(--accent);stroke-width:3}
+.cot-t{fill:var(--accent);font-size:10.5px;font-weight:700}
+.cot-h{fill:var(--accent);font-size:10px}
+.secao{display:flex;flex-direction:column;gap:10px}
+.cartoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
+.cartao{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.cartao header{display:flex;align-items:center;gap:8px}
+.mini{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);object-fit:cover;flex:none}
+.meta{color:var(--muted);font-size:.8rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.vazio{color:var(--muted);font-size:.9rem}
+.declarado{display:flex;flex-direction:column;gap:4px;border-left:3px solid var(--line);padding-left:10px}
+.declarado.compra{border-color:var(--compra)}.declarado.venda{border-color:var(--venda)}
+.preco{font-weight:600;font-variant-numeric:tabular-nums}
+.declarado.compra .preco{color:var(--compra)}.declarado.venda .preco{color:var(--venda)}
+blockquote{font-size:.92rem;line-height:1.45;overflow-wrap:anywhere}
+blockquote::before{content:"“"}blockquote::after{content:"”"}
+.traducao{font-size:.86rem;color:var(--muted);overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main class="pagina">
+  <header class="cabeca">
+    <h1>Régua do Bitcoin</h1>
+    <p>Atualizada em 18/09/2026 às 20:50 (horário de Brasília) · BTC 80.910 às 20:50 (Binance, BTC/USDT).</p>
+    <p>Cada ponto é o preço em que o próprio influencer declarou, no último vídeo dele, que compra ou que vende Bitcoin. A frase que ele disse está no cartão, com o link para ouvir no vídeo.</p>
+  </header>
+
+  <svg class="regua" viewBox="0 0 360 640" role="img" aria-label="Régua do Bitcoin: pontos de compra e de venda declarados e a cotação do Bitcoin">
+    <defs><clipPath id="foto" clipPathUnits="objectBoundingBox"><circle cx=".5" cy=".5" r=".5"/></clipPath></defs>
+    <text class="lado compra" x="118" y="14" text-anchor="middle">COMPRA</text>
+    <text class="lado venda" x="242" y="14" text-anchor="middle">VENDA</text>
+    <line class="eixo" x1="180" y1="44" x2="180" y2="596"/>
+    
+    <line class="risco" x1="177" y1="585.0" x2="183" y2="585.0"/>
+    
+    <line class="risco" x1="177" y1="562.9" x2="183" y2="562.9"/>
+    
+    <line class="risco" x1="174" y1="540.8" x2="186" y2="540.8"/>
+    
+    <line class="risco" x1="177" y1="518.7" x2="183" y2="518.7"/>
+    
+    <line class="risco" x1="177" y1="496.6" x2="183" y2="496.6"/>
+    
+    <line class="risco" x1="177" y1="474.6" x2="183" y2="474.6"/>
+    
+    <line class="risco" x1="177" y1="452.5" x2="183" y2="452.5"/>
+    
+    <line class="risco" x1="174" y1="430.4" x2="186" y2="430.4"/>
+    
+    <line class="risco" x1="177" y1="408.3" x2="183" y2="408.3"/>
+    
+    <line class="risco" x1="177" y1="386.2" x2="183" y2="386.2"/>
+    
+    <line class="risco" x1="177" y1="364.2" x2="183" y2="364.2"/>
+    
+    <line class="risco" x1="177" y1="342.1" x2="183" y2="342.1"/>
+    
+    <line class="risco" x1="174" y1="320.0" x2="186" y2="320.0"/>
+    
+    <line class="risco" x1="177" y1="297.9" x2="183" y2="297.9"/>
+    
+    <line class="risco" x1="177" y1="275.8" x2="183" y2="275.8"/>
+    
+    <line class="risco" x1="177" y1="253.8" x2="183" y2="253.8"/>
+    
+    <line class="risco" x1="177" y1="231.7" x2="183" y2="231.7"/>
+    
+    <line class="risco" x1="174" y1="209.6" x2="186" y2="209.6"/>
+    
+    <line class="risco" x1="177" y1="187.5" x2="183" y2="187.5"/>
+    
+    <line class="risco" x1="177" y1="165.4" x2="183" y2="165.4"/>
+    
+    <line class="risco" x1="177" y1="143.4" x2="183" y2="143.4"/>
+    
+    <line class="risco" x1="177" y1="121.3" x2="183" y2="121.3"/>
+    
+    <line class="risco" x1="174" y1="99.2" x2="186" y2="99.2"/>
+    
+    <line class="risco" x1="177" y1="77.1" x2="183" y2="77.1"/>
+    
+    <line class="risco" x1="177" y1="55.0" x2="183" y2="55.0"/>
+    
+    
+    <polyline class="guia compra" points="180,526.7 158,526.7 140,526.7 133,526.7"/>
+    <circle class="marca compra" cx="180" cy="526.7" r="3"/>
+    <a href="https://www.youtube.com/channel/UCoNkJtAvRbc0t_KR8PSNs8w" target="_blank" rel="noopener">
+      <title>Bernardo Pascowitch — compra 74.255</title>
+      <circle class="anel compra" cx="118" cy="526.7" r="16"/>
+      <image href="https://yt3.googleusercontent.com/4wnXIuYUgGa2Fdgyn6LtpmJj3QWSh25q1IEgX8KlKEDdH7CcJ7uKkCHfQAjJJlVVuYMOv9nxhw=s96" x="103" y="511.7" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    <polyline class="guia venda" points="180,99.2 202,99.2 220,99.2 227,99.2"/>
+    <circle class="marca venda" cx="180" cy="99.2" r="3"/>
+    <a href="https://www.youtube.com/channel/UCuWRNR4p8nLGVf_ZPuIBdDA" target="_blank" rel="noopener">
+      <title>Gui Telles / Investimento — venda 82.000</title>
+      <circle class="anel venda" cx="242" cy="99.2" r="16"/>
+      <image href="https://yt3.googleusercontent.com/DEZB28-Qj1Pm_Lrcwhxv8hN_ZNigDKozylB1DTNq4kVhCuL_UrmGIczEGF5WQAOVvRwMYX7jdYg=s96" x="227" y="84.2" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    <polyline class="guia venda" points="180,320.0 202,320.0 220,320.0 227,320.0"/>
+    <circle class="marca venda" cx="180" cy="320.0" r="3"/>
+    <a href="https://www.youtube.com/channel/UC7F2FFxvbHyuarrjRlCFK4g" target="_blank" rel="noopener">
+      <title>Mack Aqui — venda 78.000</title>
+      <circle class="anel venda" cx="242" cy="320.0" r="16"/>
+      <image href="https://yt3.googleusercontent.com/K8UkwWbmW7uOEuVlV33UlphOHGP8yuqJvbaHOG5XN6LGnJJvALkz57GixEqgL5ExwBJ3i35t=s96" x="227" y="305.0" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    <polyline class="guia venda" points="180,375.2 202,375.2 220,375.2 227,375.2"/>
+    <circle class="marca venda" cx="180" cy="375.2" r="3"/>
+    <a href="https://www.youtube.com/channel/UCpwO586BGlLdJMYuDU9-FoQ" target="_blank" rel="noopener">
+      <title>TMG Trades — venda 77.000</title>
+      <circle class="anel venda" cx="242" cy="375.2" r="16"/>
+      <image href="https://yt3.googleusercontent.com/UBV7jZIWbqiC50UVB8U56vsPFMD0HhtqKX-9D2z5fo0PkBc2XcRhPudX7MAL04j1YJZ07t4dON4=s96" x="227" y="360.2" width="30" height="30" clip-path="url(#foto)" preserveAspectRatio="xMidYMid slice"/>
+    </a>
+    
+    
+    
+    <text class="rot" x="96" y="524.7" text-anchor="end">Bernardo</text>
+    <text class="val compra" x="96" y="536.7" text-anchor="end">74,3k</text>
+    
+    <text class="rot" x="264" y="97.2" text-anchor="start">Gui</text>
+    <text class="val venda" x="264" y="109.2" text-anchor="start">82k</text>
+    
+    <text class="rot" x="264" y="318.0" text-anchor="start">Mack</text>
+    <text class="val venda" x="264" y="330.0" text-anchor="start">78k</text>
+    
+    <text class="rot" x="264" y="373.2" text-anchor="start">TMG</text>
+    <text class="val venda" x="264" y="385.2" text-anchor="start">77k</text>
+    
+    
+    <text class="tick fundo" x="180" y="544.3" text-anchor="middle">74k</text>
+    
+    <text class="tick fundo" x="180" y="433.9" text-anchor="middle">76k</text>
+    
+    <text class="tick fundo" x="180" y="213.1" text-anchor="middle">80k</text>
+    
+    <line class="cot" x1="164" y1="159.4" x2="196" y2="159.4"/>
+    <text class="cot-t fundo" x="180" y="152.4" text-anchor="middle">BTC 80,9k</text>
+    <text class="cot-h fundo" x="180" y="173.4" text-anchor="middle">18/09 às 20:50</text>
+  </svg>
+
+  <section class="secao">
+    <h2>O que cada um declarou</h2>
+    <div class="cartoes">
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/4wnXIuYUgGa2Fdgyn6LtpmJj3QWSh25q1IEgX8KlKEDdH7CcJ7uKkCHfQAjJJlVVuYMOv9nxhw=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCoNkJtAvRbc0t_KR8PSNs8w" target="_blank" rel="noopener">Bernardo Pascowitch</a></h3></header>
+        <p class="meta"><a href="https://youtu.be/ISMGTvhBYvM" target="_blank" rel="noopener">BITCOIN (BTC) SOBE MESMO COM CLARITY ACT E JURO AMERICANO! O QUE ESTÁ ACONTECENDO?</a> · 18/09/2026</p>
+        
+        
+        <div class="declarado compra">
+          <p class="preco">Compra · US$ 74.255</p>
+          <blockquote>Ainda que você acredite que o inverno cripto acabou, você não deveria comprar aqui no topo. Você deveria comprar entre 74255 e 69514, que são os níveis de respiro.</blockquote>
+          
+          <p class="meta"><a href="https://youtu.be/ISMGTvhBYvM?t=2010" target="_blank" rel="noopener">Ouvir no vídeo, aos 33:30</a></p>
+        </div>
+        
+        <p class="vazio">Não declarou venda no último vídeo.</p>
+        
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/DEZB28-Qj1Pm_Lrcwhxv8hN_ZNigDKozylB1DTNq4kVhCuL_UrmGIczEGF5WQAOVvRwMYX7jdYg=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCuWRNR4p8nLGVf_ZPuIBdDA" target="_blank" rel="noopener">Gui Telles / Investimento</a></h3></header>
+        <p class="meta"><a href="https://youtu.be/n9EK9HEoNco" target="_blank" rel="noopener">Não vacila, essa é a grande oportunidade de 2026 nas criptos</a> · 18/09/2026</p>
+        
+        
+        <div class="declarado venda">
+          <p class="preco">Venda · US$ 82.000 · saída</p>
+          <blockquote>Como que foi bater nos 82.000? Houve grande rejeição, houve sinais de distribuição, mercado azedou, risco voltou a subir? Cara, se tudo isso acontecer, estou vendendo aqui em cima mais uma vez, preservando o meu patrimônio e o patrimônio dos meus clientes mais uma vez.</blockquote>
+          
+          <p class="meta"><a href="https://youtu.be/n9EK9HEoNco?t=1276" target="_blank" rel="noopener">Ouvir no vídeo, aos 21:16</a></p>
+        </div>
+        
+        <p class="vazio">Não declarou compra no último vídeo.</p>
+        
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/K8UkwWbmW7uOEuVlV33UlphOHGP8yuqJvbaHOG5XN6LGnJJvALkz57GixEqgL5ExwBJ3i35t=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UC7F2FFxvbHyuarrjRlCFK4g" target="_blank" rel="noopener">Mack Aqui</a></h3></header>
+        <p class="meta"><a href="https://youtu.be/DDMvPzWdffA" target="_blank" rel="noopener">Bitcoin: Você Acha que o Bear Realmente &#34;Acabou&#34;?</a> · 17/09/2026</p>
+        
+        
+        <div class="declarado venda">
+          <p class="preco">Venda · US$ 78.000 · short</p>
+          <blockquote>Eu particularmente não por já estou posicionado. Já estou [06:58] posicionado com o Bitcoin aqui em short [06:59] aproximadamente 78.000.</blockquote>
+          
+          <p class="meta"><a href="https://youtu.be/DDMvPzWdffA?t=415" target="_blank" rel="noopener">Ouvir no vídeo, aos 6:55</a></p>
+        </div>
+        
+        <p class="vazio">Não declarou compra no último vídeo.</p>
+        
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/UBV7jZIWbqiC50UVB8U56vsPFMD0HhtqKX-9D2z5fo0PkBc2XcRhPudX7MAL04j1YJZ07t4dON4=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCpwO586BGlLdJMYuDU9-FoQ" target="_blank" rel="noopener">TMG Trades</a></h3></header>
+        <p class="meta"><a href="https://youtu.be/we8GcSFF0aw" target="_blank" rel="noopener">BITCOIN HUGE LIQUIDITY GAP!! THURSDAY LIQUIDATION TRAP!! FOMC RATE HIKE!!!</a> · 16/09/2026</p>
+        
+        
+        <div class="declarado venda">
+          <p class="preco">Venda · US$ 77.000 · short</p>
+          <blockquote>I initially opened this trade, it was at $81,000. My new entry price in this trade is $77,000.</blockquote>
+          <p class="traducao">Tradução: Eu abri essa operação inicialmente em 81.000 dólares. Meu novo preço de entrada nessa operação é 77.000 dólares.</p>
+          <p class="meta"><a href="https://youtu.be/we8GcSFF0aw?t=529" target="_blank" rel="noopener">Ouvir no vídeo, aos 8:49</a></p>
+        </div>
+        
+        <p class="vazio">Não declarou compra no último vídeo.</p>
+        
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/EYbwokGAKktsun2WnX3tFuJpAaEQiK8i3L8Xs0Sx0L2qnr-Ulgwom_2wLYNRIrD3e1QHiMWzOVU=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCFzEG7N47dktszRxdfOHJdA" target="_blank" rel="noopener">Fausto Botelho</a></h3></header>
+        <p class="meta"><a href="https://youtu.be/_p-gNrboMUg" target="_blank" rel="noopener">🚨BITCOIN DESAFIANDO o MACRO: Força ou Armadilha?</a> · 18/09/2026</p>
+        
+        
+        <p class="vazio">Não declarou compra nem venda no último vídeo.</p>
+        
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/GI0ZZckJrJJxSSuHrSJMKzO-eVmq7Nig-rGEO6U1wsHz_Pl6kYrcSZSAQ_pJiq-3rN1i0WWV=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UC3bwXp8SU6EqK3Bb6tYKbhQ" target="_blank" rel="noopener">INSCRITOS MILIONÁRIOS</a></h3></header>
+        <p class="meta"><a href="https://youtu.be/fkJETr0ev08" target="_blank" rel="noopener">Dias de luta, dias de lenda!</a> · 18/09/2026</p>
+        
+        
+        <p class="vazio">Não declarou compra nem venda no último vídeo.</p>
+        
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/bdEg7cmv2G-o-8w4eDQHs-xnsSLlN0kSBj4SKSE2CH_lSHRZWOkcEBNMmG3JQNBO4X3uM9RBEw=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCqJh7qQbiQ-5HPZkMu_hIqg" target="_blank" rel="noopener">Investidor Moderno</a></h3></header>
+        <p class="meta"><a href="https://youtu.be/93k12-PgTNA" target="_blank" rel="noopener">BITCOIN PUMP 81K: AGORA VAI? ROMPIMENTO CONFIRMADO? + ESTRATÉGIA AGORA</a> · 18/09/2026</p>
+        
+        
+        <p class="vazio">Não declarou compra nem venda no último vídeo.</p>
+        
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/ckcbpaT6m1z0zJeOzNxw4Fnce5B3IiGESVWbELr2Jz9hmj2Un5DSh12WSb_NkbAQusjkGGvzKIo=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UC16h2Qs8qQobqsU_D6rgeXA" target="_blank" rel="noopener">Cauê Oliveira</a></h3></header>
+        <p class="meta"><a href="https://youtu.be/CjfvutqTmj4" target="_blank" rel="noopener">Fed SOBE JUROS, mas BITCOIN vai SUBIR por ESSE MOTIVO (Não é o que você acha)</a> · 17/09/2026</p>
+        
+        
+        <p class="vazio">Não declarou compra nem venda no último vídeo.</p>
+        
+      </article>
+      
+      <article class="cartao">
+        <header><img class="mini" src="https://yt3.googleusercontent.com/u9Grlg1intVKN34XmVPeveetHld-es1fPVTnTfH4VMpk_COBsSxPahkAjKCQ6LEWJ0jQ8PdCUA=s96" alt="">
+          <h3><a href="https://www.youtube.com/channel/UCxgxWgN0T4hcXJvkzGegb4w" target="_blank" rel="noopener">Ghost | Bitcoin e Cripto</a></h3></header>
+        <p class="meta"><a href="https://youtu.be/nU1KNZwVR_I" target="_blank" rel="noopener">BITCOIN Grande IMPACTO NO PREÇO essa SEMANA (Clarity e FOMC, saiba disso)</a> · 15/09/2026</p>
+        
+        
+        <p class="vazio">Não declarou compra nem venda no último vídeo.</p>
+        
+      </article>
+      
+    </div>
+    <p class="rodape">Esta página reúne declarações de terceiros e não é recomendação de investimento.</p>
+  </section>
+</main>
+</body>
+</html>
