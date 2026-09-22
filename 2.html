@@ -1,1180 +1,390 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Diário de Mercados — 2026-09-17</title>
-    <style>
-        :root {
-            --bg-primary: #0f0f0f;
-            --bg-secondary: #1a1a1a;
-            --bg-tertiary: #2d2d2d;
-            --text-primary: #e8e8e8;
-            --text-secondary: #b0b0b0;
-            --accent-up: #10b981;
-            --accent-down: #ef4444;
-            --accent-neutral: #8b5cf6;
-            --border-color: #404040;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            padding: 20px;
-        }
-        header {
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;
-            border-bottom: 2px solid var(--border-color); padding-bottom: 15px;
-        }
-        h1 { font-size: 2.2em; font-weight: 700; letter-spacing: -0.5px; }
-        .date-time { font-size: 0.95em; color: var(--text-secondary); }
-        nav {
-            display: flex; gap: 20px; margin-bottom: 30px; padding: 15px;
-            background-color: var(--bg-secondary); border-radius: 8px; flex-wrap: wrap;
-        }
-        nav a {
-            color: var(--accent-neutral); text-decoration: none; font-size: 0.95em; font-weight: 600;
-            transition: color 0.3s;
-        }
-        nav a:hover { color: var(--accent-up); }
-        .section {
-            margin-bottom: 40px; padding: 20px; background-color: var(--bg-secondary);
-            border-radius: 8px; border-left: 4px solid var(--accent-neutral);
-        }
-        .section-title {
-            font-size: 1.6em; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        table {
-            width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.95em;
-        }
-        th, td {
-            padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color);
-        }
-        th {
-            background-color: var(--bg-tertiary); font-weight: 700; text-transform: uppercase;
-            font-size: 0.85em; letter-spacing: 0.5px;
-        }
-        tr:hover { background-color: var(--bg-tertiary); }
-        .up { color: var(--accent-up); font-weight: 600; }
-        .down { color: var(--accent-down); font-weight: 600; }
-        .neutral { color: var(--text-secondary); }
-        .badge {
-            display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85em;
-            font-weight: 600; text-transform: uppercase;
-        }
-        .badge-high { background-color: rgba(239, 68, 68, 0.2); color: var(--accent-down); }
-        .badge-medium { background-color: rgba(139, 92, 246, 0.2); color: var(--accent-neutral); }
-        .badge-low { background-color: rgba(16, 185, 129, 0.2); color: var(--accent-up); }
-        .insight {
-            padding: 15px; margin-bottom: 15px; background-color: var(--bg-tertiary);
-            border-left: 3px solid var(--accent-neutral); border-radius: 4px;
-        }
-        .insight-title { font-weight: 700; margin-bottom: 8px; color: var(--accent-up); }
-        .grid-2 {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;
-        }
-        .grid-4 {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;
-        }
-        .asset-card {
-            padding: 15px; background-color: var(--bg-tertiary); border-radius: 6px;
-            border-top: 3px solid var(--accent-neutral);
-        }
-        .asset-header { display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 10px; font-weight: 700; }
-        .asset-ticker { font-size: 1.1em; font-family: 'Courier New', monospace; }
-        .asset-price { font-size: 0.95em; }
-        .asset-details { font-size: 0.9em; color: var(--text-secondary); line-height: 1.5; }
-        .conviction-bar {
-            display: flex; gap: 5px; margin-top: 8px;
-        }
-        .conviction-dot {
-            width: 8px; height: 8px; border-radius: 50%; background-color: var(--accent-neutral);
-        }
-        .conviction-alta .conviction-dot { background-color: var(--accent-down); }
-        .conviction-media .conviction-dot:nth-child(2) { background-color: var(--accent-down); }
-        .sources {
-            font-size: 0.9em; color: var(--text-secondary); margin-top: 30px;
-            padding-top: 20px; border-top: 1px solid var(--border-color);
-        }
-        .source-row { padding: 8px 0; }
-        .source-code { font-family: 'Courier New', monospace; font-weight: 600; color: var(--accent-neutral); }
-        .limitation {
-            padding: 15px; background-color: rgba(239, 68, 68, 0.1);
-            border-left: 3px solid var(--accent-down); margin-bottom: 10px; font-size: 0.95em;
-        }
-        @media (max-width: 768px) {
-            .grid-2, .grid-4 { grid-template-columns: 1fr; }
-            header { flex-direction: column; align-items: flex-start; }
-            nav { margin-top: 15px; }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diário de Mercados — 2026-09-22</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fffdf8;--ink:#1d1b16;--mut:#6b655a;--line:#d9d3c5;--acc:#8a4b12;--up:#1b7a43;--dn:#b3261e;--neu:#8a7a3a;--z1:#b3261e;--z2:#d9822b;--z3:#b9b19a;--z4:#7fae5a;--z5:#1b7a43}
+@media (prefers-color-scheme:dark){:root{--bg:#14130f;--card:#1c1a15;--ink:#ece7da;--mut:#a39c8c;--line:#35312a;--acc:#e0a565;--up:#5fcf8c;--dn:#ff7b72;--neu:#d8c56a;--z3:#5a5546}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Georgia,'Times New Roman',serif}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:3px double var(--ink);padding:22px 0 10px;flex-wrap:wrap}
+.brand{font-size:26px;font-weight:700;letter-spacing:.02em}
+.brand small{display:block;font-size:12px;font-weight:400;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
+.date{text-align:right;font-variant-numeric:tabular-nums;color:var(--mut);font-size:13px}
+.date b{display:block;color:var(--ink);font-size:18px}
+nav{background:var(--card);border:1px solid var(--line);padding:10px 14px;margin:14px 0 6px;font-size:13px;line-height:1.9}
+nav b{font-variant:small-caps;letter-spacing:.06em;color:var(--acc);margin-right:6px}
+nav a{color:var(--ink);margin-right:12px;white-space:nowrap}
+h1{font-variant:small-caps;letter-spacing:.08em;font-size:22px;border-bottom:2px solid var(--ink);padding-bottom:4px;margin:40px 0 6px}
+h2{font-variant:small-caps;letter-spacing:.07em;font-size:17px;color:var(--acc);margin:28px 0 8px;border-bottom:1px solid var(--line);padding-bottom:3px}
+h3{font-size:15px;margin:18px 0 4px}
+p{margin:6px 0}
+.lead{color:var(--mut);font-size:13px}
+table{width:100%;border-collapse:collapse;font:12.5px/1.35 'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;background:var(--card)}
+th,td{border:1px solid var(--line);padding:5px 7px;text-align:left;vertical-align:top}
+th{font-variant:small-caps;letter-spacing:.05em;background:transparent;border-bottom:2px solid var(--ink);font-size:12px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);padding:10px 14px}
+.up{color:var(--up);font-weight:700}.dn{color:var(--dn);font-weight:700}.neu{color:var(--neu);font-weight:700}
+.tag{font:700 10px/1 Arial,sans-serif;letter-spacing:.06em;padding:2px 5px;border-radius:2px;border:1px solid currentColor;margin-right:4px;vertical-align:1px}
+.f{color:var(--up)}.c{color:var(--neu)}.o{color:var(--acc)}
+.hi{color:var(--dn);font-weight:700}.me{color:var(--neu);font-weight:700}.lo{color:var(--mut);font-weight:700}
+ol.news{margin:4px 0;padding-left:20px;font-size:14px}
+ol.news li{margin-bottom:8px}
+ol.news span{display:block;color:var(--mut);font-size:13px}
+.ins{border-left:4px solid var(--acc);margin:12px 0}
+.ins h3{margin-top:2px}
+.asset{border-top:1px solid var(--line);padding:8px 0}
+.asset h3{margin:0 0 2px;font:700 13.5px/1.3 'Helvetica Neue',Arial,sans-serif}
+.asset h3 code{font-size:13px;color:var(--acc)}
+.asset p{font-size:14px}
+.meta{font:12.5px/1.4 Arial,sans-serif;color:var(--mut)}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
+svg text{font-family:Arial,sans-serif;fill:var(--ink)}
+svg .m{fill:var(--mut)}
+.verdict{font-size:16px;font-style:italic;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 4px;margin:14px 0}
+ul.src{font:12.5px/1.5 Arial,sans-serif;padding-left:18px}
+ul.src a{color:var(--acc);word-break:break-all}
+footer{margin-top:40px;border-top:3px double var(--ink);padding-top:8px;color:var(--mut);font-size:12px}
+</style>
 </head>
 <body>
-    <header>
-        <div>
-            <h1>📊 Dashboard Diário de Mercados</h1>
-            <p style="font-size: 0.95em; color: var(--text-secondary); margin-top: 5px;">Legado + Cripto</p>
-        </div>
-        <div class="date-time">
-            <div><strong>2026-09-17</strong></div>
-            <div>Coleta: 10:19 BRT</div>
-        </div>
-    </header>
+<div class="wrap">
 
-    <nav>
-        <a href="#agenda">→ Agenda</a>
-        <a href="#noticias">→ Notícias</a>
-        <a href="#sentimento">→ Sentimento</a>
-        <a href="#insights">→ Insights</a>
-        <a href="#ativos">→ Ativos</a>
-        <a href="#fontes">→ Fontes</a>
-    </nav>
+<header>
+  <div class="brand">CocaDash · Diário de Mercados<small>Legado + Cripto — pesquisa diária v1</small></div>
+  <div class="date"><b>Terça-feira, 22 de setembro de 2026</b>Horários em BRT (UTC-3) · coleta de dados: 22/09 ≈ 09:15 BRT</div>
+</header>
 
-    <!-- PARTE 1: DASHBOARD -->
-    <div id="agenda" class="section">
-        <h2 class="section-title">Agenda Macro — 17 de Setembro</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Horário (BRT)</th>
-                    <th>Evento</th>
-                    <th>País</th>
-                    <th>Consenso</th>
-                    <th>Anterior</th>
-                    <th>Impacto</th>
-                    <th>Afeta</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>08:30</td>
-                    <td>Produção Industrial (ago)</td>
-                    <td>🇧🇷</td>
-                    <td>-0,1%</td>
-                    <td>-0,4%</td>
-                    <td><span class="badge badge-low">Baixo</span></td>
-                    <td>Legado</td>
-                </tr>
-                <tr>
-                    <td>09:00</td>
-                    <td>BoJ Governor Ueda (comentários)</td>
-                    <td>🇯🇵</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td><span class="badge badge-medium">Médio</span></td>
-                    <td>Ambos</td>
-                </tr>
-                <tr>
-                    <td>13:30</td>
-                    <td>Jobless Claims (EUA)</td>
-                    <td>🇺🇸</td>
-                    <td>230K</td>
-                    <td>227K</td>
-                    <td><span class="badge badge-medium">Médio</span></td>
-                    <td>Ambos</td>
-                </tr>
-                <tr>
-                    <td>14:00</td>
-                    <td>Philadephia Fed Index (ago)</td>
-                    <td>🇺🇸</td>
-                    <td>-7,5</td>
-                    <td>-13,5</td>
-                    <td><span class="badge badge-low">Baixo</span></td>
-                    <td>Legado</td>
-                </tr>
-                <tr>
-                    <td>16:00</td>
-                    <td>Vencimento de Opções (BTC/ETH)</td>
-                    <td>🌐</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td><span class="badge badge-high">Alto</span></td>
-                    <td>Cripto</td>
-                </tr>
-                <tr>
-                    <td>19:00</td>
-                    <td>Ethereum Dencun Hard Fork (cronograma)</td>
-                    <td>🌐</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td><span class="badge badge-low">Baixo</span></td>
-                    <td>Cripto</td>
-                </tr>
-            </tbody>
-        </table>
-        <p style="font-size: 0.9em; color: var(--text-secondary); margin-top: 15px;">
-            <strong>Dados de:</strong> Fed Calendar (16/09, 22:40 UTC) | BoJ Calendar (16/09, 23:15 UTC) | CoinGecko Events (17/09, 10:15 BRT)
-        </p>
-    </div>
+<nav>
+  <b>Parte 1 — Dashboard</b>
+  <a href="#p1-1">1.1 Agenda de hoje</a><a href="#p1-2">1.2 Top 5 de ontem</a><a href="#p1-3">1.3 Sentimento</a><a href="#p1-4">1.4 Insights escondidos</a><br>
+  <b>Parte 2 — Listas</b>
+  <a href="#p2-1">2.1 Alta hoje</a><a href="#p2-2">2.2 Baixa hoje</a><a href="#p2-3">2.3 Alta 15 dias</a><a href="#p2-4">2.4 Baixa 15 dias</a><br>
+  <b>Parte 3</b>
+  <a href="#p3-1">3.1 Fontes</a><a href="#p3-2">3.2 Limitações</a>
+</nav>
 
-    <div id="noticias" class="section">
-        <h2 class="section-title">Top 5 Notícias — 16 de Setembro</h2>
-        <div class="grid-2">
-            <div>
-                <h3 style="color: var(--accent-up); margin-bottom: 15px; font-size: 1.1em;">📈 Mercado Legado</h3>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><strong>BCE mantém juros; sinais de cortes em dez</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="color: var(--text-secondary); font-size: 0.9em;">Euribor+3m: +15 bps | Fonte: ECB Press (16/09, 13:45 UTC)</td>
-                        </tr>
-                        <tr style="height: 15px;"><td></td></tr>
-                        <tr>
-                            <td><strong>Nasdaq 100 +2,3%; tech lidera em força (rotação de setor)</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="color: var(--text-secondary); font-size: 0.9em;">S&P 500: +1,8% | Fonte: Bloomberg (16/09, 21:30 UTC)</td>
-                        </tr>
-                        <tr style="height: 15px;"><td></td></tr>
-                        <tr>
-                            <td><strong>Petróleo Brent sobe para $82,15/bbl (+3,1%); nervosismo Oriente Médio</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="color: var(--text-secondary); font-size: 0.9em;">WTI: +3,4% | Fonte: CNBC Energy (16/09, 22:00 UTC)</td>
-                        </tr>
-                        <tr style="height: 15px;"><td></td></tr>
-                        <tr>
-                            <td><strong>Dólar +0,8% vs cesta; Fed hard-line afasta cortes antes de dez</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="color: var(--text-secondary); font-size: 0.9em;">DXY: 104,23 (+0,75%) | Fonte: Fed Reserve (16/09, 23:30 UTC)</td>
-                        </tr>
-                        <tr style="height: 15px;"><td></td></tr>
-                        <tr>
-                            <td><strong>Ouro fecha em $2.610/oz (+1,2%); demanda de hedge em alta</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="color: var(--text-secondary); font-size: 0.9em;">COMEX: Spot +1,25% | Fonte: CME Group (16/09, 23:15 UTC)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <h3 style="color: var(--accent-neutral); margin-bottom: 15px; font-size: 1.1em;">⚡ Mercado Cripto</h3>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><strong>Bitcoin +1,17% a $76.631; ETH +2,33% a $2.456 (recuperação pós-Fed)</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="color: var(--text-secondary); font-size: 0.9em;">Fonte: CoinGecko (17/09, 10:19 BRT)</td>
-                        </tr>
-                        <tr style="height: 15px;"><td></td></tr>
-                        <tr>
-                            <td><strong>Stablecoin USDT +$2B em supply onchain (fluxo institucional)</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="color: var(--text-secondary); font-size: 0.9em;">Glassnode (16/09, 22:40 UTC): +$2.1B em 24h</td>
-                        </tr>
-                        <tr style="height: 15px;"><td></td></tr>
-                        <tr>
-                            <td><strong>Solana sobe 4,8% a $142; aprovação de SOL ETF spot aguardada</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="color: var(--text-secondary); font-size: 0.9em;">BINANCE:SOLUSDT | CoinGecko (17/09, 10:15 BRT)</td>
-                        </tr>
-                        <tr style="height: 15px;"><td></td></tr>
-                        <tr>
-                            <td><strong>Funding Rates BTC/ETH recuam; posição longa desmonta</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="color: var(--text-secondary); font-size: 0.9em;">Bybit, OKX agregado (17/09, 09:30 BRT): BTC 0,004% (de 0,018%)</td>
-                        </tr>
-                        <tr style="height: 15px;"><td></td></tr>
-                        <tr>
-                            <td><strong>Altcoins no radar: XRP +3,2%, LINK +2,8% (fluxo privado)</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="color: var(--text-secondary); font-size: 0.9em;">CoinGecko (17/09, 10:18 BRT) | Só título</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<p class="lead">Convenção: <span class="tag f">FATO</span> aconteceu e tem fonte · <span class="tag c">CONSENSO</span> o que o mercado espera · <span class="tag o">OPINIÃO</span> análise deste relatório. Números entre colchetes [n] remetem à lista de fontes (Parte 3). Preços de ações = fechamento de 21/09 (17:00 BRT); cripto, futuros, câmbio e commodities = coleta de 22/09 ≈ 09:10 BRT.</p>
 
-    <div id="sentimento" class="section">
-        <h2 class="section-title">Sentimento Comparativo</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 40%;">Indicador</th>
-                    <th style="width: 30%;">Legado</th>
-                    <th style="width: 30%;">Cripto</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Fear & Greed Index</strong></td>
-                    <td><span class="up">64/100 — Ganância</span></td>
-                    <td><span class="up">72/100 — Ganância Forte</span></td>
-                </tr>
-                <tr>
-                    <td style="color: var(--text-secondary);">Fonte &amp; horário</td>
-                    <td style="color: var(--text-secondary); font-size: 0.9em;">CNN (17/09, 10:15 BRT)</td>
-                    <td style="color: var(--text-secondary); font-size: 0.9em;">alternative.me (17/09, 10:12 BRT)</td>
-                </tr>
-                <tr style="height: 10px;"><td colspan="3"></td></tr>
-                <tr>
-                    <td><strong>VIX / Funding Rates</strong></td>
-                    <td><span class="neutral">VIX 15,8 — Calmo</span></td>
-                    <td><span class="neutral">BTC funding 0,004% — Neutro</span></td>
-                </tr>
-                <tr>
-                    <td style="color: var(--text-secondary);">Interpretação</td>
-                    <td style="color: var(--text-secondary); font-size: 0.9em;">Comprador confiante, mas vol. baixa = falta de convicção</td>
-                    <td style="color: var(--text-secondary); font-size: 0.9em;">Long recuando; short começando a cobrir</td>
-                </tr>
-                <tr style="height: 10px;"><td colspan="3"></td></tr>
-                <tr>
-                    <td><strong>Dominância BTC</strong></td>
-                    <td>—</td>
-                    <td><span class="neutral">54,2% (+0,3% em 24h)</span></td>
-                </tr>
-                <tr>
-                    <td colspan="3" style="color: var(--text-secondary); font-size: 0.9em;">
-                        <strong>Veredito (1 frase):</strong> Ganância em ambos os lados, mas legado com proteção (VIX baixo = puts baratos),
-                        cripto com posição longa fraca (funding recuando) — correlação média, não convergência.
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<h1 id="p1">Parte 1 — Dashboard</h1>
 
-    <div id="insights" class="section">
-        <h2 class="section-title">3 Insights Não-Óbvios</h2>
-        <div class="insight">
-            <div class="insight-title">1️⃣ CNN em 64 (ganância) + VIX 15,8 (calmo) = Proteção extremamente barata</div>
-            <div style="color: var(--text-secondary); font-size: 0.95em;">
-                <strong>Tese:</strong> O mercado legado preza ganância enquanto mede volatilidade implícita em piso histórico.
-                Put spreads nos próximos 15 dias (S&P -2% strike) estão precificando &lt;1% de queda, quando o IV próprio
-                (não nível de medo) sugere +50% de upside tail risk em 21 dias. Isto é assimetria pura: venda de prêmio em
-                condição de "tudo bem" esconde downside estrutural (Fed apertado, inflação presa, bancos ameaçados de margin call).
-                <br /><br />
-                <strong>Gatilho:</strong> Se S&P cair &gt;1% num dia (evento > 2 desvios-padrão), puts saltam +300% e spreads
-                ficam +500%, confirmando a tese.
-                <br /><br />
-                <strong>Invalidação:</strong> Se VIX subir para &gt;20 sem queda de preço, a proteção não estava barata — estava
-                cara e o mercado já precia o tail risk (falsa assimetria).
-            </div>
-        </div>
-        <div class="insight">
-            <div class="insight-title">2️⃣ ETH varejo longo 76% vs. top traders 57% + exits institucionais no painel = Set-up de liquidação</div>
-            <div style="color: var(--text-secondary); font-size: 0.95em;">
-                <strong>Tese:</strong> Glassnode aponta que varejo acumulou 76% de posição longa em ETH (média móvel 90d)
-                enquanto dados de perp exchanges (OKX, Bybit) mostram top traders (>$500K notional) em apenas 57% long —
-                isto é divergência de 19pp. Simultaneously, instituições (rastreadas via ETF flows Grayscale + iShares) saíram
-                -$150M em 3 dias. Varejo alavancado vs. institucional exit = squeeze setup: varejo liquidado quando varejo less
-                esperado é queda + recarga.
-                <br /><br />
-                <strong>Gatilho:</strong> Se ETH cair &lt;2% da máxima semanal ($2.480), varejo entra em stop-loss (Bybit liquidation
-                ladder mostra $2.350 como suporte crítico com $400M em longs).
-                <br /><br />
-                <strong>Invalidação:</strong> Se inflows de ETF retomam (&gt;+$200M em 24h), tese de exit morre e posição longa
-                é reforçada.
-            </div>
-        </div>
-        <div class="insight">
-            <div class="insight-title">3️⃣ Energy mega-caps (XOM, CVX, et al.) em beta 2,3–2,4× vs. petróleo, mas precificam "fim da guerra" (Brent -5% YTD)</div>
-            <div style="color: var(--text-secondary); font-size: 0.95em;">
-                <strong>Tese:</strong> Energy stocks operam em beta extraordinário vs. commodity: XOM +22% YTD enquanto Brent
-                +8%, sugerindo "prêmio de paz" que não existe nos preços do petróleo. Airlines (UAL, DAL, SAVE) ainda em beta
-                ~0,8, ou seja, faltam completar a repricing de custos reduzidos de combustível. O carry-over de inflação em frete
-                aéreo (booking power +18% Y/Y em premium classes) mas jet fuel commodity preço apenas +8% YTD = arbitragem de
-                margens em aberto.
-                <br /><br />
-                <strong>Gatilho:</strong> Se Brent cai para &lt;$78 (break de suporte de setembro), energy estica o múltiplo
-                (beta salta para 3,0+) para confirmar "preço de paz". Airlines desaceleram então acompanhando, fechando o gap.
-                <br /><br />
-                <strong>Invalidação:</strong> Novo flash de geopolítica (Irã, Straits) eleva Brent &gt;$90 e energy normaliza
-                para beta 0,8–1,0 (sem prêmio).
-            </div>
-        </div>
-    </div>
+<p><span class="tag f">FATO</span> Pano de fundo em uma linha: o Fed subiu os juros em 25 pb para 3,75%–4,00% em 16/09, primeira alta em mais de três anos, por 12 votos a 0, com 16 dos 18 dirigentes vendo mais uma alta ainda em 2026 [1]; o Treasury de 10 anos tocou 5,006% na semana passada, maior nível desde 2007, e o BoJ subiu para 1,25% [2]; o petróleo caiu quatro pregões seguidos (WTI −4,5% a US$ 95,78 e Brent −3,4% a US$ 100,34 ontem) com o fluxo pelo Estreito de Ormuz no maior nível em seis meses e Trump dizendo que "provavelmente" encontraria o presidente iraniano na ONU esta semana [3]; Musalem (St. Louis Fed) disse ontem que "mais altas provavelmente serão necessárias" [4]; no Brasil, o Copom cortou a Selic para 13,75% em 16/09 sem sinalizar o próximo passo [5].</p>
 
-    <!-- PARTE 2: ATIVOS -->
-    <div id="ativos" class="section">
-        <h2 class="section-title">Ativos com Potencial de Valorização — Hoje</h2>
-        <div class="grid-4">
-            <div class="asset-card conviction-alta">
-                <div class="asset-header">
-                    <span class="asset-ticker">GEL.US</span>
-                    <span class="asset-price up">+2,8%</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Generac Holdings (energia distribuída)</strong><br/>
-                    $118,20 → Suporte técnico: Amazon contract (16/09) +$140M 15-ano; demanda de backup gen.
-                    em data centers cresce 22% Y/Y. Catalisador macro: energia cara, infraestrutura resiliente em foco.
-                    <br/><strong>Invalidação:</strong> -2% se energia cai &lt;$78/bbl.
-                </div>
-                <div class="conviction-bar conviction-alta">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-down); margin-top: 5px;">Convicção: ALTA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">NVDA.US</span>
-                    <span class="asset-price up">+1,4%</span>
-                </div>
-                <div class="asset-details">
-                    <strong>NVIDIA (IA, chips)</strong><br/>
-                    $139,50 → Suporte: fed fund futures precificam cortes em dez (52% prob., CME FedWatch).
-                    Se cortes confirmam, tech funding costs caem. Catalisador: AI capex remains robust.
-                    <br/><strong>Invalidação:</strong> Se Fed sinaliza pausa (não cortes), stops em $135.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">BTC.USDT</span>
-                    <span class="asset-price up">+1,17%</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Bitcoin (cripto, macro hedge)</strong><br/>
-                    $76.631 → Suporte técnico: MA200 em $75.200. Dólar + juros altos = BTC ganha como hedge fora-caixa.
-                    Funding rates recuam (0,004%) = shorts cobrem. Catalisador: cortes fed em dez.
-                    <br/><strong>Invalidação:</strong> Fed sinais "hold", dólar +1%, BTC cai para $74k.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">ETH.USDT</span>
-                    <span class="asset-price up">+2,33%</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Ethereum (cripto, aplicações)</strong><br/>
-                    $2.456,20 → Catalisador: Dencun fork (cronograma mantido). Fluxo L2s reduz fees.
-                    Suporte: $2.350 (liquidação massiva abaixo). Inversão da tese cripto: top traders desapegam (57% long).
-                    <br/><strong>Invalidação:</strong> Queda &lt;2% semanal, longs liquidados, suporte quebra.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-baixa">
-                <div class="asset-header">
-                    <span class="asset-ticker">XOM.US</span>
-                    <span class="asset-price up">+0,8%</span>
-                </div>
-                <div class="asset-details">
-                    <strong>ExxonMobil (energia, commodities)</strong><br/>
-                    $114,30 → Brent +3,1% ontem. Dividend yield 3,4% robusto.
-                    Multíplo P/E 11,8× baixo vs. SPX 18×. Risco: reversão de beta se preço cai.
-                    <br/><strong>Invalidação:</strong> Brent cai &lt;$78, beta volta 0,8.
-                </div>
-                <div class="conviction-bar conviction-baixa">
-                    <span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-up); margin-top: 5px;">Convicção: BAIXA</div>
-            </div>
-            <div class="asset-card conviction-baixa">
-                <div class="asset-header">
-                    <span class="asset-ticker">JPM.US</span>
-                    <span class="asset-price up">+0,3%</span>
-                </div>
-                <div class="asset-details">
-                    <strong>JPMorgan Chase (financials, spread curves)</strong><br/>
-                    $189,75 → Curva desplana (2y10y spread -12 bps em 24h). Margens de empréstimo comprimem.
-                    ROE preso em 14,5%. Catalisador fraco: retorno mínimo até cortes fed claros.
-                    <br/><strong>Invalidação:</strong> Curva reencha (spread >80 bps), NIM expande, ROE sobe para 16%+.
-                </div>
-                <div class="conviction-bar conviction-baixa">
-                    <span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-up); margin-top: 5px;">Convicção: BAIXA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">SOL.USDT</span>
-                    <span class="asset-price up">+4,8%</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Solana (cripto, ETF expectation)</strong><br/>
-                    $142,40 → ETF spot SOL esperado antes de ano novo (89% prob. Finra).
-                    Suporte: $140 (funding longs firme em 0,012%). Catalisador: aprovação ETF fluxo institucional.
-                    <br/><strong>Invalidação:</strong> Adiamento de ETF, queda &lt;3%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-baixa">
-                <div class="asset-header">
-                    <span class="asset-ticker">LINK.USDT</span>
-                    <span class="asset-price up">+2,8%</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Chainlink (cripto, oráculo infraestrutura)</strong><br/>
-                    $19,40 → Fluxo privado nota entrada institucional (+3,2%). Resistência: $20,50 (MA50).
-                    Catalisador débil: crescimento de uso de oráculo em novos L2s. Risco: altcoin rotation.
-                    <br/><strong>Invalidação:</strong> Saída de altcoin capital, queda &lt;8%.
-                </div>
-                <div class="conviction-bar conviction-baixa">
-                    <span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-up); margin-top: 5px;">Convicção: BAIXA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">CVX.US</span>
-                    <span class="asset-price up">+2,1%</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Chevron (energia exploração)</strong><br/>
-                    $159,20 → Beta XOM (+2,1% ontem). Payout ratio 49% sustentável.
-                    Exploração em Guyana reduz custo de poço. Catalisador: Brent &gt;$80 mantido.
-                    <br/><strong>Invalidação:</strong> Commodity oversupply, queda &lt;5%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-baixa">
-                <div class="asset-header">
-                    <span class="asset-ticker">XRP.USDT</span>
-                    <span class="asset-price up">+3,2%</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Ripple XRP (cripto, pagamento remessa)</strong><br/>
-                    $2,94 → Fluxo privado observa entrada. Suporte: $2,85. Catalisador fraco: aprovação em mercados emergentes.
-                    Risco: regulação SEC continuada, altcoin sentiment shift.
-                    <br/><strong>Invalidação:</strong> Lite-coin trading volume explode, XRP recua &lt;2%.
-                </div>
-                <div class="conviction-bar conviction-baixa">
-                    <span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-up); margin-top: 5px;">Convicção: BAIXA</div>
-            </div>
-        </div>
-    </div>
+<h2 id="p1-1">1.1 Agenda macro de hoje</h2>
+<div class="scroll">
+<table>
+<tr><th>Horário (BRT)</th><th>Evento</th><th>País</th><th>Consenso</th><th>Anterior</th><th>Impacto</th><th>Afeta mais</th></tr>
+<tr><td>04:30</td><td>SNB — decisão de juros (lista de calendário; a decisão oficial do SNB é 25/09, ver 3.2) [7]</td><td>Suíça</td><td>0,00%</td><td>0,00%</td><td class="lo">Baixo</td><td>Legado</td></tr>
+<tr><td>pré-abertura</td><td>AutoZone (AZO) — resultado 4T fiscal 2026, <b>já publicado</b>: EPS US$ 56,05, vendas US$ 6,6 bi (+5,6%), comps +1,5% em moeda constante, margem bruta 53,3% (+182 pb, dos quais 145 pb de reembolso de tarifas) [8]; call às 11:00 BRT</td><td>EUA</td><td>EPS US$ 54,22 [9]</td><td>EPS US$ 48,71 [8]</td><td class="me">Médio</td><td>Legado</td></tr>
+<tr><td>08:00</td><td>Ata do Copom (reunião de 16/09, corte para 13,75%) [7][5]</td><td>Brasil</td><td>—</td><td>—</td><td class="me">Médio</td><td>Legado</td></tr>
+<tr><td>08:00</td><td>Discurso de Lagarde (BCE) [7]</td><td>Zona do Euro</td><td>—</td><td>—</td><td class="me">Médio</td><td>Legado</td></tr>
+<tr><td>09:15</td><td>ADP — variação semanal do emprego privado [6]</td><td>EUA</td><td>—</td><td>+16,3 mil</td><td class="me">Médio</td><td>Ambos</td></tr>
+<tr><td>09:55</td><td>Redbook — vendas no varejo (semanal) [6]</td><td>EUA</td><td>—</td><td>+8,5%</td><td class="lo">Baixo</td><td>Legado</td></tr>
+<tr><td>11:00</td><td>Richmond Fed — índice de manufatura de setembro [6]</td><td>EUA</td><td>5</td><td>4</td><td class="lo">Baixo</td><td>Legado</td></tr>
+<tr><td>11:00</td><td>Confiança do consumidor (prévia de setembro) [7]</td><td>Zona do Euro</td><td>−16,0</td><td>−15,5</td><td class="lo">Baixo</td><td>Legado</td></tr>
+<tr><td>11:05</td><td>Fed — discurso de John Williams (NY Fed) [6]</td><td>EUA</td><td>—</td><td>—</td><td class="hi">Alto</td><td>Ambos</td></tr>
+<tr><td>11:20</td><td>Fed — discurso do governador Philip Jefferson [6]</td><td>EUA</td><td>—</td><td>—</td><td class="hi">Alto</td><td>Ambos</td></tr>
+<tr><td>14:00</td><td>Tesouro — leilão de notas de 2 anos [6]</td><td>EUA</td><td>—</td><td>4,315%</td><td class="me">Médio</td><td>Legado</td></tr>
+<tr><td>14:00</td><td>Fed — discurso de Thomas Barkin (Richmond Fed) [6]</td><td>EUA</td><td>—</td><td>—</td><td class="me">Médio</td><td>Ambos</td></tr>
+<tr><td>dia todo</td><td>Assembleia Geral da ONU: Trump discursa; Pezeshkian (Irã) viaja hoje a Nova York; Trump disse domingo que "provavelmente" o encontraria, sem reunião marcada [11]</td><td>EUA / Irã</td><td>—</td><td>—</td><td class="hi">Alto</td><td>Ambos</td></tr>
+<tr><td>dia todo</td><td>Unlock de token: MBG (MultiBank), ≈US$ 2,43 mi, 5,04% do circulante [12]</td><td>Cripto</td><td>—</td><td>—</td><td class="lo">Baixo</td><td>Cripto</td></tr>
+<tr><td>17:30</td><td>API — estoques semanais de petróleo [7]</td><td>EUA</td><td>−0,5 mi bbl</td><td>+7,14 mi bbl</td><td class="me">Médio</td><td>Legado</td></tr>
+</table>
+</div>
+<p class="meta">Não há hoje decisão do FOMC, dado de inflação (CPI/PPI) nem payroll: a semana é de dez aparições de dirigentes do Fed e pouco dado [6]. Não há hoje vencimento relevante de opções cripto nem decisão regulatória agendada; os eventos cripto da semana são o vencimento trimestral da Deribit (sexta 25/09, 05:00 BRT) e o unlock da Plasma (XPL, 25/09) [13]. Consenso do ADP semanal e do leilão de 2 anos: dado indisponível. A ata do Copom e o resultado da AutoZone já saíram na hora da coleta; o conteúdo da ata não foi lido para este relatório.</p>
 
-    <div class="section">
-        <h2 class="section-title">Ativos com Risco de Desvalorização — Hoje</h2>
-        <div class="grid-4">
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">SPX.US</span>
-                    <span class="asset-price down">-1,8% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>S&P 500 (mega-cap mix)</strong><br/>
-                    $5.895 → Valorização extrema (P/E 18,9×, vs. média 15×). VIX 15,8 = proteção barata.
-                    Risco: jobless claims &gt;235K sinaliza abrandamento (→ queda -1% intraday histórica).
-                    <br/><strong>Invalidação:</strong> Claims &lt;225K, VIX cai para &lt;14, suporta subida.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-baixa">
-                <div class="asset-header">
-                    <span class="asset-ticker">QQQ.US</span>
-                    <span class="asset-price down">-2,1% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Nasdaq 100 (tech/mega-cap concentration)</strong><br/>
-                    $18.540 → Concentração em 7 ativos (MAG7) = 48% do índice. Volatilidade histórica +40%.
-                    Risco: rotação for bonds (10y yield -12bps em 24h) + profit-taking.
-                    <br/><strong>Invalidação:</strong> Fed pivô dovish (cortes em nov), tech mantém suporte.
-                </div>
-                <div class="conviction-bar conviction-baixa">
-                    <span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-up); margin-top: 5px;">Convicção: BAIXA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">DXY.US</span>
-                    <span class="asset-price down">-0,8% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Dólar Index (moeda global)</strong><br/>
-                    104,23 → Overbought (RSI 72). Fed hard-line dissipates se dados pioram.
-                    Risco: reversal técnica se jobless claims queda, suaviza Fed outlook.
-                    <br/><strong>Invalidação:</strong> Claims forte, Fed mantém hard-line, DXY sobe para 105+.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-baixa">
-                <div class="asset-header">
-                    <span class="asset-ticker">TSLA.US</span>
-                    <span class="asset-price down">-1,2% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Tesla (auto elétrico, concentration risk)</strong><br/>
-                    $218,50 → EV sales growth desacelerando (-7% Q3 est.). Valuation 3,8× sales pricin perfeição.
-                    Risco: China export data fraco sinaliza demanda global abanda.
-                    <br/><strong>Invalidação:</strong> Delivery guidance FY 1,8M confirmado, suporte $210+.
-                </div>
-                <div class="conviction-bar conviction-baixa">
-                    <span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-up); margin-top: 5px;">Convicção: BAIXA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">BND.US</span>
-                    <span class="asset-price down">-0,5% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Vanguard Bond ETF (renda fixa, duration risk)</strong><br/>
-                    $81,45 → Duration 6,2 anos. Yield 4,9%. Risco: Fed sinais "hold" (não cortes), yields sobe.
-                    10y referencial +12bps em 24h. Risco: inflação surpresa.
-                    <br/><strong>Invalidação:</strong> CPI fraco (<2,5%), yields caem, BND +1,5%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">GLD.US</span>
-                    <span class="asset-price down">-0,9% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Ouro ETF (commodity, hedge)</strong><br/>
-                    $187,80 (+1,2% spot ontem). Overbought RSI 74. Risco: Fed "hard-line" persiste,
-                    dólar forte mata demanda. Suporte: $183 (MA200).
-                    <br/><strong>Invalidação:</strong> Fed dovish, ouro mantém $190+.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">DOGE.USDT</span>
-                    <span class="asset-price down">-2,3% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Dogecoin (cripto meme, altcoin)</strong><br/>
-                    $0,098 → Sem fundamentals. Vol. 150% anualizada. Risco: reversão sentiment (BTC flatlining).
-                    Suporte: $0,085 (quebra aqui, -15% em cascata).
-                    <br/><strong>Invalidação:</strong> Buying frenzy retoma, sobe para $0,12+.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-alta">
-                <div class="asset-header">
-                    <span class="asset-ticker">UST.USDT</span>
-                    <span class="asset-price down">-3,0% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Terra USD (stablecoin associado)</strong><br/>
-                    $0,997 → Depegging risk vivo (supply -$50M em 48h). Validadores desarmam nodes.
-                    Risco: contagion se tether (USDT) questiona. Suporte: $0,95 (quebra aqui, death spiral).
-                    <br/><strong>Invalidação:</strong> Validadores voltam, supply expande, repeg $1,00.
-                </div>
-                <div class="conviction-bar conviction-alta">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-down); margin-top: 5px;">Convicção: ALTA</div>
-            </div>
-            <div class="asset-card conviction-baixa">
-                <div class="asset-header">
-                    <span class="asset-ticker">LTC.USDT</span>
-                    <span class="asset-price down">-1,7% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Litecoin (cripto, altcoin)</strong><br/>
-                    $62,30 → Sem catalysador próximo. Volume -40% vs. 30d média. Risco: BTC weakness,
-                    altcoins sangram primeiro. Suporte: $58.
-                    <br/><strong>Invalidação:</strong> Merge mining update bombeado, LTC sobe para $70+.
-                </div>
-                <div class="conviction-bar conviction-baixa">
-                    <span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-up); margin-top: 5px;">Convicção: BAIXA</div>
-            </div>
-        </div>
-    </div>
+<h2 id="p1-2">1.2 Top 5 notícias de ontem (21/09)</h2>
+<div class="cols">
+<div class="card">
+<h3>Mercado Legado</h3>
+<ol class="news">
+<li>Nasdaq fecha em recorde pela primeira vez desde junho, puxado por semicondutores e IA [14]<span>S&amp;P 500 <b class="up">+1,49%</b> (7.764,70) · Nasdaq <b class="up">+2,26%</b> (27.122,09) · Dow <b class="up">+0,71%</b> (52.048,83) [14]</span></li>
+<li>Petróleo cai pelo quarto pregão seguido: fluxo por Ormuz no maior nível em seis meses e Trump aberto a encontrar Pezeshkian na ONU [3]<span>WTI <b class="dn">−4,5%</b> (US$ 95,78) · Brent <b class="dn">−3,4%</b> (US$ 100,34) · XOM <b class="dn">−3,2%</b> · CVX <b class="dn">−2,8%</b> [3][17]</span></li>
+<li>Meta dispara com o agente Muse no topo da App Store e Wells Fargo elevando o alvo de US$ 640 para US$ 796 [16]<span>META <b class="up">+11,3%</b>, a US$ 741,25; ≈US$ 190 bi de valor de mercado em um dia [16][17]</span></li>
+<li>Intel sobe 12% e AMD encosta em US$ 1 trilhão de valor de mercado: rali de CPUs com a narrativa de inferência local do Muse e revisões de alvo [15]<span>INTC <b class="up">+12,1%</b> (US$ 121,78) · AMD <b class="up">+9,9%</b> (US$ 615,52) [17]</span></li>
+<li>Musalem (Fed St. Louis) diz que mais altas de juros "provavelmente serão necessárias" e que a política talvez ainda seja estimulativa [4]<span>Treasury 10 anos <b class="dn">−4 pb</b> a 4,96% (o petróleo pesou mais que o Fed) · ouro <b class="dn">−0,9%</b> a US$ 4.340,51 [14]</span></li>
+</ol>
+<p class="meta">Também ontem: Morgan Stanley alertou que o S&amp;P 500 pode cair até 7% se a energia voltar a subir com o 10 anos perto de 5% [14]; o dólar (DXY) fechou em 100,43 [17].</p>
+</div>
+<div class="card">
+<h3>Mercado Cripto</h3>
+<ol class="news">
+<li>Bitcoin rompe US$ 85 mil pela primeira vez desde janeiro e liquida ≈US$ 648 mi em shorts em 24 h [18]<span>BTC <b class="up">+5,3%</b> a US$ 84.702 (07:30 ET), máxima intradiária de US$ 87.354 (+7,7%) [18][20]</span></li>
+<li>ETFs de BTC à vista captam US$ 999 mi no dia (IBIT US$ 381 mi); ETFs de ETH captam US$ 270 mi (ETHA US$ 110 mi) [19]<span>Maior entrada diária desde a semana anterior, que somou só US$ 6,2 mi — a menor em 141 semanas [2]</span></li>
+<li>Strategy compra 950 BTC (US$ 75,7 mi, média US$ 79.670) e chega a 846.000 BTC; Strive comprou 1.355 BTC (US$ 107,7 mi) no mesmo período [21][22]<span>MSTR <b class="up">+9,5%</b> a US$ 168,50 · COIN <b class="up">+3,5%</b> a US$ 201,05 [17]</span></li>
+<li>BTC fecha a semana a US$ 81.159, acima da média móvel de 50 semanas (US$ 78.786) pela primeira vez em 45 semanas [18]<span>Resistência de US$ 82.000 havia segurado quatro tentativas desde 25/08 [18]</span></li>
+<li>Solana: Agave 4.3 vira versão recomendada aos validadores, último checkpoint antes da ativação do Alpenglow em 28/09 [23]<span>SOL <b class="up">+6,6%</b> a US$ 115 · ETH <b class="up">+5,4%</b> a US$ 2.724 · XRP <b class="up">+6,4%</b> a US$ 1,47 [18]</span></li>
+</ol>
+<p class="meta">Também: baleias acumularam ≈1,54 bi de XRP (US$ 2,2 bi) em 96 h [24]; a Fear &amp; Greed cripto entrou em "ganância extrema" (78) pela primeira vez no mês [26].</p>
+</div>
+</div>
 
-    <div class="section">
-        <h2 class="section-title">Ativos com Potencial de Valorização — Próximos 15 Dias</h2>
-        <div class="grid-4">
-            <div class="asset-card conviction-alta">
-                <div class="asset-header">
-                    <span class="asset-ticker">UAL.US</span>
-                    <span class="asset-price up">+6,5% potencial</span>
-                </div>
-                <div class="asset-details">
-                    <strong>United Airlines (transporte, fuel hedge)</strong><br/>
-                    $56,80 → Jet fuel -8% vs. Brent (estruturalmente). Booking power +18% premium classes.
-                    Próximos 15 dias: airlines repricing fuel savings. Catalisador: Q3 earnings (28/09) beat.
-                    <br/><strong>Invalidação:</strong> Brent salta &gt;$90, fuel hedges revertem, UAL -5%.
-                </div>
-                <div class="conviction-bar conviction-alta">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-down); margin-top: 5px;">Convicção: ALTA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">DAL.US</span>
-                    <span class="asset-price up">+5,2% potencial</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Delta Air Lines (transporte aereo)</strong><br/>
-                    $44,20 → Mesmo thesis UAL mas fleet mais novo (eficiência +12%). Q3 guidance intact.
-                    Próximos 15 dias: rotação para cyclicals se fed corta em dez. Resistência: $46.
-                    <br/><strong>Invalidação:</strong> Fed sinaliza "hold", sector underperforms, DAL -3%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">FCX.US</span>
-                    <span class="asset-price up">+4,1% potencial</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Freeport-McMoRan (cobre, EV demand)</strong><br/>
-                    $46,50 → Cobre +2,8% vs. ouro (+1,2%); EV batteries demand sólido. Próximos 15 dias:
-                    China stimulus package esperado (antes do Golden Week 30/09). Risco: oversupply.
-                    <br/><strong>Invalidação:</strong> China não stimula, cobre cai &lt;-3%, FCX -6%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">AAPL.US</span>
-                    <span class="asset-price up">+2,3% potencial</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Apple (tech, services)</strong><br/>
-                    $232,15 → iPhone 16 release (22/09) momentum. Services segment +12% YoY.
-                    Próximos 15 dias: earnings call guidance sinaliza 2027 AI roadmap. Resistência: $235.
-                    <br/><strong>Invalidação:</strong> iPhone 16 pre-order miss, AAPL -4%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">AMD.US</span>
-                    <span class="asset-price up">+3,7% potencial</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Advanced Micro Devices (semiconductores, AI)</strong><br/>
-                    $128,60 → EPYC shipments +24% Q3E. Data center margin +320 bps. Próximos 15 dias:
-                    Ryzen AI launch (25/09) market share win vs. Intel. Suporte: $125.
-                    <br/><strong>Invalidação:</strong> Guidance miss Q3, market share gap widens, AMD -5%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-baixa">
-                <div class="asset-header">
-                    <span class="asset-ticker">SPY.US</span>
-                    <span class="asset-price up">+1,8% potencial</span>
-                </div>
-                <div class="asset-details">
-                    <strong>SPY ETF (S&P 500 tracking)</strong><br/>
-                    $589,30 → Mesma thesis SPX mas com beta. Próximos 15 dias: FOMC (19/09) pode pivô dovish
-                    se jobless claim trend deteriora. Resistência: $595.
-                    <br/><strong>Invalidação:</strong> FOMC hawkish, SPY cai para $580-.
-                </div>
-                <div class="conviction-bar conviction-baixa">
-                    <span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-up); margin-top: 5px;">Convicção: BAIXA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">SOL.USDT</span>
-                    <span class="asset-price up">+8,3% potencial</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Solana (cripto, ETF catalyst)</strong><br/>
-                    $142,40 → ETF aprovação esperada antes de ano novo (89% prob., Finra). Próximos 15 dias:
-                    SEC decisão final (estimado antes de 15/10). Catalisador: aprovação = $170+.
-                    <br/><strong>Invalidação:</strong> Adiamento 2027, SOL recua para $120.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">PEPE.USDT</span>
-                    <span class="asset-price up">+15,2% potencial</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Pepe (cripto meme, sentiment)</strong><br/>
-                    $0,00845 → Meme reversal próximo (volume crescente +68% 24h). Suporte: $0,0075.
-                    Próximos 15 dias: Twitter meme season alta (setembro). Catalisador: trending hashtag.
-                    <br/><strong>Invalidação:</strong> Meme winter retoma, PEPE -20%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">POL.USDT</span>
-                    <span class="asset-price up">+6,1% potencial</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Polygon (cripto, L2 scaling)</strong><br/>
-                    $0,825 → zkEVM mainnet upgrade (20/09) reduz gas &lt;-50%. Próximos 15 dias:
-                    migração DApps da Ethereum acelera (economia de custo). Suporte: $0,80.
-                    <br/><strong>Invalidação:</strong> Upgrade delay, ecosystem stalls, POL -8%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-        </div>
-    </div>
+<h2 id="p1-3">1.3 Sentimento comparativo</h2>
+<div class="cols">
+<div class="card">
+<svg viewBox="0 0 520 190" width="100%" role="img" aria-label="Fear and Greed: legado 34 Medo; cripto 78 Ganância extrema">
+  <text x="0" y="14" font-size="12" font-weight="700">FEAR &amp; GREED (0–100)</text>
+  <g transform="translate(0,34)">
+    <text x="0" y="12" font-size="12">Legado · CNN</text>
+    <rect x="110" y="0" width="100" height="16" fill="var(--z1)"/><rect x="210" y="0" width="80" height="16" fill="var(--z2)"/><rect x="290" y="0" width="40" height="16" fill="var(--z3)"/><rect x="330" y="0" width="80" height="16" fill="var(--z4)"/><rect x="410" y="0" width="100" height="16" fill="var(--z5)"/>
+    <path d="M244.6 -5 l6 -9 h-12z" fill="var(--ink)"/><rect x="243.6" y="-5" width="2" height="26" fill="var(--ink)"/>
+    <text x="244.6" y="36" font-size="13" font-weight="700" text-anchor="middle">33,7 · Medo</text>
+    <text x="330" y="36" font-size="10.5" class="m">1 sem: 28 · 1 mês: 55</text>
+  </g>
+  <g transform="translate(0,104)">
+    <text x="0" y="12" font-size="12">Cripto · alt.me</text>
+    <rect x="110" y="0" width="100" height="16" fill="var(--z1)"/><rect x="210" y="0" width="80" height="16" fill="var(--z2)"/><rect x="290" y="0" width="40" height="16" fill="var(--z3)"/><rect x="330" y="0" width="80" height="16" fill="var(--z4)"/><rect x="410" y="0" width="100" height="16" fill="var(--z5)"/>
+    <path d="M422 -5 l6 -9 h-12z" fill="var(--ink)"/><rect x="421" y="-5" width="2" height="26" fill="var(--ink)"/>
+    <text x="422" y="36" font-size="13" font-weight="700" text-anchor="middle">78 · Ganância extrema</text>
+    <text x="400" y="36" font-size="10.5" class="m">ontem: 70 · 1 sem: 69</text>
+  </g>
+  <g font-size="9.5" class="m" transform="translate(0,168)">
+    <text x="110" y="10" class="m">0 medo extremo</text><text x="222" y="10" class="m">25 medo</text><text x="290" y="10" class="m">45 neutro</text><text x="335" y="10" class="m">55 ganância</text><text x="425" y="10" class="m">75 gan. extrema</text>
+  </g>
+</svg>
+</div>
+<div class="card">
+<svg viewBox="0 0 520 190" width="100%" role="img" aria-label="Componentes do índice CNN">
+  <text x="0" y="14" font-size="12" font-weight="700">POR DENTRO DO ÍNDICE CNN — nota 0–100 por componente [25]</text>
+  <g font-size="11.5" transform="translate(0,28)">
+    <text x="0" y="12">Momentum S&amp;P</text><rect x="170" y="2" width="300" height="12" fill="none" stroke="var(--line)"/><rect x="170" y="2" width="121.2" height="12" fill="var(--z2)"/><text x="478" y="12" font-weight="700">40</text>
+    <text x="0" y="34">Força de preço</text><rect x="170" y="24" width="300" height="12" fill="none" stroke="var(--line)"/><rect x="170" y="24" width="4.8" height="12" fill="var(--z1)"/><text x="478" y="34" font-weight="700">2</text>
+    <text x="0" y="56">Amplitude</text><rect x="170" y="46" width="300" height="12" fill="none" stroke="var(--line)"/><rect x="170" y="46" width="0.6" height="12" fill="var(--z1)"/><text x="478" y="56" font-weight="700">0</text>
+    <text x="0" y="78">Put/call</text><rect x="170" y="68" width="300" height="12" fill="none" stroke="var(--line)"/><rect x="170" y="68" width="113.4" height="12" fill="var(--z2)"/><text x="478" y="78" font-weight="700">38</text>
+    <text x="0" y="100">Volatilidade (VIX)</text><rect x="170" y="90" width="300" height="12" fill="none" stroke="var(--line)"/><rect x="170" y="90" width="150" height="12" fill="var(--z3)"/><text x="478" y="100" font-weight="700">50</text>
+    <text x="0" y="122">Demanda por junk</text><rect x="170" y="112" width="300" height="12" fill="none" stroke="var(--line)"/><rect x="170" y="112" width="145.8" height="12" fill="var(--z3)"/><text x="478" y="122" font-weight="700">49</text>
+    <text x="0" y="144">Refúgio (bond vs ação)</text><rect x="170" y="134" width="300" height="12" fill="none" stroke="var(--line)"/><rect x="170" y="134" width="171" height="12" fill="var(--z4)"/><text x="478" y="144" font-weight="700">57</text>
+  </g>
+</svg>
+</div>
+</div>
 
-    <div class="section">
-        <h2 class="section-title">Ativos com Risco de Desvalorização — Próximos 15 Dias</h2>
-        <div class="grid-4">
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">IWM.US</span>
-                    <span class="asset-price down">-4,2% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Russell 2000 (small-cap, micro-cap)</strong><br/>
-                    $1.928,40 → Small-cap profit margins comprimem (-180 bps YoY). Risco: rotação para mega-cap
-                    se Fed segue "hard-line". Próximos 15 dias: earnings season (fim outubro) pode desapontar.
-                    <br/><strong>Invalidação:</strong> Fed dovish, IWM reversal para $2.050+.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">ZM.US</span>
-                    <span class="asset-price down">-3,1% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Zoom (saas, video conferencing)</strong><br/>
-                    $77,20 → ARR growth flatlining (+2% YoY). Churn rate 3,5% (história: 1,2%). Próximos 15 dias:
-                    Q3 guidance (fim setembro) pode sinalizar abrandamento. Risco: perdeu moat.
-                    <br/><strong>Invalidação:</strong> Novo produto (AI companion) buzz, ZM +7%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-alta">
-                <div class="asset-header">
-                    <span class="asset-ticker">COIN.US</span>
-                    <span class="asset-price down">-5,8% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Coinbase (exchange cripto, regulatory)</strong><br/>
-                    $96,50 → Regulação SEC pressiona volumes. Próximos 15 dias: SEC vs. Ripple ruling
-                    (esperado fim setembro) pode impactar derivativos legais em EUA. Risco: decisão contra altcoins.
-                    <br/><strong>Invalidação:</strong> SEC ruling favorável, cripto ETFs aprovados, COIN +12%.
-                </div>
-                <div class="conviction-bar conviction-alta">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-down); margin-top: 5px;">Convicção: ALTA</div>
-            </div>
-            <div class="asset-card conviction-baixa">
-                <div class="asset-header">
-                    <span class="asset-ticker">MRK.US</span>
-                    <span class="asset-price down">-2,1% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Merck (pharma, patentes)</strong><br/>
-                    $73,80 → Patent cliff em 2027 (Keytruda exclusividade perde). Próximos 15 dias:
-                    conference call (fim outubro) pode sinalizar pipeline fraco. Risco: pipeline miss.
-                    <br/><strong>Invalidação:</strong> Phase III success, MRK +6%.
-                </div>
-                <div class="conviction-bar conviction-baixa">
-                    <span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-up); margin-top: 5px;">Convicção: BAIXA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">BRK.B.US</span>
-                    <span class="asset-price down">-1,5% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Berkshire Hathaway (conglomerado, cash)</strong><br/>
-                    $418,30 → Buffett reduces equity position (cash alloc +2.2% em 24h). Próximos 15 dias:
-                    Q3 earnings pode sinalizar aversão a risco. Risco: cash pile sinaliza preocupação.
-                    <br/><strong>Invalidação:</strong> Mega-deal announcement, BRK.B +4%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">TLT.US</span>
-                    <span class="asset-price down">-1,9% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>20+ Year Treasury ETF (duration extrema)</strong><br/>
-                    $87,60 → Duration 18 anos. 10y yield +12bps em 24h. Próximos 15 dias: FOMC (19/09)
-                    pode sinalizar "hold" (não cortes) = yields sobe +20bps. Risco: duration blow-up.
-                    <br/><strong>Invalidação:</strong> CPI surpresa baixo, yields caem -30bps, TLT +2,2%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">SHIB.USDT</span>
-                    <span class="asset-price down">-6,4% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Shiba Inu (cripto meme, zero fundamentals)</strong><br/>
-                    $0,00002380 → Sem desenvolvedor ativo desde 6 meses. Volume -55% vs. 90d média.
-                    Próximos 15 dias: sentimento meme recua (altcoin winter).
-                    <br/><strong>Invalidação:</strong> Viral tweet Elon, SHIB +18%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-media">
-                <div class="asset-header">
-                    <span class="asset-ticker">AVAX.USDT</span>
-                    <span class="asset-price down">-3,7% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Avalanche (cripto, L1 blockchain)</strong><br/>
-                    $35,40 → Network TVL -22% em 30 dias. Gas fees reduzidos (good), network value compressed.
-                    Próximos 15 dias: subnets migration (Solana) ameaça market share.
-                    <br/><strong>Invalidação:</strong> Subnets volume explosion, AVAX +8%.
-                </div>
-                <div class="conviction-bar conviction-media">
-                    <span class="conviction-dot"></span><span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-neutral); margin-top: 5px;">Convicção: MÉDIA</div>
-            </div>
-            <div class="asset-card conviction-baixa">
-                <div class="asset-header">
-                    <span class="asset-ticker">RIOT.US</span>
-                    <span class="asset-price down">-2,8% risco</span>
-                </div>
-                <div class="asset-details">
-                    <strong>Riot Platforms (Bitcoin mining, eletrônico)</strong><br/>
-                    $18,20 → Hash rate dependency +85%. Se BTC cai -5%, mining profitability halves.
-                    Próximos 15 dias: difficulty adjustment (29/09) pode desapontar.
-                    <br/><strong>Invalidação:</strong> BTC sobe para $80K+, mining gear demand +30%, RIOT +15%.
-                </div>
-                <div class="conviction-bar conviction-baixa">
-                    <span class="conviction-dot"></span><span class="conviction-dot" style="opacity:0.3;"></span><span class="conviction-dot" style="opacity:0.3;"></span>
-                </div>
-                <div style="font-size: 0.85em; color: var(--accent-up); margin-top: 5px;">Convicção: BAIXA</div>
-            </div>
-        </div>
-    </div>
+<div class="scroll" style="margin-top:12px">
+<table>
+<tr><th style="width:22%">Indicador</th><th style="width:39%">Legado</th><th style="width:39%">Cripto</th></tr>
+<tr><td>Fear &amp; Greed</td><td><b>34 — Medo</b> (CNN, 22/09 08:50 BRT; fechamento anterior 34, 1 semana 28, 1 mês 55, 1 ano 67) [25]</td><td><b>78 — Ganância extrema</b> (alternative.me, 22/09; ontem 70, 1 semana 69, 1 mês 66) [26]</td></tr>
+<tr><td>Direção dominante</td><td><span class="neu">NEUTRO</span> — índices em recorde, mas amplitude (0,2) e força de preço (1,6) em medo extremo: sobe meia dúzia de ações, não o mercado [25][14] <span class="tag o">OPINIÃO</span></td><td><span class="up">ALTISTA</span> — rompimento de US$ 82 mil com US$ 999 mi de ETF no dia e funding ainda modesto (≈0,007%/8 h) [19][29][30][31] <span class="tag o">OPINIÃO</span></td></tr>
+<tr><td>Volatilidade / opções</td><td>VIX <b>14,70</b> (22/09 08:54 BRT; fechou 14,87 ontem) [17] · put/call CBOE total <b>0,81</b>, equity <b>0,58</b>, index <b>0,98</b> (dado de 18/09, o mais recente publicado) [27] · straddles de fim de semana do SPX abaixo de 50 pb, mínimas do ano [33]</td><td>Vol implícita (DVOL) BTC <b>37,6</b> · ETH <b>51,4</b> (Deribit, 22/09 09:09 BRT) [28] · skew: dado indisponível · put/call do vencimento de 25/09: 0,52, max pain ≈US$ 72 mil [13]</td></tr>
+<tr><td>Funding (perpétuos, por 8 h)</td><td>—</td><td>BTC: Binance 0,0055% · Bybit 0,0059% · OKX 0,0100% → <b>média 0,0071%</b>; ETH: Binance 0,0087% · Bybit 0,0048% · OKX 0,0080% → <b>média 0,0072%</b> (22/09 09:09 BRT) [29][30][31]</td></tr>
+<tr><td>Long/short</td><td>—</td><td>BTC (Binance): contas <b>0,95</b> (48,7% long) · top traders por conta 1,08 · top traders por posição <b>2,23</b>; ETH: contas <b>2,47</b> (71,2% long) · top por conta 1,40 · top por posição 1,50 (22/09 09:00 BRT) [29]</td></tr>
+<tr><td>Dominância BTC</td><td>—</td><td><b>58,9%</b> (CoinGecko, 22/09 09:08 BRT; ETH 11,4%; cap total US$ 2,92 tri, −0,58% em 24 h) · variação 24 h da dominância: dado indisponível [32]</td></tr>
+</table>
+</div>
 
-    <!-- PARTE 3: FONTES E LIMITAÇÕES -->
-    <div id="fontes" class="section">
-        <h2 class="section-title">Fontes e Metodologia</h2>
-        <div style="margin-bottom: 30px;">
-            <h3 style="color: var(--accent-neutral); margin-bottom: 15px; font-size: 1.1em;">Código de Fontes</h3>
-            <table style="font-size: 0.9em;">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Fonte</th>
-                        <th>Data/Hora Coleta (BRT)</th>
-                        <th>Dados Utilizados</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="source-code">CG</span></td>
-                        <td>CoinGecko API</td>
-                        <td>17/09, 10:19</td>
-                        <td>BTC, ETH, SOL, XRP, LINK, PEPE, POL, AVAX, LTC, DOGE (preços, 24h change, market cap)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">FX-CNN</span></td>
-                        <td>CNN Fear & Greed Index</td>
-                        <td>17/09, 10:15</td>
-                        <td>Fear & Greed legado (64/100)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">FX-ALT</span></td>
-                        <td>alternative.me Crypto F&G</td>
-                        <td>17/09, 10:12</td>
-                        <td>Fear & Greed cripto (72/100)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">GLASSNODE</span></td>
-                        <td>Glassnode On-Chain Intelligence</td>
-                        <td>16/09, 22:40</td>
-                        <td>ETH varejo long %, supply stablecoin, funding rates histórico</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">BYBIT-OKX</span></td>
-                        <td>Bybit + OKX agregado</td>
-                        <td>17/09, 09:30</td>
-                        <td>Funding rates BTC/ETH, long/short ratio</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">ECB</span></td>
-                        <td>European Central Bank Press</td>
-                        <td>16/09, 13:45 UTC</td>
-                        <td>Decisão Taxa Principal BCE 3,75%, Euribor outlook</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">Bloomberg</span></td>
-                        <td>Bloomberg Terminal (via aggregator)</td>
-                        <td>16/09, 21:30 UTC</td>
-                        <td>S&P 500 +1,8%, Nasdaq-100 +2,3%, sector performance</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">CNBC-Energy</span></td>
-                        <td>CNBC Energy Markets</td>
-                        <td>16/09, 22:00 UTC</td>
-                        <td>Brent $82,15/bbl (+3,1%), WTI (+3,4%)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">Fed-Reserve</span></td>
-                        <td>Federal Reserve Data</td>
-                        <td>16/09, 23:30 UTC</td>
-                        <td>DXY 104,23 (+0,75%), Fed Funds futures (CME FedWatch)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">CME-Group</span></td>
-                        <td>CME COMEX</td>
-                        <td>16/09, 23:15 UTC</td>
-                        <td>Ouro spot $2.610/oz (+1,2%)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">TradingView-API</span></td>
-                        <td>TradingView Data Feed</td>
-                        <td>17/09, 10:10</td>
-                        <td>Tickers, preços correntes, MA50/MA200</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">Fed-Calendar</span></td>
-                        <td>Federal Reserve Economic Data (FRED)</td>
-                        <td>16/09, 22:40 UTC</td>
-                        <td>Agenda macro EUA (Jobless Claims, Philadelphia Fed Index)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">BoJ-Calendar</span></td>
-                        <td>Bank of Japan Oficialmente</td>
-                        <td>16/09, 23:15 UTC</td>
-                        <td>Agenda decisão BoJ, comments Ueda</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">Finra-ETF</span></td>
-                        <td>FINRA ETF Approval Tracker</td>
-                        <td>17/09, 09:45</td>
-                        <td>Probabilidade aprovação Solana ETF spot (89%)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="source-code">Título-Só</span></td>
-                        <td>Google News RSS + Bing News RSS</td>
-                        <td>Vários em 48h antes</td>
-                        <td>Headlines notícias (sem conteúdo completo por bloqueio web scraping)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div>
-            <h3 style="color: var(--accent-down); margin-bottom: 15px; font-size: 1.1em;">⚠️ Limitações de Dados &amp; Transparência</h3>
-            <div class="limitation">
-                <strong>1. Web scraping bloqueado:</strong> CNBC, Bloomberg, TheStreet retornam 403 Forbidden em requests diretos.
-                Headlines extraídas de agregadores de notícias (Google News, Bing News RSS) — títulos apenas, sem corpo.
-                Impacto: análise de notícias limitada a manchetes; contexto completo indisponível.
-            </div>
-            <div class="limitation">
-                <strong>2. API rate limits:</strong> Yahoo Finance e alguns endpoints de histórico ficam em timeout após 4–5 queries.
-                Dados históricos de 15 dias parcialmente estimados via suportes técnicos (MA50, MA200) conhecidos.
-                Impacto: analytic de momentum em 15 dias menos preciso.
-            </div>
-            <div class="limitation">
-                <strong>3. Dados de futuro indisponíveis:</strong> Dot plot da Fed (mediana de juros final 2026, 2027) expirou
-                (última reunião 18/09/2026). Decisão do BoJ estimada em 18/09, fora da janela de coleta.
-                Impacto: consenso de taxas de juros refere-se ao anterior (junho); novo consenso será conhecido amanhã.
-            </div>
-            <div class="limitation">
-                <strong>4. Funding rates de pequenas exchanges:</strong> Agregado Bybit + OKX cobre ~60% do volume perpetual.
-                Pequenas exchanges (Deribit, Kraken futures, Huobi) não incluídas (falta de API aberta).
-                Impacto: posicionamento long/short pode estar enviesado para operadores Ásia.
-            </div>
-            <div class="limitation">
-                <strong>5. Amostragem one-shot:</strong> Relatório é snapshot 17/09 10:19 BRT. Volatilidade intraday não capturada.
-                Preços mudam a cada minuto; teses de today/15d assumem suportes/resistências conhecidos às 10:19,
-                não ao fechamento (16:00 BRT stocks, 24/7 cripto).
-                Impacto: breakouts intraday podem invalidar teses sem sinalização aqui.
-            </div>
-            <div class="limitation">
-                <strong>6. Dados de on-chain (Glassnode):</strong> Histórico TVL, long/short distribution vem de agregadores de terceiros.
-                Não é verificado contra ledgers de cada exchange. Amostragem pode ter delays &lt;2h.
-                Impacto: dados ~2h de idade potencialmente; posições podem ter mudado.
-            </div>
-            <div class="limitation">
-                <strong>7. Nenhuma estimativa silenciosa:</strong> Campos marcados "dado indisponível" significam API devolveu erro,
-                timeout ou bloqueio (403). <strong>Não</strong> foram preenchidos com proxies, médias ou palpites.
-                Teses que dependem desses dados têm risco estrutural de invalidação se o dado real for diferente.
-            </div>
-            <div class="limitation">
-                <strong>8. Timezone:</strong> Toda a coleta foi normalizada para BRT (UTC-3 / Brasília).
-                Horários de agenda comparados contra fuso de cada país (EUA = EST/EDT, Japão = JST, EU = CET).
-                Risco de off-by-one se transição de horário de verão entre cotas.
-            </div>
-        </div>
-    </div>
+<p class="verdict"><b>Veredito:</b> o medo está na amplitude da bolsa americana (índice CNN em 34 com Nasdaq em recorde) e a ganância está no cripto (78, extrema, com varejo ainda vendido em BTC); os dois mercados divergem na leitura de sentimento, mas convergem no preço porque sobem pelo mesmo motivo — o petróleo caindo e o juro longo cedendo.</p>
 
-    <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border-color);
-                  color: var(--text-secondary); font-size: 0.9em; text-align: center;">
-        <p>Relatório Diário de Mercados — CocaDash | 2026-09-17 10:19 BRT</p>
-        <p>Metodologia: Pesquisa de 48 horas, coleta API real-time, nenhuma estimativa silenciosa.</p>
-        <p>Avisos: Este relatório é fornecido como-é, sem garantias. Preços mudam continuamente. Teses de convicção são
-        baseadas em dados conhecidos à hora de coleta; invalidações podem ocorrer intraday.</p>
-    </footer>
+<h2 id="p1-4">1.4 Três insights escondidos</h2>
+
+<div class="card ins">
+<h3>① O rompimento do BTC aconteceu sem ETF: o dinheiro institucional chegou depois, perseguindo o preço</h3>
+<p><b>Tese.</b> <span class="tag f">FATO</span> Na semana encerrada em 18/09 os ETFs de BTC captaram só US$ 6,2 mi, a menor entrada em 141 semanas, e os de ETH perderam US$ 140 mi [2]; o rompimento de US$ 82 mil veio com ≈US$ 648 mi de shorts liquidados e 96% das liquidações de 24 h foram de posições vendidas [18][34]; só depois, na segunda, entraram US$ 999 mi nos ETFs de BTC e US$ 270 mi nos de ETH [19]. <span class="tag o">OPINIÃO</span> O movimento foi squeeze, não acumulação: o fluxo que sustenta o preço tem um dia de idade, e o varejo da Binance ainda está 51% vendido em BTC (ratio 0,95) enquanto os top traders estão 2,23 comprados por posição [29] — o combustível de squeeze não acabou, mas o suporte de fluxo é frágil.</p>
+<p><b>Gatilho.</b> Entrada líquida nos ETFs de BTC de pelo menos US$ 300 mi em cada um dos próximos três pregões (dados de 22, 23 e 24/09) com o preço acima de US$ 84 mil.</p>
+<p><b>Invalidação.</b> Saída líquida nos ETFs em 22 ou 23/09 com o BTC ainda acima de US$ 84 mil: prova que o fluxo de segunda foi um dia isolado e que o preço está sendo carregado só por liquidação de shorts.</p>
+</div>
+
+<div class="card ins">
+<h3>② Sexta vencem US$ 14,7 bi em opções de BTC com max pain em US$ 72 mil — 14 mil dólares abaixo do spot</h3>
+<p><b>Tese.</b> <span class="tag f">FATO</span> O vencimento trimestral da Deribit em 25/09 (05:00 BRT) concentra 41,5% de todo o open interest de opções de BTC (US$ 14,73 bi, ≈186 mil contratos) e US$ 1,92 bi de ETH; put/call 0,52, max pain ≈US$ 72 mil, calls grandes em US$ 85 mil e US$ 90 mil [13]. <span class="tag o">OPINIÃO</span> Com o spot em US$ 86 mil, as calls de 85 mil viraram dinheiro e quem as vendeu precisa comprar delta na alta — é isso que torna o movimento de segunda desproporcional e que segue empurrando o preço até sexta. Depois do vencimento essa força mecânica desaparece: a semana que vem começa sem o "vento de cauda" das opções, com DVOL do BTC em 37,6 [28], barato para quem quiser proteção.</p>
+<p><b>Gatilho.</b> BTC sustentado acima de US$ 85 mil até quinta-feira com o DVOL subindo acima de 40 (dealers pagando por vol para se cobrir).</p>
+<p><b>Invalidação.</b> Perda de US$ 82 mil antes de sexta — o nível que segurou quatro tentativas desde 25/08 [18]: abaixo dele o hedge dos vendedores de call se inverte (vendem delta na queda) e a mesma mecânica acelera o movimento para baixo.</p>
+</div>
+
+<div class="card ins">
+<h3>③ Nasdaq em recorde com amplitude 0 de 100: o rali é de meia dúzia de ações e o índice CNN sabe disso</h3>
+<p><b>Tese.</b> <span class="tag f">FATO</span> O índice CNN está em 34 (medo) e dois componentes estão em medo extremo — amplitude de preço 0,2 e força de preço 1,6 — enquanto o Nasdaq fez recorde e o S&amp;P subiu 1,49% no mesmo dia [25][14]; o put/call equity de 0,58 é o mais complacente do ano [27] e o Morgan Stanley estima queda de até 7% no S&amp;P se a energia voltar a subir com o 10 anos perto de 5% [14]. <span class="tag o">OPINIÃO</span> A leitura óbvia é "sentimento contrário, compre". A não-óbvia: o índice mede o mercado inteiro e o mercado inteiro não está subindo — META, AMD, INTC e MU carregaram o dia. Um rali de amplitude zero com opções complacentes é o pior desenho para absorver um choque de petróleo, e o petróleo depende de uma reunião Trump–Pezeshkian que não está marcada [11].</p>
+<p><b>Gatilho.</b> Componente de amplitude da CNN acima de 20 nos próximos cinco pregões com o S&amp;P estável: a base do rali se alargou e a fragilidade some.</p>
+<p><b>Invalidação.</b> Amplitude e força de preço subindo junto com o índice nesta semana (rotação para o resto do mercado) — ou Brent abaixo de US$ 95 com o 10 anos abaixo de 4,85%, que retira o gatilho do cenário do Morgan Stanley.</p>
+</div>
+
+<h1 id="p2">Parte 2 — Listas de ativos</h1>
+<p class="lead">Cinco cripto + cinco legado por lista. "Invalida" = nível em que a tese deixa de valer. Convicção reflete a qualidade do catalisador, não o tamanho do movimento esperado. Toda a coluna de motivo abaixo das tabelas é <span class="tag o">OPINIÃO</span> apoiada nos fatos citados. Isto é pesquisa, não recomendação de investimento.</p>
+
+<h2 id="p2-1">2.1 Potencial de valorização hoje</h2>
+<div class="scroll"><table>
+<tr><th>Ticker</th><th>Preço</th><th>Catalisador em uma linha</th><th>Invalida</th><th>Convicção</th></tr>
+<tr><td><code>BINANCE:BTCUSDT</code></td><td>85.945</td><td>US$ 999 mi de ETF no dia, varejo ainda vendido, calls de 85 mil forçando hedge até sexta [19][29][13]</td><td>&lt; 84.000</td><td class="me">Média</td></tr>
+<tr><td><code>BINANCE:ETHUSDT</code></td><td>2.743</td><td>ETFs de ETH viraram para +US$ 270 mi depois de uma semana de saída [19][2]</td><td>&lt; 2.650</td><td class="me">Média</td></tr>
+<tr><td><code>BINANCE:SOLUSDT</code></td><td>117,3</td><td>Agave 4.3 recomendado ontem aos validadores; ETFs de SOL com 12 semanas de entradas [23][2]</td><td>&lt; 111</td><td class="me">Média</td></tr>
+<tr><td><code>BINANCE:XRPUSDT</code></td><td>1,54</td><td>Baleias acumularam US$ 2,2 bi em 96 h; US$ 1,60 é o nível de decisão [24]</td><td>&lt; 1,47</td><td class="me">Média</td></tr>
+<tr><td><code>BINANCE:DOGEUSDT</code></td><td>0,098</td><td>Retomou US$ 0,090 após defender 0,084–0,088; +14% na segunda, beta alto ao BTC [43]</td><td>&lt; 0,090</td><td class="lo">Baixa</td></tr>
+<tr><td><code>NASDAQ:NVDA</code></td><td>227,38</td><td>Ficou para trás no rali de chips (+2,3% vs AMD +9,9%) com a cúpula EUA–China de quinta pautando restrições de tecnologia [17][10]</td><td>&lt; 222</td><td class="me">Média</td></tr>
+<tr><td><code>NASDAQ:COIN</code></td><td>201,05</td><td>BTC no maior nível em oito meses e volume semanal de ETFs de US$ 16,2 bi [18][34]</td><td>&lt; 194</td><td class="me">Média</td></tr>
+<tr><td><code>NASDAQ:MSTR</code></td><td>168,50</td><td>Voltou a comprar (950 BTC) depois de duas semanas parada; alavancagem ao BTC acima de US$ 85 mil [21]</td><td>&lt; 154</td><td class="me">Média</td></tr>
+<tr><td><code>NASDAQ:META</code></td><td>741,25</td><td>Alvo do Wells Fargo em US$ 796 (+7%) e Muse no topo da App Store [16]</td><td>&lt; 700</td><td class="lo">Baixa</td></tr>
+<tr><td><code>NYSE:AZO</code></td><td>2.803,25</td><td>EPS US$ 56,05 contra estimativa de US$ 54,22, margem bruta +182 pb; qualidade do lucro é a dúvida [8][9]</td><td>&lt; 2.750</td><td class="lo">Baixa</td></tr>
+</table></div>
+
+<div class="asset"><h3><code>BINANCE:BTCUSDT</code> · US$ 85.945 (+1,1% em 24 h) [32]</h3><p>Catalisador: US$ 999 mi entraram nos ETFs à vista na segunda, 38% pela IBIT [19], e a Strategy voltou a comprar depois de duas semanas parada [21]. Técnico: primeiro fechamento semanal acima da média de 50 semanas (US$ 78.786) em 45 semanas, com a antiga resistência de US$ 82 mil virando suporte; a próxima barreira é US$ 87.300–87.700 (máxima de ontem em US$ 87.354) e o RSI diário já está em 80 [18][20][34]. Posicionamento: funding médio de 0,0071%/8 h nas três maiores bolsas e contas de varejo da Binance 51% vendidas — o custo de estar comprado é baixo e a mecânica das opções (calls de 85 mil, vencimento sexta) empurra a favor [29][30][31][13]. Invalida abaixo de US$ 84.000, o topo da zona de suporte imediata.</p></div>
+<div class="asset"><h3><code>BINANCE:ETHUSDT</code> · US$ 2.743 (+0,8% em 24 h) [32]</h3><p>Catalisador: os ETFs de ETH captaram US$ 270 mi na segunda (ETHA US$ 110 mi) depois de perderem US$ 140 mi na semana anterior, a primeira semana negativa desde meados de agosto [19][2]. Técnico: ontem ETH subiu 5,4% e fechou acima de US$ 2.700; o nível de US$ 2.656 (fechamento semanal) é o suporte [18][2]. Posicionamento: contas de varejo 71% compradas (ratio 2,47) e DVOL de 51,4 — é o ativo mais lotado do par, o que limita a convicção a média apesar do fluxo [29][28]. Invalida abaixo de US$ 2.650.</p></div>
+<div class="asset"><h3><code>BINANCE:SOLUSDT</code> · US$ 117,3 (+0,5% em 24 h) [32]</h3><p>Catalisador: ontem a Anza recomendou o Agave 4.3 a todos os validadores, o "último checkpoint prático" antes da ativação do Alpenglow em 28/09, que troca o TowerBFT pelo Votor e mira finalidade de 150 ms [23]. Fluxo: os ETFs de SOL somam 12 semanas seguidas de entradas, enquanto os de ETH tiveram semana negativa [2]. Técnico: SOL subiu 6,6% ontem, para US$ 115, e hoje segura o ganho com o mercado de lado [18][32]. Invalida abaixo de US$ 111, o preço do fechamento semanal [2].</p></div>
+<div class="asset"><h3><code>BINANCE:XRPUSDT</code> · US$ 1,54 (+3,4% em 24 h) [32]</h3><p>Catalisador: carteiras grandes acumularam ≈1,54 bi de XRP (US$ 2,2 bi) em 96 horas, e XRP subiu 8,2% em três dias [24]; hoje é a moeda com maior alta entre as grandes na coleta (+3,4%) num dia em que BTC sobe 1% [32]. Técnico: US$ 1,60 é o nível apontado como decisão on-chain; o fechamento de ontem em US$ 1,47 é o suporte [24][18]. Posicionamento: funding e long/short específicos de XRP não foram coletados — a convicção fica em média por isso. Invalida abaixo de US$ 1,47.</p></div>
+<div class="asset"><h3><code>BINANCE:DOGEUSDT</code> · US$ 0,098 (+4,8% em 24 h) [32]</h3><p>Catalisador: DOGE subiu mais de 14% na segunda e hoje ainda sobe 4,8%, a segunda maior alta da coleta; a defesa da faixa US$ 0,084–0,088 serviu de base e a retomada de US$ 0,090 abre caminho para US$ 0,10 [43][32]. Técnico: +18% em 7 dias, o que já embute boa parte do movimento [32]. Macro/on-chain: é pura beta ao BTC e ao apetite de varejo — a Fear &amp; Greed cripto em 78 diz que esse apetite está no extremo [26]. Convicção baixa porque o catalisador é momentum, não evento. Invalida abaixo de US$ 0,090.</p></div>
+<div class="asset"><h3><code>NASDAQ:NVDA</code> · US$ 227,38 (+2,3% em 21/09) [17]</h3><p>Catalisador: no dia em que AMD subiu 9,9% e Intel 12,1%, NVDA subiu 2,3% — ficou para trás num rali de semicondutores que ela normalmente lidera [17][15]. A cúpula Trump–Xi de quinta em Washington tem "restrições de tecnologia" na pauta, e é o item que mais pesa sobre NVDA [10]. Técnico: fechou em US$ 227,38, acima do fechamento de 18/09 (US$ 222,27) [17]. Macro: o petróleo caindo tirou 4 pb do 10 anos, o que alivia as ações de duração longa [14]. Invalida abaixo de US$ 222, o fechamento de 18/09.</p></div>
+<div class="asset"><h3><code>NASDAQ:COIN</code> · US$ 201,05 (+3,5% em 21/09) [17]</h3><p>Catalisador: BTC no maior nível em oito meses, US$ 999 mi de entrada em ETFs num dia e volume semanal de ETFs de US$ 16,2 bi — tudo isso é receita de corretagem e custódia [18][19][34]. Técnico: COIN subiu de US$ 173,97 (17/09) para US$ 201,05 em três pregões e rompeu US$ 200 [17]. Macro: o CLARITY Act morreu no Senado em 15/09, mas a SEC segue com o Regulation Crypto Assets em consulta até 20/10 — o risco regulatório é conhecido, não novo [2]. Invalida abaixo de US$ 194, o fechamento de 18/09.</p></div>
+<div class="asset"><h3><code>NASDAQ:MSTR</code> · US$ 168,50 (+9,5% em 21/09) [17]</h3><p>Catalisador: a Strategy comprou 950 BTC (US$ 75,7 mi, média US$ 79.670) e encerrou uma pausa de duas semanas; total de 846.000 BTC [21]. Técnico: MSTR foi de US$ 132,25 (17/09) a US$ 168,50 em três pregões, +27%, uma alavancagem de ≈3x sobre o BTC no período [17]. Posicionamento: a Strive, muito menor, comprou mais BTC (1.355) no mesmo intervalo — a narrativa de "motor de compra parando" [22] é o risco de curto prazo, mas com BTC acima de US$ 85 mil o prêmio do papel tende a reabrir. Invalida abaixo de US$ 154, o fechamento de 18/09.</p></div>
+<div class="asset"><h3><code>NASDAQ:META</code> · US$ 741,25 (+11,3% em 21/09) [17]</h3><p>Catalisador: o Wells Fargo elevou o alvo de US$ 640 para US$ 796 e o agente Muse tomou o primeiro lugar da App Store, à frente de ChatGPT e Claude [16]. Técnico: maior alta em um dia desde abril de 2025, +21% desde o lançamento do Muse há duas semanas — parte do movimento já está no preço [16]. Macro: ação de crescimento com o 10 anos caindo é vento a favor no dia, mas o put/call equity em 0,58 diz que o mercado já está posicionado para continuação [27]. Convicção baixa: é continuação de um dia de +11%. Invalida abaixo de US$ 700.</p></div>
+<div class="asset"><h3><code>NYSE:AZO</code> · US$ 2.803,25 (−1,8% em 21/09) [17]</h3><p>Catalisador: o resultado saiu antes da abertura — EPS US$ 56,05 contra US$ 48,71 há um ano e estimativa de US$ 54,22; vendas US$ 6,6 bi (+5,6%), 175 lojas abertas no trimestre [8][9]. A dúvida é a qualidade: dos +182 pb de margem bruta, 145 pb vieram de reembolso de tarifas e 105 pb de LIFO, e as vendas nas mesmas lojas cresceram só 1,5% em moeda constante [8]; uma manchete de agregador classificou o número como "miss" [44], o que indica que parte do mercado esperava mais. Técnico: caiu 1,8% ontem antes do número [17]. Convicção baixa até a call das 11:00 BRT esclarecer o guidance. Invalida abaixo de US$ 2.750.</p></div>
+
+<h2 id="p2-2">2.2 Risco de desvalorização hoje</h2>
+<div class="scroll"><table>
+<tr><th>Ticker</th><th>Preço</th><th>Catalisador em uma linha</th><th>Invalida</th><th>Convicção</th></tr>
+<tr><td><code>BINANCE:XPLUSDT</code></td><td>0,0928</td><td>Unlock de 63% do circulante (≈US$ 157 mi) na sexta; já cai 8,9% hoje por antecipação [13][32]</td><td>&gt; 0,105</td><td class="hi">Alta</td></tr>
+<tr><td><code>BINANCE:AEROUSDT</code></td><td>0,692</td><td>Unlock de ≈US$ 2,65 mi amanhã (23/09) depois de +25% em 7 dias [12][32]</td><td>&gt; 0,74</td><td class="lo">Baixa</td></tr>
+<tr><td><code>BINANCE:BNBUSDT</code></td><td>786</td><td>Perdeu US$ 800 e cai 0,5% num dia em que o mercado sobe [32]</td><td>&gt; 800</td><td class="lo">Baixa</td></tr>
+<tr><td><code>BINANCE:LINKUSDT</code></td><td>12,93</td><td>Fraqueza relativa: −1,1% com BTC +1,1% após +13,7% em 7 dias [32]</td><td>&gt; 13,50</td><td class="lo">Baixa</td></tr>
+<tr><td><code>BINANCE:SUIUSDT</code></td><td>1,013</td><td>Não participa do rali (−0,7% em 24 h) e está a um passo de perder US$ 1,00 [32]</td><td>&gt; 1,06</td><td class="lo">Baixa</td></tr>
+<tr><td><code>NYSE:XOM</code></td><td>158,30</td><td>Quarto dia de queda do petróleo; Brent a US$ 98,14 hoje e diplomacia EUA–Irã na ONU [3][17][11]</td><td>&gt; 163,50</td><td class="me">Média</td></tr>
+<tr><td><code>NYSE:CVX</code></td><td>203,67</td><td>Mesmo vetor: fluxo por Ormuz no maior nível em seis meses, Saudi a 2,9 mi bbl/dia pelo estreito [3]</td><td>&gt; 209,50</td><td class="me">Média</td></tr>
+<tr><td><code>NYSE:NEM</code></td><td>123,05</td><td>Ouro cai (−0,9% ontem, futuros a US$ 4.358 hoje) com dólar em 100,4 e Fed falando em mais alta [14][17][4]</td><td>&gt; 124,40</td><td class="lo">Baixa</td></tr>
+<tr><td><code>NASDAQ:INTC</code></td><td>121,78</td><td>+12% em um dia sem resultado; avaliação apontada como 279% acima do valor justo [15][35]</td><td>&gt; 125</td><td class="lo">Baixa</td></tr>
+<tr><td><code>NYSE:LMT</code></td><td>535,40</td><td>Sinais de distensão EUA–Irã (Trump aberto a encontro, fluxo por Ormuz recuperando) tiram prêmio de guerra [11][3]</td><td>&gt; 540</td><td class="lo">Baixa</td></tr>
+</table></div>
+
+<div class="asset"><h3><code>BINANCE:XPLUSDT</code> · US$ 0,0928 (−8,9% em 24 h) [32]</h3><p>Catalisador: em 25/09 vencem o cliff de um ano da equipe e dos investidores — 1,76 a 1,81 bi de XPL, 63–65% do circulante, ≈US$ 157 mi a preços atuais [13]. Técnico: XPL é a maior queda da coleta hoje (−8,9%) e devolve o ganho de 7 dias (+12%) — o mercado está vendendo antes do desbloqueio [32]. Posicionamento: com capitalização de ≈US$ 258 mi, o unlock equivale a 60% do valor de mercado, uma proporção em que a oferta nova domina qualquer fluxo comprador [32]. Convicção alta porque é evento programado e mensurável. Invalida acima de US$ 0,105, o que significaria absorção antecipada da oferta.</p></div>
+<div class="asset"><h3><code>BINANCE:AEROUSDT</code> · US$ 0,692 (+0,7% em 24 h) [32]</h3><p>Catalisador: unlock de ≈US$ 2,65 mi amanhã (23/09) [12], pequeno em valor absoluto mas chegando depois de +25% em 7 dias [32]. Técnico: o token subiu na esteira do rali de L2 (ARB +61% em 7 dias) e hoje anda de lado enquanto ARB já devolve 4,6% — a rotação que puxou está virando [32]. Posicionamento: dados de funding e long/short de AERO não foram coletados, o que mantém a convicção baixa. Invalida acima de US$ 0,74, nova máxima do movimento.</p></div>
+<div class="asset"><h3><code>BINANCE:BNBUSDT</code> · US$ 786 (−0,5% em 24 h) [32]</h3><p>Catalisador: BNB cruzou US$ 800 durante o rali de segunda e não segurou; hoje cai 0,5% com BTC +1,1% e XRP +3,4% [32]. Técnico: +9,4% em 7 dias, abaixo de SOL e ETH; a rejeição de um número redondo depois de tentativa é o padrão de curto prazo mais fraco entre as cinco maiores [32]. Macro: sem evento próprio esta semana; segue o mercado com beta menor que 1 na alta e igual na baixa. Convicção baixa por ser tese de preço relativo, não de evento. Invalida acima de US$ 800.</p></div>
+<div class="asset"><h3><code>BINANCE:LINKUSDT</code> · US$ 12,93 (−1,1% em 24 h) [32]</h3><p>Catalisador: fraqueza relativa — cai 1,1% no dia em que a capitalização total do mercado oscila −0,6% e as grandes sobem [32]. Técnico: +13,7% em 7 dias, portanto o recuo de hoje é realização depois do rali, sem suporte testado ainda [32]. Macro/on-chain: nenhum evento de rede ou unlock encontrado na janela; a tese é só de posicionamento tardio, por isso convicção baixa. Invalida acima de US$ 13,50.</p></div>
+<div class="asset"><h3><code>BINANCE:SUIUSDT</code> · US$ 1,013 (−0,7% em 24 h) [32]</h3><p>Catalisador: SUI não participou do rali de segunda com a força das outras e hoje cai 0,7%, a 1,3% de perder o nível psicológico de US$ 1,00 [32]. Técnico: a perda de US$ 1,00 num mercado em ganância extrema tende a atrair venda de stop, não compra de fundo. Macro/on-chain: nenhum catalisador de rede encontrado; tese de preço relativo, convicção baixa. Invalida acima de US$ 1,06.</p></div>
+<div class="asset"><h3><code>NYSE:XOM</code> · US$ 158,30 (−3,2% em 21/09) [17]</h3><p>Catalisador: o petróleo caiu quatro pregões seguidos; Brent fechou a US$ 100,34 ontem e está em US$ 98,14 hoje às 08:59 BRT [3][17]. O motivo é físico e diplomático ao mesmo tempo: o CENTCOM disse que o fluxo de petróleo e GNL por Ormuz nas últimas duas semanas foi o maior em seis meses, a Arábia Saudita passou 2,9 mi bbl/dia pelo estreito, e Trump disse que "provavelmente" encontraria Pezeshkian na ONU [3][11]. Técnico: XOM perdeu US$ 163,54 (18/09) e fechou em US$ 158,30 [17]. Macro: energia foi o setor que mais caiu num dia de S&amp;P +1,49% [14]. Invalida acima de US$ 163,50, o fechamento de 18/09.</p></div>
+<div class="asset"><h3><code>NYSE:CVX</code> · US$ 203,67 (−2,8% em 21/09) [17]</h3><p>Catalisador: o mesmo vetor de XOM — Brent de US$ 108 no meio do mês para US$ 98 hoje, com o fechamento do oleoduto Leste–Oeste saudita sendo lido como menos disruptivo do que se temia [3][17]. Técnico: CVX fechou abaixo de US$ 209,51 (18/09) e de US$ 211,57 (17/09), dois fechamentos perdidos em sequência [17]. Macro: o risco da tese é o próprio risco do Irã — a reunião Trump–Pezeshkian não está marcada e Trump ameaçou "destruir a economia" iraniana sem acordo [11]; se a diplomacia falhar, energia volta. Invalida acima de US$ 209,50.</p></div>
+<div class="asset"><h3><code>NYSE:NEM</code> · US$ 123,05 (−0,3% em 21/09) [17]</h3><p>Catalisador: o ouro caiu 0,9% ontem para US$ 4.340,51 e os futuros estão em US$ 4.358 hoje, abaixo dos US$ 4.424,90 de 18/09 [14][17]. Macro: dólar (DXY) em 100,4, Fed que acabou de subir e Musalem pedindo mais — juro real subindo é o pior cenário para o metal, e o componente "refúgio" do índice CNN em 57 mostra ações batendo bonds nos últimos 20 dias, isto é, ninguém correndo para proteção [17][4][25]. Técnico: NEM está a US$ 1,35 do fechamento de 18/09 e ainda não refletiu a queda do metal de hoje [17]. Convicção baixa porque é derivada de segunda ordem. Invalida acima de US$ 124,40.</p></div>
+<div class="asset"><h3><code>NASDAQ:INTC</code> · US$ 121,78 (+12,1% em 21/09) [17]</h3><p>Catalisador: +12% em um dia sem resultado, só com revisões de alvo (Tigress, Northland) e a narrativa de CPUs para inferência local do Muse [15]; o GuruFocus calcula a ação 279% acima do seu valor justo [35]. Técnico: maior fechamento desde julho, de US$ 108,60 para US$ 121,78 em um pregão — um gap desse tamanho em ação madura costuma ser parcialmente devolvido no dia seguinte quando não há número por trás [17]. Macro: o rali de chips depende da cúpula EUA–China de quinta não trazer restrição nova [10]. Convicção baixa: contra momentum forte. Invalida acima de US$ 125.</p></div>
+<div class="asset"><h3><code>NYSE:LMT</code> · US$ 535,40 (+0,4% em 21/09) [17]</h3><p>Catalisador: os sinais de distensão — Trump aberto a encontrar Pezeshkian, Pezeshkian viajando hoje a Nova York, fluxo por Ormuz no maior nível em seis meses — tiram prêmio de guerra das ações de defesa [11][3]. Técnico: LMT não caiu com o petróleo ontem (+0,4%), o que deixa o ajuste pendente para hoje se a diplomacia avançar [17]. Macro: o risco da tese é simétrico — Trump também ameaçou "eliminar a liderança" iraniana sem acordo [11]; sem reunião marcada, a convicção fica baixa. Invalida acima de US$ 540.</p></div>
+
+<h2 id="p2-3">2.3 Potencial de valorização nos próximos 15 dias (até 07/10)</h2>
+<div class="scroll"><table>
+<tr><th>Ticker</th><th>Preço</th><th>Catalisador em uma linha</th><th>Invalida</th><th>Convicção</th></tr>
+<tr><td><code>BINANCE:BTCUSDT</code></td><td>85.945</td><td>Fechamento de trimestre em 30/09 com +44% no 3T; fluxo de ETF virando e vencimento de sexta limpando o tabuleiro [48][19][13]</td><td>&lt; 78.786</td><td class="me">Média</td></tr>
+<tr><td><code>BINANCE:ETHUSDT</code></td><td>2.743</td><td>Fluxo de ETF voltou a positivo; US$ 13,5 bi acumulados e US$ 2,1 bi em 30 dias [19][2]</td><td>&lt; 2.500</td><td class="lo">Baixa</td></tr>
+<tr><td><code>BINANCE:SOLUSDT</code></td><td>117,3</td><td>Ativação do Alpenglow começa em 28/09 e se propaga por épocas de ≈38 h até início de outubro [23][45]</td><td>&lt; 105</td><td class="hi">Alta</td></tr>
+<tr><td><code>BINANCE:XRPUSDT</code></td><td>1,54</td><td>Acumulação de US$ 2,2 bi por baleias e teste de US$ 1,60 dentro da janela [24]</td><td>&lt; 1,40</td><td class="lo">Baixa</td></tr>
+<tr><td><code>BINANCE:ARBUSDT</code></td><td>0,218</td><td>Robinhood Chain (Arbitrum Orbit) repassa 10% da receita ao ecossistema; receita diária ≈US$ 1,08 mi [40]</td><td>&lt; 0,19</td><td class="me">Média</td></tr>
+<tr><td><code>NASDAQ:MU</code></td><td>1.043,96</td><td>Resultado em 30/09 com guidance de US$ 50 bi e HBM esgotado até 2027 [36][49]</td><td>&lt; 924</td><td class="me">Média</td></tr>
+<tr><td><code>NASDAQ:COST</code></td><td>898,48</td><td>Resultado em 24/09; consenso EPS US$ 6,55 (+12%), receita US$ 94,85 bi; bateu ou igualou em 5 trimestres [37]</td><td>&lt; 880</td><td class="me">Média</td></tr>
+<tr><td><code>NASDAQ:AMD</code></td><td>615,52</td><td>Cúpula Trump–Xi de 24/09 com tecnologia na pauta; resultado da Micron em 30/09 como leitura cruzada de demanda de IA [10][36]</td><td>&lt; 560</td><td class="lo">Baixa</td></tr>
+<tr><td><code>NYSE:DAL</code></td><td>82,50</td><td>Petróleo −9% em quatro dias; diplomacia na ONU esta semana é o gatilho do querosene [3][11]</td><td>&lt; 79,50</td><td class="me">Média</td></tr>
+<tr><td><code>NASDAQ:TSLA</code></td><td>375,30</td><td>Entregas do 3T saem no início de outubro, dentro da janela; consenso de entregas: dado indisponível</td><td>&lt; 364</td><td class="lo">Baixa</td></tr>
+</table></div>
+
+<div class="asset"><h3><code>BINANCE:BTCUSDT</code> · US$ 85.945 (+1,1% em 24 h) [32]</h3><p>Catalisador: o trimestre fecha em 30/09 com o BTC subindo 44% no 3T, o que força rebalanceamento de quem ficou abaixo do peso [48]; os ETFs voltaram a captar (US$ 999 mi na segunda) [19]. O que monitorar: fluxo diário dos ETFs (22–24/09); vencimento da Deribit em 25/09, que retira a força mecânica das opções [13]; renda e gastos de agosto com PCE e a revisão anual das contas nacionais em 30/09 [38]; payroll de setembro em 02/10 [39]. Técnico: acima da média de 50 semanas (US$ 78.786) pela primeira vez em 45 semanas [18]. Posicionamento: OI de futuros de US$ 61,5 bi (+7,3% em 30 dias) com funding baixo — alavancagem crescendo sem custo de carrego alto [34][29]. Invalida abaixo de US$ 78.786, a média de 50 semanas.</p></div>
+<div class="asset"><h3><code>BINANCE:ETHUSDT</code> · US$ 2.743 (+0,8% em 24 h) [32]</h3><p>Catalisador: o fluxo dos ETFs de ETH virou para +US$ 270 mi na segunda depois da primeira semana negativa desde agosto; o acumulado é de US$ 13,46 bi e US$ 2,06 bi em 30 dias [19][2]. O que monitorar: se a saída de US$ 141 mi de 15/09 (a maior em 155 sessões, no dia da derrota do CLARITY Act) foi ponto fora da curva ou mudança de regime — três dias positivos seguidos confirmam [2]. Técnico: acima de US$ 2.700 depois de +11% na semana [2]. Posicionamento: contas 71% compradas e DVOL 51 — é o que segura a convicção em baixa: há mais gente para liquidar do lado comprado do que em BTC [29][28]. Invalida abaixo de US$ 2.500.</p></div>
+<div class="asset"><h3><code>BINANCE:SOLUSDT</code> · US$ 117,3 (+0,5% em 24 h) [32]</h3><p>Catalisador: a ativação do Alpenglow começa em 28/09 (data publicada pela Anza em 12/08) e se propaga por fronteiras de época de ≈38 h até o início de outubro — a janela inteira está dentro dos 15 dias [45][23]. É a maior mudança de consenso da rede: Votor no lugar do TowerBFT, finalidade de ≈12,8 s para 150 ms, tolerância a falhas de 33% para 40% [23]. O que monitorar: adoção do Agave 4.3 pelos validadores (recomendado ontem), qualquer adiamento do feature gate, e a continuidade das entradas nos ETFs de SOL (12 semanas seguidas) [23][2]. Técnico: US$ 111 é o suporte do fechamento semanal [2]. Invalida abaixo de US$ 105.</p></div>
+<div class="asset"><h3><code>BINANCE:XRPUSDT</code> · US$ 1,54 (+3,4% em 24 h) [32]</h3><p>Catalisador: 1,54 bi de XRP (US$ 2,2 bi) acumulados por baleias em 96 h e US$ 1,60 apontado como o nível on-chain a vencer [24]. O que monitorar: se a acumulação continua nas próximas leituras semanais e se o rompimento de US$ 1,60 vem com volume; nenhum evento de rede ou regulatório específico foi encontrado na janela, e é isso que limita a convicção a baixa. Técnico: +9,6% em 7 dias; suporte em US$ 1,47 [32][18]. Invalida abaixo de US$ 1,40.</p></div>
+<div class="asset"><h3><code>BINANCE:ARBUSDT</code> · US$ 0,218 (−4,6% em 24 h) [32]</h3><p>Catalisador: a Robinhood Chain, L2 construída com Arbitrum Orbit, passou de US$ 47 bi de volume acumulado em DEX em menos de dois meses, com receita bruta diária de ≈US$ 1,08 mi e 10% da receita líquida repassada ao tesouro e à guilda de desenvolvedores do Arbitrum — a primeira ligação concreta entre ARB e receita [40]. O que monitorar: volume diário da Robinhood Chain (pico de US$ 945 mi) e TVL (≈US$ 1,4 bi); se a receita cair, a tese cai [40]. Técnico: +61% em 7 dias e −4,6% hoje — a lista de 15 dias supõe que a realização de hoje é entrada, não topo [32]. Invalida abaixo de US$ 0,19.</p></div>
+<div class="asset"><h3><code>NASDAQ:MU</code> · US$ 1.043,96 (+2,8% em 21/09) [17]</h3><p>Catalisador: resultado do 4T fiscal em 30/09; guidance de US$ 50 bi de receita (+341% a/a) e EPS de ≈US$ 30,73, com HBM3E e HBM4 esgotados até 2027 e mais de US$ 1 bi já entregue em HBM4 [36]. O que monitorar: a semana extra do trimestre (14 semanas) implica ≈12% de crescimento semanal, abaixo dos 13–18% de alta de preço de DRAM projetados pela TrendForce — o risco é um beat pequeno, não um miss [49]; a cúpula EUA–China de 24/09 e o fluxo em AMD/INTC até lá. Técnico: acima de US$ 1.000 desde 18/09 [17]. Invalida abaixo de US$ 924, o fechamento de 16/09.</p></div>
+<div class="asset"><h3><code>NASDAQ:COST</code> · US$ 898,48 (+0,4% em 21/09) [17]</h3><p>Catalisador: resultado do 4T fiscal em 24/09 após o fechamento; consenso de receita US$ 94,85 bi (+10%) e EPS US$ 6,55 (+12%); a empresa bateu ou igualou o consenso nos últimos cinco trimestres e o e-commerce cresceu 21,5% no trimestre anterior [37]. O que monitorar: taxa de renovação de assinaturas (a métrica que move a ação) e o comp de setembro; a ação caiu para ≈US$ 895 antes do número, o que reduz o preço da surpresa [37]. Macro: consumidor com sentimento Michigan em 51,7 na prévia — Costco é onde o consumidor pressionado vai [13]. Invalida abaixo de US$ 880.</p></div>
+<div class="asset"><h3><code>NASDAQ:AMD</code> · US$ 615,52 (+9,9% em 21/09) [17]</h3><p>Catalisador: cúpula Trump–Xi em Washington em 24/09 com "restrições de tecnologia, IA e minerais críticos" na pauta — qualquer afrouxamento reabre a China para aceleradores [10]; o resultado da Micron em 30/09 é a leitura cruzada de demanda de IA [36]. O que monitorar: comunicado da cúpula, e se AMD sustenta o US$ 1 trilhão de valor de mercado tocado ontem [14]. Técnico: +9,9% em um dia; o fechamento de 18/09 (US$ 559,82) é o nível de invalidação [17]. Convicção baixa: o catalisador é binário e a ação já subiu 27% em 5 pregões. Invalida abaixo de US$ 560.</p></div>
+<div class="asset"><h3><code>NYSE:DAL</code> · US$ 82,50 (+3,6% em 21/09) [17]</h3><p>Catalisador: o petróleo caiu mais de 9% em quatro dias (WTI de US$ 108 no pico do mês para US$ 95,78 ontem), e querosene é o segundo maior custo de uma companhia aérea [3]. O que monitorar: a Assembleia da ONU esta semana (Trump e Pezeshkian discursam; reunião não marcada) e o estoque semanal da API hoje às 17:30 BRT [11][7]; o resultado do 3T da Delta sai logo depois da janela, então a tese é só de custo. Técnico: DAL subiu 3,6% ontem para US$ 82,50, acima dos US$ 79,62 de 18/09 [17]. Invalida abaixo de US$ 79,50.</p></div>
+<div class="asset"><h3><code>NASDAQ:TSLA</code> · US$ 375,30 (+3,0% em 21/09) [17]</h3><p>Catalisador: o relatório de entregas do 3T sai nos primeiros dias de outubro, dentro da janela; consenso de entregas: dado indisponível nesta pesquisa, e é por isso que a convicção é baixa. O que monitorar: qualquer prévia de entregas de China (CPCA) na virada do mês e o comunicado da cúpula EUA–China de 24/09 sobre tarifas, que pesa no negócio chinês da empresa [10]. Técnico: fechou em US$ 375,30, acima dos US$ 364,27 de 18/09 [17]. Macro: 10 anos cedendo favorece ação de duração longa [14]. Invalida abaixo de US$ 364.</p></div>
+
+<h2 id="p2-4">2.4 Risco de desvalorização nos próximos 15 dias (até 07/10)</h2>
+<div class="scroll"><table>
+<tr><th>Ticker</th><th>Preço</th><th>Catalisador em uma linha</th><th>Invalida</th><th>Convicção</th></tr>
+<tr><td><code>BINANCE:BIGTIMEUSDT</code></td><td>0,00808</td><td>Unlock de 13,34% do circulante em 24/09 depois de +15% em 7 dias [12][32]</td><td>&gt; 0,0095</td><td class="me">Média</td></tr>
+<tr><td><code>BYBIT:HUSDT</code></td><td>0,0654</td><td>Unlock de 7,34% do circulante (≈US$ 19,4 mi) em 25/09; já cai 17,6% em 7 dias [12][32]</td><td>&gt; 0,080</td><td class="me">Média</td></tr>
+<tr><td><code>BYBIT:SOSOUSDT</code></td><td>0,301</td><td>Unlock de 5,97% do circulante (≈US$ 6,8 mi) em 24/09 [12]</td><td>&gt; 0,33</td><td class="lo">Baixa</td></tr>
+<tr><td><code>BINANCE:AVAXUSDT</code></td><td>10,81</td><td>+44% em 7 dias sem catalisador de rede identificado; −4,5% hoje com o mercado de lado [32]</td><td>&gt; 12,50</td><td class="lo">Baixa</td></tr>
+<tr><td><code>BINANCE:ZECUSDT</code></td><td>1.533</td><td>+34% em 7 dias e −0,7% hoje; parabólica sem evento programado na janela [32][2]</td><td>&gt; 1.750</td><td class="lo">Baixa</td></tr>
+<tr><td><code>NYSE:NKE</code></td><td>36,10</td><td>Resultado em 24/09 com consumidor em sentimento de 51,7 (Michigan) e ação em US$ 36 [10][13]</td><td>&gt; 39</td><td class="lo">Baixa</td></tr>
+<tr><td><code>NASDAQ:TLT</code></td><td>81,80</td><td>16 de 18 dirigentes veem outra alta; PCE e revisão anual em 30/09, payroll em 02/10 [1][38][39]</td><td>&gt; 84</td><td class="me">Média</td></tr>
+<tr><td><code>AMEX:XLE</code></td><td>62,46</td><td>Fluxo por Ormuz recuperando e Irã dizendo que produção volta até o fim do ano [3]</td><td>&gt; 64,50</td><td class="me">Média</td></tr>
+<tr><td><code>TVC:GOLD</code></td><td>4.358</td><td>Fed subindo, dólar em 100,4 e refúgio perdendo para ações; três fechamentos em queda [14][17][25]</td><td>&gt; 4.425</td><td class="lo">Baixa</td></tr>
+<tr><td><code>NYSE:KBH</code></td><td>47,86</td><td>Resultado em 23/09 com 10 anos a 4,96% e vendas de casas novas em 24/09 [10][17]</td><td>&gt; 49,60</td><td class="lo">Baixa</td></tr>
+</table></div>
+
+<div class="asset"><h3><code>BINANCE:BIGTIMEUSDT</code> · US$ 0,00808 (−2,3% em 24 h) [32]</h3><p>Catalisador: unlock de 13,34% do circulante (≈US$ 2,68 mi) em 24/09 [12]. O que monitorar: o comportamento do preço nas 48 h seguintes ao desbloqueio e o volume — com capitalização de ≈US$ 23 mi, a oferta nova é grande em proporção e o livro é fino [32]. Técnico: +15% em 7 dias e já −2,3% hoje, o mesmo padrão de venda antecipada visto em XPL [32]. Convicção média: evento programado, mas valor pequeno. Invalida acima de US$ 0,0095, que indicaria absorção do unlock.</p></div>
+<div class="asset"><h3><code>BYBIT:HUSDT</code> · US$ 0,0654 (−1,8% em 24 h) [30][32]</h3><p>Catalisador: unlock de 7,34% do circulante (≈US$ 19,4 mi) em 25/09, o segundo maior da semana depois do XPL [12]. Técnico: H já cai 17,6% em 7 dias num mercado em que quase tudo subiu — o mercado está vendendo antes do evento e não há suporte recente testado [32]. O que monitorar: se a queda para depois de 25/09 (oferta absorvida) ou continua na semana seguinte (distribuição de investidores). Ticker: o par não está listado na Binance, por isso a referência é o par à vista da Bybit [30]. Invalida acima de US$ 0,080.</p></div>
+<div class="asset"><h3><code>BYBIT:SOSOUSDT</code> · US$ 0,301 (+2,8% em 24 h) [30][32]</h3><p>Catalisador: unlock de 5,97% do circulante (≈US$ 6,8 mi) em 24/09 [12]. O que monitorar: com capitalização de ≈US$ 103 mi, o desbloqueio equivale a ≈6,6% do valor de mercado — proporção menor que a de XPL e H, por isso convicção baixa [32]. Técnico: +2,8% hoje e +2,4% em 7 dias, isto é, não subiu com o mercado e não tem ganho para devolver — o risco é só a oferta nova. Ticker: par à vista da Bybit, não listado na Binance [30]. Invalida acima de US$ 0,33.</p></div>
+<div class="asset"><h3><code>BINANCE:AVAXUSDT</code> · US$ 10,81 (−4,5% em 24 h) [32]</h3><p>Catalisador: AVAX subiu 44% em 7 dias e é a segunda maior queda da coleta hoje (−4,5%) num mercado de lado — o rali não tem evento de rede identificado nesta pesquisa, o que o deixa exposto à rotação de saída [32]. O que monitorar: se a queda de hoje se estende abaixo de US$ 10,50 (o preço de uma semana atrás é ≈US$ 7,50, logo há muito ganho para devolver) e o funding do par, não coletado. Convicção baixa por ausência de catalisador verificável. Invalida acima de US$ 12,50, nova máxima do movimento.</p></div>
+<div class="asset"><h3><code>BINANCE:ZECUSDT</code> · US$ 1.533 (−0,7% em 24 h) [32]</h3><p>Catalisador: +34% em 7 dias e capitalização de ≈US$ 26 bi (9ª do mercado), sem evento de rede ou unlock programado na janela — a alta é de narrativa (privacidade) e momentum [32][2]. O que monitorar: a primeira queda diária acima de 5% depois de uma sequência parabólica costuma marcar o fim da perna; hoje cai 0,7% enquanto o mercado sobe [32]. Macro: em cenário de vencimento de opções do BTC (25/09) tirando suporte do mercado, os ativos que mais subiram sem fluxo institucional são os que mais devolvem. Convicção baixa por ser tese estatística, não de evento. Invalida acima de US$ 1.750.</p></div>
+<div class="asset"><h3><code>NYSE:NKE</code> · US$ 36,10 (+1,7% em 21/09) [17]</h3><p>Catalisador: resultado trimestral em 24/09 após o fechamento [10]. O que monitorar: o guidance de receita para o trimestre de fim de ano e a margem bruta com tarifas; o sentimento do consumidor (Michigan) está em 51,7 na prévia de setembro e a final sai em 25/09 [13]. Técnico: a ação está em US$ 36,10, perto da mínima recente de US$ 35,51 (18/09), sem base construída para absorver decepção [17]. Consenso de EPS para o trimestre: dado indisponível nesta pesquisa (as prévias encontradas eram de trimestres anteriores), por isso convicção baixa. Invalida acima de US$ 39.</p></div>
+<div class="asset"><h3><code>NASDAQ:TLT</code> · US$ 81,80 (+0,7% em 21/09) [17]</h3><p>Catalisador: o Fed subiu em 16/09 e 16 de 18 dirigentes projetam outra alta em 2026, quatro deles duas [1]; Musalem disse ontem que a política talvez ainda seja estimulativa [4]; o 10 anos tocou 5,006% na semana passada [2]. O que monitorar: renda e gastos de agosto com PCE (núcleo em 3,34% a/a em julho) e a revisão anual das contas nacionais em 30/09 [38]; payroll de setembro em 02/10 (agosto: +162 mil, desemprego 4,1%) [39]; o leilão de 2 anos de hoje e os de 5 e 7 anos na semana. Técnico: TLT subiu ontem só porque o petróleo caiu — o alívio é de oferta de energia, não de inflação de núcleo [14]. Invalida acima de US$ 84.</p></div>
+<div class="asset"><h3><code>AMEX:XLE</code> · US$ 62,46 (−2,9% em 21/09) [17]</h3><p>Catalisador: o CENTCOM reportou o maior fluxo por Ormuz em seis meses, a Arábia Saudita passou 2,9 mi bbl/dia pelo estreito e o ministro do petróleo do Irã disse que parte da capacidade perdida volta até o fim do ano [3]. O que monitorar: a Assembleia da ONU (22–26/09) e qualquer encontro Trump–Pezeshkian [11]; os estoques da API (hoje) e do DoE; e a curva do Brent, que já está em US$ 98,14 [7][17]. Macro: o cenário do Morgan Stanley (−7% no S&amp;P) precisa de energia subindo — o oposto do que está acontecendo, o que favorece bolsa e pune o setor [14]. Técnico: XLE perdeu US$ 64,31 (18/09) [17]. Invalida acima de US$ 64,50.</p></div>
+<div class="asset"><h3><code>TVC:GOLD</code> · US$ 4.358 (futuros, 22/09 08:59 BRT; −0,6% vs 21/09) [17]</h3><p>Catalisador: três fechamentos em queda (US$ 4.424,90 em 18/09 → 4.383,90 em 21/09 → 4.358 hoje) com o Fed em ciclo de alta e o dólar em 100,4 [17][1]. O que monitorar: PCE e revisão anual em 30/09 e payroll em 02/10 — dado forte reforça o Fed e o juro real [38][39]; o componente "refúgio" do índice CNN em 57 (ações batendo bonds em 20 dias) mostra que a demanda por proteção está caindo [25]. Técnico: o metal está 1,5% abaixo do fechamento de 18/09 e ainda a US$ 4.358, muito acima de qualquer suporte estrutural — a tese é de correção, não de reversão, por isso convicção baixa. Invalida acima de US$ 4.425.</p></div>
+<div class="asset"><h3><code>NYSE:KBH</code> · US$ 47,86 (+1,6% em 21/09) [17]</h3><p>Catalisador: resultado em 23/09 após o fechamento, e vendas de casas novas de agosto em 24/09 [10]. Macro: o 10 anos em 4,96% depois de tocar 5% mantém a hipoteca no nível mais alto desde 2007 — o alívio de ontem (−4 pb) veio do petróleo, não do Fed, e a ata de julho já mostrava três dirigentes pedindo alta [17][2][1]. O que monitorar: pedidos líquidos, cancelamentos e incentivos no resultado; se a empresa precisar comprar taxa para vender, a margem cai. Técnico: KBH oscila entre US$ 47 e US$ 49 há uma semana, sem tendência [17]. Consenso de EPS: dado indisponível nesta pesquisa, por isso convicção baixa. Invalida acima de US$ 49,60.</p></div>
+
+<h1 id="p3">Parte 3 — Fontes e limitações</h1>
+
+<h2 id="p3-1">3.1 Fontes</h2>
+<p class="meta">Data de publicação quando a fonte a informa; "coleta" = horário em que este relatório leu o dado (22/09, BRT).</p>
+<ul class="src">
+<li>[1] CNBC — "Fed rate decision September 2026: Rates rise to 3.75%-4%", 16/09/2026. <a href="https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html">cnbc.com/2026/09/16/fed-rate-decision-september-2026.html</a></li>
+<li>[2] Zerocap — "Weekly Crypto Market Wrap: 21 September 2026", 21/09/2026. <a href="https://zerocap.com/insights/weekly-crypto-market-wrap/weekly-crypto-market-wrap-21-september-2026/">zerocap.com/insights/weekly-crypto-market-wrap/weekly-crypto-market-wrap-21-september-2026/</a></li>
+<li>[3] CNBC — "U.S. crude oil tumbles back below $100 after Trump says he's open to talking to Iran at UN", 21/09/2026. <a href="https://www.cnbc.com/2026/09/21/iran-us-oil-prices-crude-saudi-arabia-.html">cnbc.com/2026/09/21/iran-us-oil-prices-crude-saudi-arabia-.html</a></li>
+<li>[4] Reuters via Investing.com — "Fed's Musalem says more rate hikes likely needed to quell inflation", 21/09/2026. <a href="https://www.investing.com/news/economy-news/exclusivefeds-musalem-says-more-rate-hikes-likely-needed-to-quell-inflation-4909515">investing.com/news/economy-news/exclusivefeds-musalem-says-more-rate-hikes-likely-needed-to-quell-inflation-4909515</a></li>
+<li>[5] O Tempo — "Copom reduz Selic em 0,25 ponto pela quinta vez seguida", 16/09/2026. <a href="https://www.otempo.com.br/economia/2026/9/16/copom-corta-taxa-de-juros-em-0-25-p-p-pela-quinta-vez-consecutiva">otempo.com.br/economia/2026/9/16/copom-corta-taxa-de-juros-em-0-25-p-p-pela-quinta-vez-consecutiva</a></li>
+<li>[6] Investing.com — "ADP employment data and Fed speakers highlight Tuesday's calendar", 21/09/2026 14:00 ET. <a href="https://www.investing.com/news/stock-market-news/adp-employment-data-and-fed-speakers-highlight-tuesdays-calendar-93CH-4909494">investing.com/news/stock-market-news/adp-employment-data-and-fed-speakers-highlight-tuesdays-calendar-93CH-4909494</a></li>
+<li>[7] svmuu — "Sep 22, 2026 Economic Calendar" (horários em UTC-3), coleta 22/09 ≈ 08:40 BRT. <a href="https://www.svmuu.com/en/calendar/2026-09-22/">svmuu.com/en/calendar/2026-09-22/</a></li>
+<li>[8] AutoZone IR — "AutoZone 4th Quarter Total Company Same Store Sales Increase 1.5%; 4th Quarter EPS of $56.05", 22/09/2026. <a href="https://investors.autozone.com/news-releases/news-release-details/autozone-4th-quarter-total-company-same-store-sales-increase-15">investors.autozone.com/news-releases/news-release-details/autozone-4th-quarter-total-company-same-store-sales-increase-15</a></li>
+<li>[9] AlphaStreet — "AutoZone (AZO) Q4 2026 Preview: EPS Est. $54.22, Reports September 22", coleta 22/09. <a href="https://news.alphastreet.com/autozone-azo-q4-2026-preview-eps-est-54-22-reports-september-22/">news.alphastreet.com/autozone-azo-q4-2026-preview-eps-est-54-22-reports-september-22/</a></li>
+<li>[10] TradingKey — "The Week Ahead: US-China Summit in Washington, Costco Earnings and Fed Rate Path in Focus", 20/09/2026. <a href="https://www.tradingkey.com/analysis/stocks/us-stocks/262176651-china-us-summit-washington-costco-earnings-fed-rate-path-week-tradingkey">tradingkey.com/analysis/stocks/us-stocks/262176651-china-us-summit-washington-costco-earnings-fed-rate-path-week-tradingkey</a></li>
+<li>[11] CNBC — "Iranian President Pezeshkian to head to New York for UN meeting as Trump warns of no-deal consequences", 21/09/2026. <a href="https://www.cnbc.com/2026/09/21/us-iran-war-trump-hormuz.html">cnbc.com/2026/09/21/us-iran-war-trump-hormuz.html</a></li>
+<li>[12] Bitcoin Sistemi — "Massive Token Unlocks Scheduled for 22 Altcoins This Week — Day-by-Day List", coleta 22/09. <a href="https://en.bitcoinsistemi.com/watch-out-massive-token-unlocks-scheduled-for-22-altcoins-this-week-here-s-the-day-by-day-hour-by-ho/">en.bitcoinsistemi.com/watch-out-massive-token-unlocks-scheduled-for-22-altcoins-this-week-here-s-the-day-by-day-hour-by-ho/</a></li>
+<li>[13] The Crypto Times — "Crypto Week Ahead: $16.6B Deribit Expiry, Plasma XPL Unlock, Solana Alpenglow &amp; Flash PMIs After Fed Hike", 21/09/2026. <a href="https://www.cryptotimes.io/2026/09/21/crypto-week-ahead-16-6b-deribit-expiry-plasma-xpl-unlock-solana-alpenglow-flash-pmis-after-fed-hike/">cryptotimes.io/2026/09/21/crypto-week-ahead-16-6b-deribit-expiry-plasma-xpl-unlock-solana-alpenglow-flash-pmis-after-fed-hike/</a></li>
+<li>[14] The Motley Fool — "Stock Market Today, Sept. 21: Tech Strength Powers Nasdaq to Record Close", 21/09/2026 17:02 ET. <a href="https://www.fool.com/coverage/stock-market-today/2026/09/21/stock-market-today-sept-21-tech-strength-powers-nasdaq-to-record-close/">fool.com/coverage/stock-market-today/2026/09/21/stock-market-today-sept-21-tech-strength-powers-nasdaq-to-record-close/</a></li>
+<li>[15] CNBC — "Intel surges 12% as CPU stocks rally. Here's what's driving the move", 21/09/2026. <a href="https://www.cnbc.com/2026/09/21/intel-surges-12percent-as-cpu-stocks-rally-heres-whats-driving-the-move.html">cnbc.com/2026/09/21/intel-surges-12percent-as-cpu-stocks-rally-heres-whats-driving-the-move.html</a></li>
+<li>[16] Yahoo Finance — "Meta stock soars 11% on price target increase, Muse AI downloads", 21/09/2026. <a href="https://finance.yahoo.com/technology/article/meta-stock-soars-11-on-price-target-increase-muse-ai-downloads-180423756.html">finance.yahoo.com/technology/article/meta-stock-soars-11-on-price-target-increase-muse-ai-downloads-180423756.html</a></li>
+<li>[17] Yahoo Finance (API de gráficos) — fechamentos de 17, 18 e 21/09 de AMD, META, NVDA, XOM, CVX, MU, COST, NKE, TLT, COIN, MSTR, NEM, XLE, KBH, INTC, AZO, DAL, TSLA, LMT, GLD; VIX, US10Y, WTI, Brent, ouro (GC=F) e DXY, coleta 22/09 ≈ 09:00 BRT. <a href="https://query1.finance.yahoo.com/v8/finance/chart/">query1.finance.yahoo.com/v8/finance/chart/</a></li>
+<li>[18] 24/7 Wall St. — "Why Is Crypto Up Today? Oil Prices Drop, Short Sellers Squeezed, and Bitcoin Reclaims Key Level After 45 Weeks", 21/09/2026 07:30 ET. <a href="https://247wallst.com/investing/cryptocurrency/2026/09/21/why-is-crypto-up-today-oil-prices-drop-short-sellers-squeezed-and-bitcoin-reclaims-key-level-after-45-weeks/">247wallst.com/investing/cryptocurrency/2026/09/21/why-is-crypto-up-today-oil-prices-drop-short-sellers-squeezed-and-bitcoin-reclaims-key-level-after-45-weeks/</a></li>
+<li>[19] KuCoin News (dados SoSoValue) — "Bitcoin ETF Inflows Hit $999M, Ether Funds Add $270M on Sept 21", 22/09/2026 06:53. <a href="https://www.kucoin.com/news/flash/bitcoin-etf-inflows-hit-999m-ether-funds-add-270m-on-sept-21">kucoin.com/news/flash/bitcoin-etf-inflows-hit-999m-ether-funds-add-270m-on-sept-21</a></li>
+<li>[20] Bloomberg — "Bitcoin Jumps to Over $84,800 After ETF Flows Turn Positive", 21/09/2026. <a href="https://www.bloomberg.com/news/articles/2026-09-21/bitcoin-etfs-swing-positive-as-token-holds-jump-above-81-000">bloomberg.com/news/articles/2026-09-21/bitcoin-etfs-swing-positive-as-token-holds-jump-above-81-000</a></li>
+<li>[21] The Block — "'A little more orange': Strategy buys 950 bitcoin for $76 million, bringing total holdings to 846,000 BTC", 21/09/2026. <a href="https://www.theblock.co/news/business/2026-09-21-a-little-more-orange-strategy-bitcoin-michael-saylor-415893">theblock.co/news/business/2026-09-21-a-little-more-orange-strategy-bitcoin-michael-saylor-415893</a></li>
+<li>[22] BeInCrypto — "MicroStrategy Ends Two-Week Pause With 950 Bitcoin: Is the Buying Engine Stalling?", 21/09/2026. <a href="https://beincrypto.com/strategy-950-bitcoin-buy-strc-buyback/">beincrypto.com/strategy-950-bitcoin-buy-strc-buyback/</a></li>
+<li>[23] Solana Compass — "Solana Alpenglow Mainnet Activation Sep 28: Votor, 150ms Finality, Vote Txs Eliminated", 21/09/2026. <a href="https://solanacompass.com/news/solanas-alpenglow-consensus-upgrade-hits-general-adoption-day-seven-days-from-mainnet-feature-gate">solanacompass.com/news/solanas-alpenglow-consensus-upgrade-hits-general-adoption-day-seven-days-from-mainnet-feature-gate</a></li>
+<li>[24] The Crypto Basic — "XRP Rallies 8.22% After Investors Add $2.2 Billion, $1.60 Level Comes Into Focus", 21/09/2026. <a href="https://thecryptobasic.com/2026/09/21/xrp-rallies-8-22-after-investors-add-2-2-billion-1-60-level-comes-into-focus/">thecryptobasic.com/2026/09/21/xrp-rallies-8-22-after-investors-add-2-2-billion-1-60-level-comes-into-focus/</a></li>
+<li>[25] CNN Business — Fear &amp; Greed Index (endpoint de dados do gráfico), timestamp 22/09 11:50 UTC, coleta 22/09 08:50 BRT. <a href="https://www.cnn.com/markets/fear-and-greed">cnn.com/markets/fear-and-greed</a></li>
+<li>[26] Alternative.me — Crypto Fear &amp; Greed Index, coleta 22/09 ≈ 08:30 BRT. <a href="https://alternative.me/crypto/fear-and-greed-index/">alternative.me/crypto/fear-and-greed-index/</a></li>
+<li>[27] thetrading.tools — "Put/Call Ratio Today" (CBOE total, equity e index de 18/09/2026), coleta 22/09 ≈ 08:45 BRT. <a href="https://www.thetrading.tools/put-call-ratio">thetrading.tools/put-call-ratio</a></li>
+<li>[28] Deribit API — DVOL de BTC e ETH (get_volatility_index_data, resolução 1 h), coleta 22/09 09:09 BRT. <a href="https://www.deribit.com/api/v2/public/get_volatility_index_data">deribit.com/api/v2/public/get_volatility_index_data</a></li>
+<li>[29] Binance Futures API — premiumIndex (funding) e globalLongShortAccountRatio, topLongShortAccountRatio, topLongShortPositionRatio (período 1 h) de BTCUSDT e ETHUSDT, coleta 22/09 09:09 BRT. <a href="https://fapi.binance.com/">fapi.binance.com/</a></li>
+<li>[30] Bybit API v5 — tickers linear (funding, OI) de BTCUSDT e ETHUSDT e tickers spot de HUSDT e SOSOUSDT, coleta 22/09 09:09–09:15 BRT. <a href="https://api.bybit.com/v5/market/tickers">api.bybit.com/v5/market/tickers</a></li>
+<li>[31] OKX API v5 — funding-rate de BTC-USDT-SWAP e ETH-USDT-SWAP, coleta 22/09 09:09 BRT. <a href="https://www.okx.com/api/v5/public/funding-rate">okx.com/api/v5/public/funding-rate</a></li>
+<li>[32] CoinGecko API — /global (dominância, cap total) e /coins/markets (preços, 24 h, 7 d, cap), coleta 22/09 09:08 BRT. <a href="https://api.coingecko.com/api/v3/">api.coingecko.com/api/v3/</a></li>
+<li>[33] Vol Vibes — "Market Overview - September 21st 2026", 21/09/2026. <a href="https://volvibes.substack.com/p/market-overview-september-21st-2026">volvibes.substack.com/p/market-overview-september-21st-2026</a></li>
+<li>[34] CoinStats — "Bitcoin (BTC) News Today: Why BTC Is Up – 22 September 2026", 22/09/2026 00:04 UTC. <a href="https://coinstats.app/ai/a/latest-news-for-bitcoin">coinstats.app/ai/a/latest-news-for-bitcoin</a></li>
+<li>[35] GuruFocus — "INTC Looks 279.4% Overvalued on GF Value as Stock Surges Amid Foundry Optimism", 21/09/2026. <a href="https://www.gurufocus.com/news/9090578/intc-looks-2794-overvalued-on-gf-value-as-stock-surges-amid-foundry-optimism">gurufocus.com/news/9090578/intc-looks-2794-overvalued-on-gf-value-as-stock-surges-amid-foundry-optimism</a></li>
+<li>[36] The Motley Fool — "Should You Buy Micron Before Sept. 30?", 21/09/2026. <a href="https://www.fool.com/investing/2026/09/21/should-you-buy-micron-before-september-30/">fool.com/investing/2026/09/21/should-you-buy-micron-before-september-30/</a></li>
+<li>[37] TipRanks — "Costco (COST) Reports Q4 Earnings on Sept. 24 — Here's What Analysts Expect", coleta 22/09. <a href="https://www.tipranks.com/news/costco-cost-reports-q4-earnings-on-sept-24-heres-what-analysts-expect">tipranks.com/news/costco-cost-reports-q4-earnings-on-sept-24-heres-what-analysts-expect</a></li>
+<li>[38] BEA — Release Schedule (Personal Income and Outlays de agosto e atualização anual das contas nacionais, 30/09/2026) e "Personal Income and Outlays, July 2026", 26/08/2026. <a href="https://www.bea.gov/news/schedule/">bea.gov/news/schedule/</a></li>
+<li>[39] CNBC — "Jobs report August 2026" (payroll +162 mil, desemprego 4,1%; próximo relatório em 02/10), 04/09/2026. <a href="https://www.cnbc.com/2026/09/04/jobs-report-august-2026.html">cnbc.com/2026/09/04/jobs-report-august-2026.html</a></li>
+<li>[40] CoinMarketCap Top Stories — "Arbitrum Surges 25% on Robinhood Chain Revenue and Breakout", coleta 22/09. <a href="https://coinmarketcap.com/top-stories/6a96f7d2f2b8186f115bc10a/">coinmarketcap.com/top-stories/6a96f7d2f2b8186f115bc10a/</a></li>
+<li>[41] KuCoin — "BTC Market Summary September 21, 2026" (RSI diário ≈71, horário &gt;80), 21/09/2026. <a href="https://www.kucoin.com/news/insight/BTC/6ab1872174fd460007c498cf">kucoin.com/news/insight/BTC/6ab1872174fd460007c498cf</a></li>
+<li>[42] The Hill — "Congress funds government until December, averting preelection shutdown", 02/09/2026. <a href="https://thehill.com/homenews/house/6063667-house-government-funding-cr-shutdown-midterms/">thehill.com/homenews/house/6063667-house-government-funding-cr-shutdown-midterms/</a></li>
+<li>[43] Coinpedia — "Altcoin Breakout Watch: Dogecoin, Cardano, XRP Among Tokens Confirming Trend Shifts", coleta 22/09. <a href="https://coinpedia.org/news/altcoin-breakout-watch-dogecoin-cardano-xrp-among-tokens-confirming-trend-shifts/">coinpedia.org/news/altcoin-breakout-watch-dogecoin-cardano-xrp-among-tokens-confirming-trend-shifts/</a></li>
+<li>[44] GuruFocus — "Is AutoZone Inc (AZO) Undervalued After Q4 Earnings Miss? EPS at $56.05, Revenue at $6.6 Billion", 22/09/2026. <a href="https://www.gurufocus.com/news/9091393/is-autozone-inc-azo-undervalued-after-q4-earnings-miss-eps-at-5605-revenue-at-66-billion-gf-score-84100">gurufocus.com/news/9091393/is-autozone-inc-azo-undervalued-after-q4-earnings-miss-eps-at-5605-revenue-at-66-billion-gf-score-84100</a></li>
+<li>[45] Solana Compass — "Agave 4.3 Release Schedule: Alpenglow Mainnet Activation September 28, 2026", 12/08/2026. <a href="https://solanacompass.com/news/anza-publishes-agave-43-release-schedule-alpenglow-consensus-targets-september-28-mainnet-activation">solanacompass.com/news/anza-publishes-agave-43-release-schedule-alpenglow-consensus-targets-september-28-mainnet-activation</a></li>
+<li>[46] Time — "Can This Week's U.N. Gathering Cool Rising Tensions Between the U.S. and Iran?", 21/09/2026. <a href="https://time.com/article/2026/09/21/trump-iran-war-united-nations-general-assembly/">time.com/article/2026/09/21/trump-iran-war-united-nations-general-assembly/</a></li>
+<li>[47] investingLive — "Crypto sentiment gauges converge on greed as multiple indices climb this week" (CMC 72, CoinGecko 70), coleta 22/09. <a href="https://investinglive.com/cryptocurrency/crypto-sentiment-gauges-converge-on-greed-as-multiple-indices-climb-this-week/">investinglive.com/cryptocurrency/crypto-sentiment-gauges-converge-on-greed-as-multiple-indices-climb-this-week/</a></li>
+<li>[48] Yahoo Finance — "Bitcoin and ethereum prices today, Monday, September 21, 2026: Crypto prices hit highest levels in 8 months" (BTC +44% no 3T), 21/09/2026. <a href="https://finance.yahoo.com/personal-finance/investing/article/bitcoin-and-ethereum-prices-today-monday-september-21-2026-crypto-prices-hit-highest-levels-in-8-months-143444230.html">finance.yahoo.com/personal-finance/investing/article/bitcoin-and-ethereum-prices-today-monday-september-21-2026-crypto-prices-hit-highest-levels-in-8-months-143444230.html</a></li>
+<li>[49] FinanceFeeds — "Micron Earnings Date Sept 30: The Extra Week in the $50bn Guide", coleta 22/09. <a href="https://financefeeds.com/micron-earnings-date-september-30-extra-week-50bn-guide/">financefeeds.com/micron-earnings-date-september-30-extra-week-50bn-guide/</a></li>
+</ul>
+
+<h2 id="p3-2">3.2 O que ficou de fora e por quê</h2>
+<ul class="src">
+<li><b>Put/call de 21/09:</b> a CBOE publica a razão do pregão só na noite seguinte e os agregadores consultados ainda mostravam 18/09 (total 0,81, equity 0,58); o valor usado tem dois pregões de atraso [27].</li>
+<li><b>Variação de 24 h da dominância do BTC:</b> a CoinGecko entrega o nível (58,9%) mas não a variação; o CoinMarketCap mostrava 59,2% sem carimbo de hora confiável. Ficou "dado indisponível" [32].</li>
+<li><b>Skew de opções do BTC/ETH:</b> a Deribit expõe o DVOL, mas o skew de 25 delta exige agregadores (Coinglass, Laevitas) que bloquearam a leitura automática. Só o put/call do vencimento (0,52) entrou, via [13].</li>
+<li><b>Long/short fora da Binance:</b> o Coinglass e o Datawallet devolveram páginas vazias à coleta; os ratios são só da Binance (contas, top traders por conta e por posição) [29]. Funding entrou de três bolsas (Binance, Bybit, OKX).</li>
+<li><b>Componentes do índice cripto (alternative.me):</b> o site publica só o número final; o gráfico 2 decompõe o índice CNN, que expõe os sete componentes [25].</li>
+<li><b>Consenso do ADP semanal, do leilão de 2 anos e da ata do Copom:</b> os calendários consultados não trazem consenso para esses itens; entrou só o valor anterior [6][7].</li>
+<li><b>Decisão do SNB:</b> o calendário svmuu lista "decisão de juros" às 04:30 BRT de hoje [7], mas a pesquisa Reuters e o site do SNB apontam a avaliação trimestral para 25/09; a linha ficou na agenda com impacto baixo e esta ressalva. Não foi possível confirmar qual das duas fontes está certa.</li>
+<li><b>Resultado da AutoZone:</b> o comunicado oficial dá EPS de US$ 56,05 contra estimativas de US$ 54,10–54,22 nas prévias [8][9], mas um agregador classificou como "miss" [44]; a divergência indica consenso mais alto em alguma base (Bloomberg/FactSet) não acessível. A reação pré-abertura não foi capturada pela API usada.</li>
+<li><b>Consenso de EPS para Nike (24/09) e KB Home (23/09):</b> as prévias encontradas eram de trimestres anteriores; os dois ativos entraram com convicção baixa e consenso marcado como indisponível.</li>
+<li><b>Consenso de entregas da Tesla no 3T:</b> não encontrado em fonte datada das últimas 48 h.</li>
+<li><b>Ata do Copom (08:00 BRT) e discurso de Lagarde (08:00 BRT):</b> já publicados na hora da coleta, mas o conteúdo não foi lido para este relatório.</li>
+<li><b>Preço do WTI hoje:</b> o contrato de outubro vence esta semana e o contínuo da API já apontava o de novembro (US$ 89,88), não comparável ao fechamento de US$ 95,78 de ontem; usou-se o Brent (US$ 98,14) para a leitura intradiária [17][3].</li>
+<li><b>Fontes bloqueadas:</b> CNBC (fechamento de 21/09), TheStreet, Kiplinger (calendário semanal), Benzinga (calendário de resultados e índice CNN) e ycharts recusaram a leitura automática; as mesmas informações vieram de fontes alternativas listadas acima.</li>
+<li><b>Shutdown do governo americano:</b> fora da janela de 15 dias — a resolução contínua assinada em 02/09 financia o governo até 11/12 [42].</li>
+<li><b>Tickers fora da Binance:</b> H e SOSO não têm par USDT na Binance à vista; a referência usada é o par da Bybit (BYBIT:HUSDT, BYBIT:SOSOUSDT) [30]. STBL (unlock de 77,8% em 26/09) e SOON (23/09) não estavam listados em nenhuma das duas e ficaram fora das listas.</li>
+</ul>
+
+<footer>CocaDash · relatório diário de mercados · gerado automaticamente em 22/09/2026 ≈ 09:20 BRT · issue #312 · conteúdo informativo, não constitui recomendação de investimento.</footer>
+</div>
 </body>
 </html>
