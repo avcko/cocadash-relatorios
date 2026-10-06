@@ -5,15 +5,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Régua do Bitcoin</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
 <style>
-:root{--bg:#f3f5f1;--surface:#ffffff;--ink:#19211e;--muted:#5a6963;--line:#c6cfca;--accent:#0e6a5a;
-  --compra:#187a4a;--venda:#b23a2a}
-@media (prefers-color-scheme:dark){:root{--bg:#111513;--surface:#19201d;--ink:#e5ebe8;--muted:#97a6a0;
-  --line:#36413c;--accent:#5ccab3;--compra:#62d095;--venda:#f28f7d}}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "IBM Plex Sans",system-ui,sans-serif}
+/* tema Rewaff escuro do tweakcn, cores em hex convertidas de oklch (issue #432) */
+:root{--bg:#02080e;--surface:#09131a;--ink:#e9f0f5;--muted:#85919a;--line:#202a32;--accent:#319cfc;
+  --compra:#2fbc5b;--venda:#f22a36;--radius:10px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Space Grotesk",system-ui,sans-serif}
 .pagina{max-width:1100px;margin-inline:auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:26px}
-h1,h2,h3{font-family:"Archivo","IBM Plex Sans",system-ui,sans-serif;margin:0;text-wrap:balance}
+h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;margin:0;text-wrap:balance}
 h1{font-size:1.8rem;line-height:1.15;font-weight:700}
 h2{font-size:1.1rem;font-weight:600}
 h3{font-size:.95rem;font-weight:600;flex:1;min-width:0;overflow-wrap:anywhere}
@@ -22,17 +21,17 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px
 .cabeca{display:flex;flex-direction:column;gap:6px}
 .cabeca p,.rodape{color:var(--muted);font-size:.9rem;max-width:68ch}
 .regua{width:100%;max-width:420px;height:auto;display:block;margin-inline:auto;background:var(--surface);
-  border:1px solid var(--line);border-radius:6px;font-family:"IBM Plex Sans",system-ui,sans-serif}
+  border:1px solid var(--line);border-radius:var(--radius);font-family:"Space Grotesk",system-ui,sans-serif}
 .eixo{stroke:var(--ink);stroke-width:2}
 .risco{stroke:var(--muted);stroke-width:1}
-.tick{fill:var(--muted);font-size:10px;font-variant-numeric:tabular-nums}
+.tick{fill:var(--muted);font-size:10px;font-variant-numeric:tabular-nums;font-family:"Space Mono",ui-monospace,monospace}
 .fundo{stroke:var(--surface);stroke-width:4;paint-order:stroke}
 .guia{fill:none;stroke-width:1.2}
 .anel{fill:var(--surface);stroke-width:2}
 .guia.compra,.anel.compra{stroke:var(--compra)}.guia.venda,.anel.venda{stroke:var(--venda)}
 .marca.compra{fill:var(--compra)}.marca.venda{fill:var(--venda)}
 .rot{fill:var(--ink);font-size:10px;font-weight:600}
-.val{font-size:10px;font-weight:600;font-variant-numeric:tabular-nums}
+.val{font-size:10px;font-weight:600;font-variant-numeric:tabular-nums;font-family:"Space Mono",ui-monospace,monospace}
 .lado{font-size:10px;font-weight:700;letter-spacing:.08em}
 .val.compra,.lado.compra{fill:var(--compra)}.val.venda,.lado.venda{fill:var(--venda)}
 .cot{stroke:var(--accent);stroke-width:3}
@@ -40,14 +39,14 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px
 .cot-h{fill:var(--accent);font-size:10px}
 .secao{display:flex;flex-direction:column;gap:10px}
 .cartoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
-.cartao{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.cartao{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;display:flex;flex-direction:column;gap:10px}
 .cartao header{display:flex;align-items:center;gap:8px}
 .mini{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);object-fit:cover;flex:none}
-.meta{color:var(--muted);font-size:.8rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.meta{color:var(--muted);font-size:.8rem;font-variant-numeric:tabular-nums;font-family:"Space Mono",ui-monospace,monospace;overflow-wrap:anywhere}
 .vazio{color:var(--muted);font-size:.9rem}
 .declarado{display:flex;flex-direction:column;gap:4px;border-left:3px solid var(--line);padding-left:10px}
 .declarado.compra{border-color:var(--compra)}.declarado.venda{border-color:var(--venda)}
-.preco{font-weight:600;font-variant-numeric:tabular-nums}
+.preco{font-weight:600;font-variant-numeric:tabular-nums;font-family:"Space Mono",ui-monospace,monospace}
 .declarado.compra .preco{color:var(--compra)}.declarado.venda .preco{color:var(--venda)}
 blockquote{font-size:.92rem;line-height:1.45;overflow-wrap:anywhere}
 blockquote::before{content:"“"}blockquote::after{content:"”"}
@@ -58,7 +57,7 @@ blockquote::before{content:"“"}blockquote::after{content:"”"}
 <main class="pagina">
   <header class="cabeca">
     <h1>Régua do Bitcoin</h1>
-    <p>Atualizada em 06/10/2026 às 17:15 (horário de Brasília) · BTC 85.634 às 17:15 (Binance, BTC/USDT).</p>
+    <p>Atualizada em 06/10/2026 às 18:45 (horário de Brasília) · BTC 85.585 às 18:45 (Binance, BTC/USDT).</p>
     <p>Cada ponto é o preço em que o próprio influencer declarou, no último vídeo dele, que compra ou que vende Bitcoin. A frase que ele disse está no cartão, com o link para ouvir no vídeo.</p>
   </header>
 
@@ -159,9 +158,9 @@ blockquote::before{content:"“"}blockquote::after{content:"”"}
     
     <text class="tick fundo" x="180" y="47.5" text-anchor="middle">87k</text>
     
-    <line class="cot" x1="164" y1="169.7" x2="196" y2="169.7"/>
-    <text class="cot-t fundo" x="180" y="162.7" text-anchor="middle">BTC 85,6k</text>
-    <text class="cot-h fundo" x="180" y="183.7" text-anchor="middle">06/10 às 17:15</text>
+    <line class="cot" x1="164" y1="174.2" x2="196" y2="174.2"/>
+    <text class="cot-t fundo" x="180" y="167.2" text-anchor="middle">BTC 85,6k</text>
+    <text class="cot-h fundo" x="180" y="188.2" text-anchor="middle">06/10 às 18:45</text>
   </svg>
 
   <section class="secao">
