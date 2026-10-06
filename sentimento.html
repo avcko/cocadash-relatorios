@@ -5,15 +5,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Quadro de sentimento dos influencers</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
 <style>
-:root{--bg:#f3f5f1;--surface:#ffffff;--ink:#19211e;--muted:#5a6963;--line:#c6cfca;
-  --alta:#dbefe1;--baixa:#f7dfdb;--misto:#eceeea;--accent:#0e6a5a}
-@media (prefers-color-scheme:dark){:root{--bg:#111513;--surface:#19201d;--ink:#e5ebe8;--muted:#97a6a0;
-  --line:#36413c;--alta:#1c3b2b;--baixa:#45221f;--misto:#1f2623;--accent:#5ccab3}}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "IBM Plex Sans",system-ui,sans-serif}
+/* tema Rewaff escuro do tweakcn, cores em hex convertidas de oklch (issue #432) */
+:root{--bg:#02080e;--surface:#09131a;--ink:#e9f0f5;--muted:#85919a;--line:#202a32;
+  --alta:#113828;--baixa:#3c1820;--misto:#172128;--accent:#319cfc;--radius:10px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Space Grotesk",system-ui,sans-serif}
 .pagina{max-width:1100px;margin-inline:auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:26px}
-h1,h2,h3{font-family:"Archivo","IBM Plex Sans",system-ui,sans-serif;margin:0;text-wrap:balance}
+h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;margin:0;text-wrap:balance}
 h1{font-size:1.8rem;line-height:1.15;font-weight:700}
 h2{font-size:1.1rem;font-weight:600}
 h3{font-size:.95rem;font-weight:600;flex:1;min-width:0;overflow-wrap:anywhere}
@@ -22,33 +21,33 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px
 .cabeca{display:flex;flex-direction:column;gap:6px}
 .cabeca p,.rodape{color:var(--muted);font-size:.9rem}
 .quadro{width:100%;max-width:680px;height:auto;display:block;margin-inline:auto;background:var(--surface);
-  border:1px solid var(--line);border-radius:6px;font-family:"IBM Plex Sans",system-ui,sans-serif}
+  border:1px solid var(--line);border-radius:var(--radius);font-family:"Space Grotesk",system-ui,sans-serif}
 .q-alta{fill:var(--alta)}.q-baixa{fill:var(--baixa)}.q-misto{fill:var(--misto)}
 .moldura{fill:none;stroke:var(--line)}
 .meio{stroke:var(--muted);stroke-dasharray:4 4;fill:none}
-.tick{fill:var(--muted);font-size:10px;font-variant-numeric:tabular-nums}
+.tick{fill:var(--muted);font-size:10px;font-variant-numeric:tabular-nums;font-family:"Space Mono",ui-monospace,monospace}
 .eixo{fill:var(--ink);font-size:12px;font-weight:600}
-.canto{fill:var(--muted);font-size:10px}
+.canto{fill:var(--ink);opacity:.75;font-size:10px}
 .anel{fill:var(--surface);stroke:var(--ink);stroke-width:1}
 .rotulo{fill:var(--ink);font-size:10px;font-weight:600;stroke:var(--surface);stroke-width:3;paint-order:stroke}
 .secao{display:flex;flex-direction:column;gap:10px}
-.tabela-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
-table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+.tabela-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
 th,td{text-align:left;padding:8px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
 th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
 tr:last-child td{border-bottom:none}
-.num{text-align:right}
+.num{text-align:right;font-variant-numeric:tabular-nums;font-family:"Space Mono",ui-monospace,monospace}
 .mini{width:28px;height:28px;border-radius:50%;vertical-align:middle;margin-right:10px;border:1px solid var(--line);object-fit:cover}
 .cartoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
-.cartao{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.cartao{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;display:flex;flex-direction:column;gap:8px}
 .cartao header{display:flex;align-items:center;gap:8px}
 .cartao header .mini{margin-right:0;flex:none}
-.xy{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.xy{font-weight:600;font-variant-numeric:tabular-nums;font-family:"Space Mono",ui-monospace,monospace;white-space:nowrap}
 .cartao ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .cartao li{display:grid;grid-template-columns:3.6em 1fr;column-gap:6px;font-size:.86rem;line-height:1.35}
 .cartao li a{overflow-wrap:anywhere;text-decoration-color:var(--line)}
-.peso{color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums;grid-row:span 2}
-.meta{color:var(--muted);font-size:.8rem;font-variant-numeric:tabular-nums}
+.peso{color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums;font-family:"Space Mono",ui-monospace,monospace;grid-row:span 2}
+.meta{color:var(--muted);font-size:.8rem;font-variant-numeric:tabular-nums;font-family:"Space Mono",ui-monospace,monospace}
 .mudo{color:var(--accent);font-weight:700}
 </style>
 </head>
@@ -56,7 +55,7 @@ tr:last-child td{border-bottom:none}
 <main class="pagina">
   <header class="cabeca">
     <h1>Quadro de sentimento dos influencers</h1>
-    <p>Atualizado em 06/10/2026 às 17:15 (horário de Brasília).</p>
+    <p>Atualizado em 06/10/2026 às 18:45 (horário de Brasília).</p>
   </header>
 
   <svg class="quadro" viewBox="0 0 520 520" role="img" aria-label="Quadro de sentimento dos influencers">
