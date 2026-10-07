@@ -4,11 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agenda econômica</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
 <style>
-:root{--bg:#f6f4ef;--card:#fffdf8;--ink:#1d1b16;--mut:#6b655a;--line:#d9d3c5;--acc:#8a4b12;--up:#1b7a43;--dn:#b3261e;--neu:#8a7a3a;--z1:#b3261e;--z2:#d9822b;--z3:#b9b19a;--z4:#7fae5a;--z5:#1b7a43}
-@media (prefers-color-scheme:dark){:root{--bg:#14130f;--card:#1c1a15;--ink:#ece7da;--mut:#a39c8c;--line:#35312a;--acc:#e0a565;--up:#5fcf8c;--dn:#ff7b72;--neu:#d8c56a;--z3:#5a5546}}
+/* tema Rewaff escuro do tweakcn, cores em hex convertidas de oklch (issue #432) */
+:root{--bg:#02080e;--card:#09131a;--ink:#e9f0f5;--mut:#85919a;--line:#202a32;--acc:#319cfc;--up:#2fbc5b;--dn:#f22a36;--neu:#ff7f16;
+  --alto-bg:rgba(242,42,54,.05)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Georgia,'Times New Roman',serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Space Grotesk",system-ui,sans-serif}
 .wrap{max-width:1280px;margin:0 auto;padding:0 16px 60px}
 h1{font-size:24px;margin:22px 0 2px}
 h2{font-size:17px;margin:26px 0 8px;color:var(--acc)}
@@ -19,8 +21,8 @@ h2{font-size:17px;margin:26px 0 8px;color:var(--acc)}
 table{border-collapse:collapse;width:100%;min-width:980px;background:var(--card)}
 th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
 th{font-size:12px;color:var(--mut);font-weight:600}
-tr.alto td{background:rgba(179,38,30,.08)}
-@media (prefers-color-scheme:dark){tr.alto td{background:rgba(255,123,114,.12)}}
+tr.alto td{background:var(--alto-bg)}
+td:nth-child(1),td:nth-child(4),td:nth-child(5){font-family:"Space Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
 small{font-size:11px;color:var(--mut)}
 small a{color:var(--acc)}
 .up{color:var(--up);font-weight:700}.dn{color:var(--dn);font-weight:700}.neu{color:var(--neu);font-weight:700}
@@ -29,10 +31,10 @@ small a{color:var(--acc)}
 <body>
 <div class="wrap">
 <h1>Agenda econômica — próximos 60 dias</h1>
-<p class="meta">Atualizada em 06/10/2026 16:43 (Brasília)</p>
+<p class="meta">Atualizada em 07/10/2026 00:01 (Brasília)</p>
 
 
-<details class="hist"><summary>semana anterior (6 eventos)</summary>
+<details class="hist"><summary>semana anterior (15 eventos)</summary>
 <h2>seg 05/10</h2>
 <div style="overflow-x:auto">
 <table>
@@ -112,10 +114,7 @@ small a{color:var(--acc)}
 
 </table>
 </div>
-
-</details>
-
-<h2>Hoje — ter 06/10</h2>
+<h2>ter 06/10</h2>
 <div style="overflow-x:auto">
 <table>
 <tr><th>Horário</th><th>Evento</th><th>País</th><th>Consenso</th><th>Anterior</th><th>Impacto</th><th>Afeta</th><th>O que é</th><th>Resultado bom (altista)</th><th>Resultado ruim (baixista)</th></tr>
@@ -227,7 +226,10 @@ small a{color:var(--acc)}
 
 </table>
 </div>
-<h2>Amanhã — qua 07/10</h2>
+
+</details>
+
+<h2>Hoje — qua 07/10</h2>
 <div style="overflow-x:auto">
 <table>
 <tr><th>Horário</th><th>Evento</th><th>País</th><th>Consenso</th><th>Anterior</th><th>Impacto</th><th>Afeta</th><th>O que é</th><th>Resultado bom (altista)</th><th>Resultado ruim (baixista)</th></tr>
@@ -279,7 +281,7 @@ small a{color:var(--acc)}
 
 </table>
 </div>
-<h2>qui 08/10</h2>
+<h2>Amanhã — qui 08/10</h2>
 <div style="overflow-x:auto">
 <table>
 <tr><th>Horário</th><th>Evento</th><th>País</th><th>Consenso</th><th>Anterior</th><th>Impacto</th><th>Afeta</th><th>O que é</th><th>Resultado bom (altista)</th><th>Resultado ruim (baixista)</th></tr>
